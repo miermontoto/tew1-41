@@ -1,0 +1,20 @@
+<!-- Snippet que contiene el formulario de autenicación -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="loginForm">
+		<p:panel header="Inicio de Sesión">
+			<h:messages globalOnly="true" styleClass="error" />
+			<p:inputText id="username" value="#{loginBean.username}"
+				placeholder="Usuario" required="true" />
+			<br></br>
+			<p:password id="password" value="#{loginBean.password}"
+				placeholder="Contraseña" required="true" />
+			<p:commandButton value="Iniciar Sesión" action="#{loginBean.manageLogin}"
+				ajax="false" />
+		</p:panel>
+	</h:form>
+</ui:composition>
