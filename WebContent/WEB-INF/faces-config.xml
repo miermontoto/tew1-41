@@ -10,6 +10,16 @@
         <managed-bean-class>presentation.loginBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+	<managed-bean>
+    	<managed-bean-name>registroBean</managed-bean-name>
+    	<managed-bean-class>presentation.registroBean</managed-bean-class>
+    	<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+    
+    <validator>
+    	<validator-id>emailValidator</validator-id>
+    	<validator-class>presentation.emailValidator</validator-class>
+	</validator>
 
     <!-- Reglas de navegación -->
     <navigation-rule>

@@ -1,0 +1,31 @@
+<!-- Snippet que contiene el formulario de autenicación -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="registroForm">
+		<p:panel header="Registro de Usuario">
+			<h:messages globalOnly="true" styleClass="error" />
+			<p:inputText id="nombre" value="#{registroBean.nombre}"
+				placeholder="Nombre" required="true" />
+			<br></br>
+			<p:inputText id="email" value="#{registroBean.email}"
+				placeholder="Correo Electrónico" required="true">
+				<f:validator validatorId="emailValidator" />
+			</p:inputText>
+			<br></br>
+			<p:message for="email" />
+			<p:password id="contrasena" value="#{registroBean.contrasena}"
+				placeholder="Contraseña" required="true" />
+			<br></br>
+			<p:password id="confirmarContrasena"
+				value="#{registroBean.confirmarContrasena}"
+				placeholder="Confirmar Contraseña" required="true" />
+			<br></br>
+			<p:commandButton value="Registrarse"
+				action="#{registroBean.registrarUsuario}" ajax="false" />
+		</p:panel>
+	</h:form>
+</ui:composition>
