@@ -1,4 +1,4 @@
-package presentation;
+package com.tewrrss.presentation;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;

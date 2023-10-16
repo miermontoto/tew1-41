@@ -2,15 +2,18 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-notlogged.xhtml">
 
-<h:head>
-    <title>Registro de Usuario</title>
-</h:head>
-<h:body>
-    <h1>Bienvenido al Registro de Usuarios</h1>
+	<ui:define name="titulo">
+		#{msgs.app_title}
+	</ui:define>
 
-    <!-- Incluye el formulario de registro -->
-    <ui:include src="/templates/register-form.xhtml" />
-</h:body>
+	<ui:define name="cuerpo">
+		<ui:include src="/templates/register-form.xhtml" />
+	</ui:define>
+
+	<ui:define name="pie">
+	</ui:define>
+
 </ui:composition>

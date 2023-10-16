@@ -11,6 +11,8 @@
 - [ ] Iniciar sesión
   - [x] Login básico
   - [ ] Conexión con BBDD
+  - [ ] Persistencia entre vistas
+  - [ ] Redirección al login
 - [ ] Salir de sesión
 - [ ] Borrado de comunicaciones
 - [ ] Reinicio de la base de datos (admin)
@@ -24,6 +26,8 @@
 
 
 ## Características y metas
-- [ ] Navegación con PrimeFaces
+- [x] Navegación con PrimeFaces
 - [ ] Inicio de BBDD con datos de prueba
 - [ ] Informe obligatorio
+- [x] Traducciones
+- [x] Manejo de errores

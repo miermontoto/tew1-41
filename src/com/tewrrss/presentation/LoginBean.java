@@ -1,4 +1,4 @@
-package presentation;
+package com.tewrrss.presentation;
 
 public class LoginBean {
 

@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-cabecera.xhtml">
+
+	<ui:define name="menubar">
+		<p:menubar>
+			<p:submenu label="USERNAME" icon="ui-icon-person">
+				<p:menuitem value="ROLE" />
+				<p:separator />
+				<p:menuitem value="#{msgs.session_logout}" update="@all" />
+			</p:submenu>
+			<p:submenu name="options" style="float:right" label="#{msgs.selected_lang}">
+				<p:menuitem value="Español" actionListener="#{settings.setSpanish}" update="@all" />
+				<p:menuitem value="English" actionListener="#{settings.setEnglish}" update="@all" />
+			</p:submenu>
+		</p:menubar>
+	</ui:define>
+</ui:composition>

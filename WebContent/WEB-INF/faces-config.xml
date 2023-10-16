@@ -7,20 +7,41 @@
     <!-- Managed Beans -->
     <managed-bean>
         <managed-bean-name>login</managed-bean-name>
-        <managed-bean-class>presentation.LoginBean</managed-bean-class>
+        <managed-bean-class>com.tewrrss.presentation.LoginBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
 	<managed-bean>
     	<managed-bean-name>registro</managed-bean-name>
-    	<managed-bean-class>presentation.RegistroBean</managed-bean-class>
+    	<managed-bean-class>com.tewrrss.presentation.RegistroBean</managed-bean-class>
     	<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 
+    <managed-bean>
+        <managed-bean-name>settings</managed-bean-name>
+        <managed-bean-class>com.tewrrss.presentation.BeanSettings</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>berror</managed-bean-name>
+        <managed-bean-class>com.tewrrss.presentation.BGError</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <!-- Misc -->
+
     <validator>
     	<validator-id>emailValidator</validator-id>
-    	<validator-class>presentation.EmailValidator</validator-class>
+    	<validator-class>com.tewrrss.presentation.EmailValidator</validator-class>
 	</validator>
+
+    <application>
+        <resource-bundle>
+            <base-name>messages</base-name>
+            <var>msgs</var>
+        </resource-bundle>
+    </application>
 
     <!-- Reglas de navegación -->
     <navigation-rule>
