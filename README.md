@@ -13,7 +13,7 @@
   - [ ] Conexión con BBDD
   - [x] Persistencia entre vistas
   - [x] Redirección al login
-- [ ] Salir de sesión
+- [x] Salir de sesión
 - [ ] Borrado de comunicaciones
 - [ ] Reinicio de la base de datos (admin)
 - [ ] Crear una comunidad
