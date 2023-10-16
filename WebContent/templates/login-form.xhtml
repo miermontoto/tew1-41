@@ -8,13 +8,12 @@
 	<h:form id="loginForm">
 		<p:panel header="Inicio de Sesión">
 			<h:messages globalOnly="true" styleClass="error" />
-			<p:inputText id="username" value="#{loginBean.username}"
+			<p:inputText id="username" value="#{login.username}"
 				placeholder="Usuario" required="true" />
-			<br></br>
-			<p:password id="password" value="#{loginBean.password}"
+			<br />
+			<p:password id="password" value="#{login.password}"
 				placeholder="Contraseña" required="true" />
-			<p:commandButton value="Iniciar Sesión" action="#{loginBean.manageLogin}"
-				ajax="false" />
+			<p:commandButton value="Iniciar Sesión" action="#{login.manageLogin}" ajax="false" />
 		</p:panel>
 	</h:form>
 </ui:composition>

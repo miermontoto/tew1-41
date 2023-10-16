@@ -13,30 +13,24 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 @FacesValidator("emailValidator")
-public class emailValidator implements Validator{
+public class EmailValidator implements Validator {
 
-	private static final String EMAIL_PATTERN = "^[A-Za-z0-9+_.-]+@(.+)$";
-    private Pattern pattern;
+    private static final Pattern pattern = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
 
-    public emailValidator() {
-        pattern = Pattern.compile(EMAIL_PATTERN);
-    }
+    public EmailValidator() { /* Se necesita un constructor, aunque estÃ© vacÃ­o */ }
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         if (value == null) {
-            return; // Deja la validación para el atributo 'required'
+            return; // Deja la validaciï¿½n para el atributo 'required'
         }
 
         String email = value.toString();
         Matcher matcher = pattern.matcher(email);
 
         if (!matcher.matches()) {
-            FacesMessage message = new FacesMessage("Pon un email válido");
+            FacesMessage message = new FacesMessage("Pon un email vÃ¡lido");
             throw new ValidatorException(message);
         }
     }
-
-
-
 }

@@ -8,24 +8,24 @@
 	<h:form id="registroForm">
 		<p:panel header="Registro de Usuario">
 			<h:messages globalOnly="true" styleClass="error" />
-			<p:inputText id="nombre" value="#{registroBean.nombre}"
+			<p:inputText id="nombre" value="#{registro.nombre}"
 				placeholder="Nombre" required="true" />
-			<br></br>
-			<p:inputText id="email" value="#{registroBean.email}"
+			<br />
+			<p:inputText id="email" value="#{registro.email}"
 				placeholder="Correo Electrónico" required="true">
 				<f:validator validatorId="emailValidator" />
 			</p:inputText>
-			<br></br>
+			<br />
 			<p:message for="email" />
-			<p:password id="contrasena" value="#{registroBean.contrasena}"
+			<p:password id="contrasena" value="#{registro.contrasena}"
 				placeholder="Contraseña" required="true" />
-			<br></br>
+			<br />
 			<p:password id="confirmarContrasena"
-				value="#{registroBean.confirmarContrasena}"
+				value="#{registro.confirmarContrasena}"
 				placeholder="Confirmar Contraseña" required="true" />
-			<br></br>
+			<br />
 			<p:commandButton value="Registrarse"
-				action="#{registroBean.registrarUsuario}" ajax="false" />
+				action="#{registro.registrarUsuario}" ajax="false" />
 		</p:panel>
 	</h:form>
 </ui:composition>

@@ -6,36 +6,62 @@
 
     <!-- Managed Beans -->
     <managed-bean>
-        <managed-bean-name>loginBean</managed-bean-name>
-        <managed-bean-class>presentation.loginBean</managed-bean-class>
+        <managed-bean-name>login</managed-bean-name>
+        <managed-bean-class>presentation.LoginBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+
 	<managed-bean>
-    	<managed-bean-name>registroBean</managed-bean-name>
-    	<managed-bean-class>presentation.registroBean</managed-bean-class>
+    	<managed-bean-name>registro</managed-bean-name>
+    	<managed-bean-class>presentation.RegistroBean</managed-bean-class>
     	<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
-    
+
     <validator>
     	<validator-id>emailValidator</validator-id>
-    	<validator-class>presentation.emailValidator</validator-class>
+    	<validator-class>presentation.EmailValidator</validator-class>
 	</validator>
 
     <!-- Reglas de navegación -->
     <navigation-rule>
+        <from-view-id>*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>registro</from-outcome>
+            <to-view-id>/registro.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
         <from-view-id>/login.xhtml</from-view-id>
+
         <navigation-case>
             <from-outcome>success</from-outcome>
-            <to-view-id>/home.xhtml</to-view-id>
+            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
-        
+
         <navigation-case>
             <from-outcome>error</from-outcome>
             <to-view-id>/login.xhtml</to-view-id>
         </navigation-case>
-        
-        
     </navigation-rule>
-    
-    
+
+    <navigation-rule>
+        <from-view-id>/register.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
