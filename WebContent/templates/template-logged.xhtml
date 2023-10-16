@@ -7,12 +7,12 @@
 
 	<ui:define name="menubar">
 		<p:menubar>
-			<p:submenu label="USERNAME" icon="ui-icon-person">
-				<p:menuitem value="ROLE" />
+			<p:submenu label="#{user.sessionUsername}" icon="ui-icon-person">
+				<p:menuitem value="#{user.sessionRole}" />
 				<p:separator />
 				<p:menuitem value="#{msgs.session_logout}" update="@all" />
 			</p:submenu>
-			<p:submenu name="options" style="float:right" label="#{msgs.selected_lang}">
+			<p:submenu name="lang" style="float:right" label="#{msgs.selected_lang}">
 				<p:menuitem value="Español" actionListener="#{settings.setSpanish}" update="@all" />
 				<p:menuitem value="English" actionListener="#{settings.setEnglish}" update="@all" />
 			</p:submenu>

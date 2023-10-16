@@ -4,31 +4,6 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
     version="2.3">
 
-    <!-- Managed Beans -->
-    <managed-bean>
-        <managed-bean-name>login</managed-bean-name>
-        <managed-bean-class>com.tewrrss.presentation.LoginBean</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-
-	<managed-bean>
-    	<managed-bean-name>registro</managed-bean-name>
-    	<managed-bean-class>com.tewrrss.presentation.RegistroBean</managed-bean-class>
-    	<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-
-    <managed-bean>
-        <managed-bean-name>settings</managed-bean-name>
-        <managed-bean-class>com.tewrrss.presentation.BeanSettings</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-
-    <managed-bean>
-        <managed-bean-name>berror</managed-bean-name>
-        <managed-bean-class>com.tewrrss.presentation.BGError</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-
     <!-- Misc -->
 
     <validator>
@@ -59,7 +34,12 @@
 
         <navigation-case>
             <from-outcome>index</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
+            <to-view-id>/restricted/index.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>error</from-outcome>
+            <to-view-id>/error.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
@@ -68,21 +48,8 @@
 
         <navigation-case>
             <from-outcome>success</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-
-        <navigation-case>
-            <from-outcome>error</from-outcome>
-            <to-view-id>/login.xhtml</to-view-id>
+            <to-view-id>/restricted/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
-    <navigation-rule>
-        <from-view-id>/register.xhtml</from-view-id>
-
-        <navigation-case>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
 </faces-config>

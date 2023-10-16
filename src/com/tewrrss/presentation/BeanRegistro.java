@@ -1,9 +1,16 @@
 package com.tewrrss.presentation;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-public class RegistroBean {
+import com.tewrrss.model.Role;
+import com.tewrrss.model.User;
+
+@ManagedBean(name = "registro")
+@SessionScoped
+public class BeanRegistro {
 
 	private String nombre;
 	private String email;
@@ -62,6 +69,7 @@ public class RegistroBean {
 		// Realiza el registro del usuario y redirige a una página de éxito
 
 		// TODO: implementar registro en BBDD
+		BeanLogin.putUserInSession(new User(nombre, email, Role.USER));
 		return "success";
 	}
 

@@ -10,7 +10,7 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "berror")
 @SessionScoped
-public class BGError implements Serializable {
+public class BeanError implements Serializable {
 	// Los detalles de cada error a considerar deberán ser:
 	// 	1. La vista desde la que se redireccionó el error.
 	// 	2. El método donde se produjo el error.
@@ -23,14 +23,14 @@ public class BGError implements Serializable {
 	private String clase;
 	private String message;
 
-	public BGError() {
+	public BeanError() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ResourceBundle bundle = facesContext.getApplication().getResourceBundle(facesContext, "msgs");
 
-		this.view = bundle.getString("unknownError");
-		this.method = bundle.getString("unknownError");
-		this.clase = bundle.getString("unknownError");
-		this.message = bundle.getString("unknownError");
+		this.view = bundle.getString("error_unknown");
+		this.method = bundle.getString("error_unknown");
+		this.clase = bundle.getString("error_unknown");
+		this.message = bundle.getString("error_unknown");
 	}
 
 	public String getView() {

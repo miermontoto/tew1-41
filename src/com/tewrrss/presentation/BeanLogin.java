@@ -1,0 +1,63 @@
+package com.tewrrss.presentation;
+import java.io.Serializable;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.*;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+
+import com.tewrrss.business.LoginService;
+import com.tewrrss.infrastructure.Factories;
+import com.tewrrss.model.User;
+
+@ManagedBean(name = "login")
+@SessionScoped
+public class BeanLogin implements Serializable {
+	private static final long serialVersionUID = 2L;
+
+	private String name = "";
+	private String password = "";
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name.trim();
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password.trim();
+	}
+
+	public String verify() {
+		FacesContext jsfCtx = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
+
+		LoginService login = Factories.services.createLoginService();
+
+		User user = login.verify(name, password);
+		if (user != null) {
+			BeanLogin.putUserInSession(user);
+			return "success";
+		}
+
+		// Si el usuario no se encuentra, se prepara el mensaje que saldrá en la vista.
+		FacesMessage msgs = new FacesMessage(FacesMessage.SEVERITY_WARN, bundle.getString("error_login_unknown"), null);
+		jsfCtx.addMessage(null, msgs);
+
+		return "login";
+	}
+
+	protected static void putUserInSession(User user) {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("LOGGEDIN_USER", user);
+	}
+}

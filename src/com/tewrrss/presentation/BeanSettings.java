@@ -18,21 +18,21 @@ public class BeanSettings implements Serializable {
 	private Locale locale = new Locale("es");
 
 	@ManagedProperty(value="#{berror}")
-	private BGError error;
+	private BeanError error;
 
-	public void setError(BGError error) {
+	public void setError(BeanError error) {
 		this.error = error;
 	}
 
-	public BGError getError(){
+	public BeanError getError(){
 		return this.error;
 	}
 
 	@PostConstruct
 	public void init() {
-		error = (BGError) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("error");
+		error = (BeanError) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("error");
 		if (error == null) {
-			error = new BGError();
+			error = new BeanError();
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("error", error);
 		}
 	}

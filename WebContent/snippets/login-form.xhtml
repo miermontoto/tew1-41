@@ -8,12 +8,13 @@
 	<h:form id="loginForm">
 		<p:panel header="Inicio de Sesión">
 			<h:messages globalOnly="true" styleClass="error" />
-			<p:inputText id="username" value="#{login.username}"
+			<p:inputText id="username" value="#{login.name}"
 				placeholder="Usuario" required="true" />
 			<br />
 			<p:password id="password" value="#{login.password}"
 				placeholder="Contraseña" required="true" />
-			<p:commandButton value="Iniciar Sesión" action="#{login.manageLogin}" ajax="false" />
+			<br />
+			<p:commandButton value="Iniciar Sesión" action="#{login.verify}" ajax="false" />
 		</p:panel>
 	</h:form>
 </ui:composition>

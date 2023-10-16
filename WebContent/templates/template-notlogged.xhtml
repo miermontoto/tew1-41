@@ -7,7 +7,11 @@
 
 	<ui:define name="menubar">
 		<p:menubar>
-			<p:submenu name="options" style="float:right" label="#{msgs.selected_lang}">
+			<p:submenu value="#{msgs.menu_notlogged_user}" icon="ui-icon-person">
+				<p:menuitem value="#{msgs.menu_notlogged_user_login}" action="login" />
+				<p:menuitem value="#{msgs.menu_notlogged_user_register}" action="register" />
+			</p:submenu>
+			<p:submenu name="lang" style="float:right" label="#{msgs.selected_lang}">
 				<p:menuitem value="Español" actionListener="#{settings.setSpanish}" update="@all" />
 				<p:menuitem value="English" actionListener="#{settings.setEnglish}" update="@all" />
 			</p:submenu>
