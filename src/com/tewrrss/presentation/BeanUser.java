@@ -1,35 +1,28 @@
 package com.tewrrss.presentation;
 
 import java.io.Serializable;
-import java.util.ResourceBundle;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
 import com.tewrrss.model.Role;
 import com.tewrrss.model.User;
 
 @ManagedBean(name = "user")
 @SessionScoped
-public class BeanUser extends User implements Serializable {
+public class BeanUser implements Serializable {
 	private static final long serialVersionUID = 55556L;
-	
-	private String sessionUsername;
-	private String sessionRole;
-
-	public BeanUser() {super("null", "null");}
 
 	public String getSessionUsername() {
-		BeanUser user = (BeanUser) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("LOGGEDIN_USER");
 		return user.getName();
 	}
 
-	public String getSessionRole() {
-		BeanUser user = (BeanUser) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-		return Role.toString(user.getRole());
+	public int getSessionRole() {
+		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("LOGGEDIN_USER");
+		return user.getRole();
 	}
 
-	public void setSessionUsername() { }
-
-	public void setSessionRole() { }
+	public String getSessionRoleName() {
+		return Role.toString(this.getSessionRole());
+	}
 }
