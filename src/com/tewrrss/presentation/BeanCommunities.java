@@ -16,16 +16,19 @@ public class BeanCommunities {
 		
 	}
 	
+	public void listarComunidades() {
+		
+	}
+	
 	// Método para declarar el borrado de comunidades. Se verifica antes que el usuario sea admin
 	public String borrarComunidad() {
 		
 		if(Role.toString(user.getRole()) == "role_admin") {
 			// TODO Borrado de la columunidad en la BBDD
 			
-			
-			return "success";
+			return "success"; // El borrado ha tenido éxito
 		} else {
-			return "unauthorized";
+			return "unauthorized"; // La comunidad no se ha podido borrar
 		}
 		
 	}
