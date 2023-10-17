@@ -12,6 +12,7 @@ import com.tewrrss.model.User;
 @SessionScoped
 public class BeanRegistro {
 
+	// Datos del cliente.
 	private String nombre;
 	private String email;
 	private String contrasena;

@@ -14,7 +14,7 @@ public class SimpleLoginService implements com.tewrrss.business.LoginService {
 
 	@Override
 	public boolean validLogin(String login, String password) {
-		// TODO: login en BBDD
+		// TODO: login en BBDD. Guardado de datos.
 		return login.equals("admin") && password.equals("tew");
 	}
 }

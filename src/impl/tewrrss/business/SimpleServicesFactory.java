@@ -9,4 +9,5 @@ public class SimpleServicesFactory implements ServicesFactory {
 	public LoginService createLoginService() {
 		return new SimpleLoginService();
 	}
+	
 }

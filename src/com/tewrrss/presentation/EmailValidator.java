@@ -28,8 +28,9 @@ public class EmailValidator implements Validator {
         String email = value.toString();
         Matcher matcher = pattern.matcher(email);
 
+        // Si el email no esta bien formado, devolvemos una excepción de validación, lo que causa un mensaje en el Front
         if (!matcher.matches()) {
-            FacesMessage message = new FacesMessage("Pon un email vÃ¡lido");
+            FacesMessage message = new FacesMessage("El email no es válido");
             throw new ValidatorException(message);
         }
     }

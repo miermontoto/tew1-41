@@ -47,16 +47,17 @@ public class BeanLogin implements Serializable {
 		User user = login.verify(name, password);
 		if (user != null) {
 			BeanLogin.putUserInSession(user);
-			return "success";
+			return "success"; //Sesión iniciada con éxito
 		}
 
-		// Si el usuario no se encuentra, se prepara el mensaje que saldrÃ¡ en la vista.
+		// Si el usuario no se encuentra, se prepara el mensaje que saldrá en la vista.
 		FacesMessage msgs = new FacesMessage(FacesMessage.SEVERITY_WARN, bundle.getString("error_login_unknown"), null);
 		jsfCtx.addMessage(null, msgs);
 
-		return "login";
+		return "login"; //El usuario ha de dirigirse a login.
 	}
 
+	// Método para manejar la desconexión de usuaris.
 	public String logout() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "login";
