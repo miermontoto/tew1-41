@@ -35,8 +35,7 @@ public class BeanCommunities {
 	}
 	
 	public String creacomunidad() {
-		System.out.print("PRUEBA");
-		this.mensaje = "Comunidad creada con éxito";
+		this.mensaje = "Éxito";
 		return "success"; // Retorno un mensaje de éxito.
 		
 	}
