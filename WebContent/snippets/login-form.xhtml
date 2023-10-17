@@ -1,4 +1,3 @@
-<!-- Snippet que contiene el formulario de autenicación -->
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -6,15 +5,15 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 	<h:form id="loginForm">
-		<p:panel header="Inicio de Sesión">
+		<p:panel header="#{msgs.session_login_title}" update="@all">
 			<h:messages globalOnly="true" styleClass="error" />
 			<p:inputText id="username" value="#{login.name}"
-				placeholder="Usuario" required="true" />
+				placeholder="#{msgs.session_login_placeholder_user}" required="true" />
 			<br />
 			<p:password id="password" value="#{login.password}"
-				placeholder="Contraseña" required="true" />
+				placeholder="#{msgs.session_login_placeholder_pass}" required="true" />
 			<br />
-			<p:commandButton value="Iniciar Sesión" action="#{login.verify}" ajax="false" />
+			<p:commandButton value="#{msgs.session_login_button}" action="#{login.verify}" ajax="false" />
 		</p:panel>
 	</h:form>
 </ui:composition>

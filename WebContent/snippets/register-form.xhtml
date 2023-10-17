@@ -1,4 +1,3 @@
-<!-- Snippet que contiene el formulario de autenicación -->
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -6,25 +5,25 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 	<h:form id="registroForm">
-		<p:panel header="Registro de Usuario">
+		<p:panel header="#{msgs.session_register_title}">
 			<h:messages globalOnly="true" styleClass="error" />
 			<p:inputText id="nombre" value="#{registro.nombre}"
-				placeholder="Nombre" required="true" />
+				placeholder="#{msgs.session_register_placeholder_user}" required="true" />
 			<br />
 			<p:inputText id="email" value="#{registro.email}"
-				placeholder="Correo Electrónico" required="true">
+				placeholder="#{msgs.session_register_placeholder_email}" required="true">
 				<f:validator validatorId="emailValidator" />
 			</p:inputText>
 			<br />
 			<p:message for="email" />
 			<p:password id="contrasena" value="#{registro.contrasena}"
-				placeholder="Contraseña" required="true" />
+				placeholder="#{msgs.session_register_placeholder_pass}" required="true" />
 			<br />
 			<p:password id="confirmarContrasena"
 				value="#{registro.confirmarContrasena}"
-				placeholder="Confirmar Contraseña" required="true" />
+				placeholder="#{msgs.session_register_placeholder_pass2}" required="true" />
 			<br />
-			<p:commandButton value="Registrarse"
+			<p:commandButton value="#{msgs.session_register_button}"
 				action="#{registro.registrarUsuario}" ajax="false" />
 		</p:panel>
 	</h:form>

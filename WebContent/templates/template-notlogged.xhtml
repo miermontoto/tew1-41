@@ -6,6 +6,8 @@
 	template="/templates/template-cabecera.xhtml">
 
 	<ui:define name="menubar">
+		<p:menuitem value="#{msgs.app_title}" icon="ui-icon-home" />
+
 		<p:menubar>
 			<p:submenu value="#{msgs.menu_notlogged_user}" icon="ui-icon-person">
 				<p:menuitem value="#{msgs.menu_notlogged_user_login}" action="login" />
