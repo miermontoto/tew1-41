@@ -9,6 +9,8 @@ import com.tewrrss.model.User;
 public class BeanCommunities {
 	
 	BeanUser loginInfo;
+	String nombrenuevacomunidad;
+	String mensaje; // Mensaje que se mostrará en caso de errores con la creación de la comunidad.
 	
 	public BeanCommunities() {
 		loginInfo = new BeanUser();
@@ -31,4 +33,30 @@ public class BeanCommunities {
 		
 		return "unauthorized"; // La comunidad no se ha podido borrar
 	}
+	
+	public String creaComunidad() {
+		
+		this.mensaje = "Comunidad creada con éxito";
+		return "success"; // Retorno un mensaje de éxito.
+		
+	}
+
+	
+	public String getNombrenuevacomunidad() {
+		return nombrenuevacomunidad;
+	}
+
+	public void setNombrenuevacomunidad(String nombrenuevacomunidad) {
+		this.nombrenuevacomunidad = nombrenuevacomunidad;
+	}
+
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
+	
+	
 }
