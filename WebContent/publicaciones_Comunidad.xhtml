@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-logged.xhtml">
+
+	<ui:define name="titulo">
+		#{msgs.app_title}
+	</ui:define>
+
+	<ui:define name="cuerpo">
+			<!-- En param,comunidadId iria el identificador de la comunidad sobre la que cargar los mensajes puede ser por parametro o variable de un bean-->
+<h:dataTable var="mensaje" value="#{BeanMensajes.getMensajesComunidad(param.comunidadId)}">
+    <h:column>
+    <f:facet name="header">Creador</f:facet>	<!-- Modificar los accesos a mensaje en funcion de como se programe la clase en el modelo -->
+	    #{mensaje.usuario}
+    </h:column>
+    <h:column>
+        <f:facet name="header">Fecha</f:facet>
+        #{mensaje.fecha}
+    </h:column>
+    <h:column>
+        <f:facet name="header">Mensaje</f:facet>
+        #{mensaje.contenido}
+    </h:column>
+</h:dataTable>
+
+
+	</ui:define>
+
+	<ui:define name="pie">
+	</ui:define>
+
+</ui:composition>
