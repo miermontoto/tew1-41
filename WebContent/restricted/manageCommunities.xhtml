@@ -15,6 +15,29 @@
 
 		<br></br>
 
+		<h:form>
+			<p:dataTable value="#{managecommunitiesbean.listarComunidades()}"
+				var="item" border="4" style="width: 500px">
+				<p:column>
+					<f:facet name="header">Nombre de la comunidad</f:facet>#{item.nombre}</p:column>
+				<p:column >
+					<f:facet name="header">Descripcion de la comunidad</f:facet>#{item.descripcion}</p:column>
+
+
+				<p:column>
+
+					<f:facet name="header">Acciones</f:facet>
+
+					<h:commandLink value="Eliminar comunidad"
+						action="#{managecommunitiesbean.borrarcomunidad(item)}" type="submit"
+						immediate="true"></h:commandLink>
+
+
+				</p:column>
+
+
+			</p:dataTable>
+		</h:form>
 
 	</ui:define>
 
