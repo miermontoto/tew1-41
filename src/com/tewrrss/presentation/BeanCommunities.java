@@ -5,37 +5,30 @@ import javax.faces.bean.ManagedBean;
 import com.tewrrss.model.Role;
 import com.tewrrss.model.User;
 
-@ManagedBean(name = "managecommunitiesbean") // ManagedBean para gestión de usuarios.
+@ManagedBean(name = "managecommunitiesbean") // ManagedBean para gestiï¿½n de usuarios.
 public class BeanCommunities {
 	
-	BeanUser user; //Variable con el usuario actual.
+	BeanUser loginInfo;
 	
 	public BeanCommunities() {
-		
-		user = new BeanUser(); // Accedo al usuario
-		
+		loginInfo = new BeanUser();
 	}
 	
-	public void listarComunidades() {
-		
+	public String listarComunidades() {
+		return "unimplemented";
 	}
 	
-	// Método para declarar el borrado de comunidades. Se verifica antes que el usuario sea admin
+	public String borrarPublicacion() {
+		return "unimplemented";
+	}
+	
+	// Mï¿½todo para declarar el borrado de comunidades. Se verifica antes que el usuario sea admin
 	public String borrarComunidad() {
-		
-		if(Role.toString(user.getRole()) == "role_admin") {
+		if(loginInfo.getSessionRole() == Role.ADMIN) {
 			// TODO Borrado de la columunidad en la BBDD
-			
-			return "success"; // El borrado ha tenido éxito
-		} else {
-			return "unauthorized"; // La comunidad no se ha podido borrar
+			return "success"; // El borrado ha tenido ï¿½xito
 		}
 		
+		return "unauthorized"; // La comunidad no se ha podido borrar
 	}
-	
-	// Método para creado y borrado de publicaciones.
-	public String borrarPublicacion() {
-		return null;
-	}
-
 }
