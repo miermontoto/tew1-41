@@ -11,7 +11,7 @@ import com.tewrrss.model.User;
 @ManagedBean(name = "managecommunitiesbean") // ManagedBean para gestión de usuarios.
 public class BeanMensajes {
 	
-	BeanUser user; //Variable con el usuario actual.
+	BeanUser user; //Necesario ???
 	
 	public BeanMensajes() {
 		user = new BeanUser(); // Accedo al usuario
@@ -25,10 +25,46 @@ public class BeanMensajes {
 	
 	
     private List<Object> mensajes;		
+    private String nuevoPost;
     
+    
+    public List<Object> getMensajes() {
+		return mensajes;
+	}
 
+	public void setMensajes(List<Object> mensajes) {
+		this.mensajes = mensajes;
+	}
+
+	public String getNuevoPost() {
+		return nuevoPost;
+	}
+
+	public void setNuevoPost(String nuevoPost) {
+		this.nuevoPost = nuevoPost;
+	}
+
+	public void agregarMensaje() {		// MODIFICAR CON LA BASE DE DATOS
+		if (nuevoPost != null && !nuevoPost.isEmpty()) {
+            // Crear un nuevo mensaje y agregarlo a la lista
+			
+/*			
+            Mensaje mensaje = new Mensaje();
+            mensaje.setContenido(nuevoPost);
+            mensaje.setUsuario("Nombre del usuario actual"); // Sacar del contexto o bean el usuario actual
+			mensaje.setSetFecha();		//Sacar la fecha actual del sistema
+	
+            mensajes.add(mensaje);
+*/
+            // Limpiar el cuadro de texto
+            nuevoPost = "";
+            
+            
+            // Aqui habria que ademas añadir ese post a la base de datos
+        }
+    }
     
-    public List<Object> getMensajesComunidad(int comunidadId) {
+    public List<Object> getMensajesComunidad(int comunidadId) {		//MODIFICAR CON LA BASE DE DATOS
         // Usar un DAO (Data Access Object) para obtener los mensajes desde la base de datos.
          
     	
