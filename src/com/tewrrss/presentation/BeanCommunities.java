@@ -1,13 +1,16 @@
 package com.tewrrss.presentation;
 
+import javax.faces.bean.ManagedBean;
+
 import com.tewrrss.model.Role;
 import com.tewrrss.model.User;
 
-public class ManageBean {
+@ManagedBean(name = "managecommunitiesbean") // ManagedBean para gestión de usuarios.
+public class BeanCommunities {
 	
 	BeanUser user; //Variable con el usuario actual.
 	
-	public ManageBean() {
+	public BeanCommunities() {
 		
 		user = new BeanUser(); // Accedo al usuario
 		
@@ -18,6 +21,8 @@ public class ManageBean {
 		
 		if(Role.toString(user.getRole()) == "role_admin") {
 			// TODO Borrado de la columunidad en la BBDD
+			
+			
 			return "success";
 		} else {
 			return "unauthorized";

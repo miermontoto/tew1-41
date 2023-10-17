@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
-    version="2.3">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
+	version="2.3">
 
-    <!-- Misc -->
+	<!-- Misc -->
 
-    <validator>
-    	<validator-id>emailValidator</validator-id>
-    	<validator-class>com.tewrrss.presentation.EmailValidator</validator-class>
+	<validator>
+		<validator-id>emailValidator</validator-id>
+		<validator-class>com.tewrrss.presentation.EmailValidator</validator-class>
 	</validator>
 
-    <application>
-        <resource-bundle>
-            <base-name>messages</base-name>
-            <var>msgs</var>
-        </resource-bundle>
-    </application>
+	<application>
+		<resource-bundle>
+			<base-name>messages</base-name>
+			<var>msgs</var>
+		</resource-bundle>
+	</application>
 
-    <!-- Reglas de navegación -->
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
+	<!-- Reglas de navegación -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
 
-        <navigation-case>
-            <from-outcome>login</from-outcome>
-            <to-view-id>/login.xhtml</to-view-id>
-        </navigation-case>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
 
-        <navigation-case>
-            <from-outcome>registro</from-outcome>
-            <to-view-id>/registro.xhtml</to-view-id>
-        </navigation-case>
+		<navigation-case>
+			<from-outcome>registro</from-outcome>
+			<to-view-id>/registro.xhtml</to-view-id>
+		</navigation-case>
 
-        <navigation-case>
-            <from-outcome>index</from-outcome>
-            <to-view-id>/restricted/index.xhtml</to-view-id>
-        </navigation-case>
+		<navigation-case>
+			<from-outcome>index</from-outcome>
+			<to-view-id>/restricted/index.xhtml</to-view-id>
+		</navigation-case>
 
-        <navigation-case>
-            <from-outcome>error</from-outcome>
-            <to-view-id>/error.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+		<navigation-case>
+			<from-outcome>error</from-outcome>
+			<to-view-id>/error.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
-    <navigation-rule>
-        <from-view-id>/login.xhtml</from-view-id>
+	<navigation-rule>
+		<from-view-id>/login.xhtml</from-view-id>
 
-        <navigation-case>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/restricted/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/restricted/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
-        <navigation-rule>
-        <from-view-id>/register.xhtml</from-view-id>
+	<navigation-rule>
+		<from-view-id>/register.xhtml</from-view-id>
 
-        <navigation-case>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/restricted/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/restricted/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>
