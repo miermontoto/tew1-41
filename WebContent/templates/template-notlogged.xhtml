@@ -10,8 +10,8 @@
 
 		<p:menubar>
 			<p:submenu value="#{msgs.menu_notlogged_user}" icon="ui-icon-person">
-				<p:menuitem value="#{msgs.menu_notlogged_user_login}" action="login" />
-				<p:menuitem value="#{msgs.menu_notlogged_user_register}" action="register" />
+				<p:menuitem value="#{msgs.session_login}" action="login" />
+				<p:menuitem value="#{msgs.session_register}" action="register" />
 			</p:submenu>
 			<p:submenu name="lang" style="float:right" label="#{msgs.selected_lang}">
 				<p:menuitem value="Español" actionListener="#{settings.setSpanish}" update="@all" />
