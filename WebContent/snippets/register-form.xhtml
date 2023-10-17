@@ -19,14 +19,14 @@
 			<p:password id="contrasena" value="#{registro.contrasena}"
 				placeholder="#{msgs.session_register_placeholder_pass}" required="true" />
 			<br />
-			
+
 			<p:password id="confirmarContrasena"
 				value="#{registro.confirmarContrasena}"
 				placeholder="#{msgs.session_register_placeholder_pass2}" required="true" />
 			<br />
-			
+
 			<h:selectBooleanCheckbox value="#{msgs.rgpd}"></h:selectBooleanCheckbox>
-			
+
 			<br />
 			<p:commandButton value="#{msgs.session_register_button}"
 				action="#{registro.registrarUsuario}" ajax="false" />
