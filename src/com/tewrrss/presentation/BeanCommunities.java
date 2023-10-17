@@ -34,8 +34,8 @@ public class BeanCommunities {
 		return "unauthorized"; // La comunidad no se ha podido borrar
 	}
 	
-	public String creaComunidad() {
-		
+	public String creacomunidad() {
+		System.out.print("PRUEBA");
 		this.mensaje = "Comunidad creada con éxito";
 		return "success"; // Retorno un mensaje de éxito.
 		

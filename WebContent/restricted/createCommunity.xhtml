@@ -17,9 +17,11 @@
 
 		<h:form>
 			 
-        <p:inputText id="texto" value="#{managecommunitiesbean.nombrenuevacomunidad}" placeholder="#{msgs.crearcomunidad}" />
-        	<p:commandButton value="Crear Comunidad" actionListener="#{managecommunitiesbean.creaComunidad}" update="mensaje" />
-        <p:outputLabel id="mensaje" value="#{managecommunitiesbean.mensaje}" rendered="#{not empty managecommunitiesbean.mensaje}" />
+        <p:inputText id="inputNombreComunidad" value="#{managecommunitiesbean.nombrenuevacomunidad}" placeholder="#{msgs.crearcomunidad}" />
+        	<br></br>
+        	
+        	<p:commandButton value="Crear" action="#{managecommunitiesbean.creacomunidad()}" type="submit" immediate="true" />
+        <!-- <p:outputLabel id="mensaje" value="#{managecommunitiesbean.mensaje}" rendered="#{not empty managecommunitiesbean.mensaje}" />-->
         
         <!-- Sólo lo renderizo en caso de que el mensaje no esté vacío -->
         
