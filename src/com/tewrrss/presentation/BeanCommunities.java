@@ -12,12 +12,13 @@ import com.tewrrss.model.User;
 @ManagedBean(name = "managecommunitiesbean") // ManagedBean para gestiï¿½n de usuarios.
 public class BeanCommunities {
 	
-	BeanUser loginInfo;
-	
+	BeanUser loginInfo; //Info del login del usuario.
 	// Variables para almacenar cuando nos pasen nuevas comunidades a crear, o acceder a una nueva.
+	
 	String nombreComunidad;		// Nombre de la nueva comunidad
 	String descripcionComunidad;	//Descripción de la nueva comunidad
 	
+	// Comunidad comunidad; //Aquí habrá comunidades. TODO con base de datos
 	
 	public BeanCommunities() {
 		loginInfo = new BeanUser();
@@ -26,14 +27,27 @@ public class BeanCommunities {
 	public String listarComunidades() {
 		
 		if(loginInfo.getSessionRole() == Role.USER) {
-			// Muestro sólo las comunidades de ese usuario, sin posibilidad de borrarlas.
+			// Muestro sólo las comunidades de ese usuario, sin posibilidad de borrarlas. Útil para ver las comunidades a las qe está unido.
 		} else if (loginInfo.getSessionRole() == Role.ADMIN) {
 			// Muestro TODAS las comunidades, con posibilidad de borrar.
 		}
-		
 		//De momento, se devuelve no implementado.
+		
 		return "unimplemented";
+		
 	}
+	
+	// Me devuelve las comunidades disponibles para este usuario, ya que ya podría estar unido a alguna. NO BORRAR
+	/*public Comunidad listarComunidadesDisponibles() {
+		
+		String username = loginInfo.getSessionUsername(); // Obtengo el usuario antes de hacer nada, útil para obtener
+														  // obtener las comunidades en las que NO está.
+		
+		// BBDD, Obtener las comunidades de la BBDD
+		
+		return comunidades;
+		
+	}*/
 	
 	public String borrarPublicacion() {
 		return "unimplemented";
@@ -73,7 +87,18 @@ public class BeanCommunities {
 		return "success"; // Retorno un mensaje de éxito. A continuación, se redirige al usuario a ver sus comunidades.
 		
 	}
-
+	
+	// Método que permite guardar una comunidad en el objeto de este Bean, de forma que sea accesible por las acciones que se desencadenen a continuación.
+	// (Unirse a comunidades, Ver mensajes de la comunidad, etc)
+	public String guardarComunidad(/*Comunidad comunidad*/) {
+		//this.comunidad = comunidad;
+		return "success";
+	}
+	
+	
+	
+	
+	
 	public String getNombreComunidad() {
 		return nombreComunidad;
 	}

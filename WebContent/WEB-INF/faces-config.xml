@@ -37,11 +37,12 @@
 			<to-view-id>/restricted/index.xhtml</to-view-id>
 		</navigation-case>
 
+		<!-- Reglas de navegación para la gestión de comunidades. -->
 		<navigation-case>
 			<from-outcome>communitiesAdmin</from-outcome>
 			<to-view-id>/restricted/manageCommunities.xhtml</to-view-id>
 		</navigation-case>
-		
+
 		<navigation-case>
 			<from-outcome>createCommunity</from-outcome>
 			<to-view-id>/restricted/createCommunity.xhtml</to-view-id>
@@ -70,42 +71,49 @@
 		</navigation-case>
 	</navigation-rule>
 
-	<!-- Gestión de comunidades -->
+	<!-- Si devuelve success, pasamos a ver mensajes de la comunidad -->
+	<navigation-rule>
+		<from-view-id>/restricted/listarcomunidadesuser.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{managecommunitiesbean.guardarComunidad}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/restricted/publicaciones_Comunidad.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+		<!-- Si devuelve success, pasamos a ver mensajes de la comunidad -->
+	<navigation-rule>
+		<from-view-id>/restricted/unircomunidadexistente.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{managecommunitiesbean.guardarComunidad}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/restricted/publicaciones_Comunidad.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+
+
+
+
+
+	<!-- Gestión de comunidades por admin-->
 	<navigation-rule>
 		<from-view-id>/manageCommunities.xhtml</from-view-id>
 
 		<!-- Borrado de una comunidad -->
 		<navigation-case>
-			<from-action>#{managecommunitiesbean.borrarcomunidad(item)}</from-action>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/manageCommunities.xhtml</to-view-id>
-		</navigation-case>
-
-		<navigation-case>
-			<from-outcome>unauthorized</from-outcome>
-			<to-view-id>/restricted/communities.xhtml</to-view-id>
-		</navigation-case>
-
-	</navigation-rule>
-	
-		<!-- Creación de comunidades -->
-	<navigation-rule>
-		<from-view-id>/restricted/createCommunity.xhtml</from-view-id>
-
-		<!-- Borrado de una comunidad -->
-		<navigation-case>
-			<from-action>#{managecommunitiesbean.creacomunidad}</from-action>
+			<from-action>#{managecommunitiesbean.borrarcomunidad}</from-action>
 			<from-outcome>success</from-outcome>
 			<to-view-id>/restricted/manageCommunities.xhtml</to-view-id>
 		</navigation-case>
 
-		<navigation-case>
-			<from-outcome>unauthorized</from-outcome>
-			<to-view-id>/restricted/communities.xhtml</to-view-id>
-		</navigation-case>
+
 
 	</navigation-rule>
-	
-	
+
+	<!-- Creación de comunidades -->
+
+
+
 
 </faces-config>
