@@ -15,16 +15,26 @@
 
 		<br></br>
 
-		<h:form>
-					 
-        <p:inputText id="inputNombreComunidad" value="#{managecommunitiesbean.nombrenuevacomunidad}" placeholder="#{msgs.crearcomunidad}" />
-        	<br></br>
-        	
-        	<h:commandButton value="Crear" action="#{managecommunitiesbean.creacomunidad()}" type="submit" immediate="true" />
-        <p:outputLabel id="mensaje" value="#{managecommunitiesbean.mensaje}" rendered="#{not empty managecommunitiesbean.mensaje}" />
-        
-        <!-- Sólo lo renderizo en caso de que el mensaje no esté vacío -->
-        
+		<h:form id="formNuevaComunidad">
+
+			<p:inputText id="inputNombreComunidad"
+				value="#{managecommunitiesbean.nombreComunidad}"
+				placeholder="#{msgs.nombrecrearcomunidad}" />
+			<br></br>
+			<p:inputText id="inputDescripcionComunidad"
+				value="#{managecommunitiesbean.descripcionComunidad}"
+				placeholder="#{msgs.descripcioncrearcomunidad}" />
+
+			<br></br>
+
+			<!-- Form AJAXIFICADO. -->
+			<p:commandButton value="Crear"
+				action="#{managecommunitiesbean.creacomunidad}" type="submit"
+				update="messages formNuevaComunidad" />
+			<p:messages id="messages" showDetail="true" />
+			<!-- Mostrar mensajes de error aquí, tras realizar validación server-side -->
+
+
 		</h:form>
 
 	</ui:define>
