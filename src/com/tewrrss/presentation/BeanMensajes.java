@@ -44,6 +44,15 @@ public class BeanMensajes {
 		this.nuevoPost = nuevoPost;
 	}
 
+	
+	public void borrarMensaje(Object mensaje) {	//BASE DE DATOS CAMBIAR OBJECT POR OBJETO MENSAJE
+		// acceder a la base de datos y eliminar este mensaje
+		
+		
+		
+	}
+	
+	
 	public void agregarMensaje() {		// MODIFICAR CON LA BASE DE DATOS
 		if (nuevoPost != null && !nuevoPost.isEmpty()) {
             // Crear un nuevo mensaje y agregarlo a la lista
