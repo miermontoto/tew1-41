@@ -11,8 +11,8 @@
 
 	<ui:define name="cuerpo">
 
-	<!-- ASEGURARSE DE QUE  -->
-		<h:dataTable var="mensaje" value="#{BeanMensajes.getMensajesUsuario}">
+	<!-- ASEGURARSE DE QUE EN MENSAJE SE TENGAN LOS DATOS DEL MENSAJE Y EL NOMBRE DEL USUARIO CREADOR -->
+		<h:dataTable var="mensaje" value="#{BeanMensajes.getMensajesNuevos}">
 			<h:column>
 				<f:facet name="header">Comunidad</f:facet>
                 #{mensaje.comunidad}
@@ -24,8 +24,6 @@
 			<h:column>
 				<f:facet name="header">Contenido del Mensaje</f:facet>
                 #{mensaje.contenido}
-                <p:commandButton value="Eliminar"
-					action="#{BeanMensajes.eliminarMensaje(mensaje)}" />
 			</h:column>
 		</h:dataTable>
 

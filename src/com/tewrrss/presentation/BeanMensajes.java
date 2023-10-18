@@ -73,6 +73,23 @@ public class BeanMensajes {
         }
     }
     
+	
+	public List<Object> getMensajesNuevos(){
+		
+		//Sacar de la base de datos los mensajes delas comunidades a las que pertenezca el usuario
+		//Hay que filtrar que solo se  muestren los ultimos 5
+		
+		
+		return mensajes;
+	}
+	
+	public List<Object> getMensajesUsuario(){
+		
+		//Sacar de la base de datos los mensajes del usuario y meterlos en mensajes 
+		
+		return mensajes;
+	}
+	
     public List<Object> getMensajesComunidad(int comunidadId) {		//MODIFICAR CON LA BASE DE DATOS
         // Usar un DAO (Data Access Object) para obtener los mensajes desde la base de datos.
          
