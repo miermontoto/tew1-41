@@ -38,7 +38,7 @@
 		</navigation-case>
 
 		<navigation-case>
-			<from-outcome>communities</from-outcome>
+			<from-outcome>communitiesAdmin</from-outcome>
 			<to-view-id>/restricted/manageCommunities.xhtml</to-view-id>
 		</navigation-case>
 
@@ -59,28 +59,48 @@
 
 	<navigation-rule>
 		<from-view-id>/register.xhtml</from-view-id>
-
 		<navigation-case>
 			<from-outcome>success</from-outcome>
 			<to-view-id>/restricted/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
-	<!--  Gestión de comunidades -->
-	<navigation-rule>
-		<from-view-id>/communities.xhtml</from-view-id>
 
+	<!-- Gestión de comunidades -->
+	<navigation-rule>
+		<from-view-id>/manageCommunities.xhtml</from-view-id>
+
+		<!-- Borrado de una comunidad -->
 		<navigation-case>
+			<from-action>#{managecommunitiesbean.borrarcomunidad(item)}</from-action>
 			<from-outcome>success</from-outcome>
-			<to-view-id>/restricted/communities.xhtml</to-view-id>
+			<to-view-id>/manageCommunities.xhtml</to-view-id>
 		</navigation-case>
-		
+
 		<navigation-case>
 			<from-outcome>unauthorized</from-outcome>
 			<to-view-id>/restricted/communities.xhtml</to-view-id>
 		</navigation-case>
-		
-		
+
 	</navigation-rule>
+	
+		<!-- Creación de comunidades -->
+	<navigation-rule>
+		<from-view-id>/restricted/createCommunity.xhtml</from-view-id>
+
+		<!-- Borrado de una comunidad -->
+		<navigation-case>
+			<from-action>#{managecommunitiesbean.creacomunidad}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/restricted/manageCommunities.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>unauthorized</from-outcome>
+			<to-view-id>/restricted/communities.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	
+	
 
 </faces-config>
