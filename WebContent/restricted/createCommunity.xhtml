@@ -3,7 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	template="/templates/template-logged-admin.xhtml">
+	template="/templates/template-logged.xhtml">
 
 	<ui:define name="titulo">
 		#{msgs.app_title}
@@ -21,6 +21,7 @@
 				value="#{managecommunitiesbean.nombreComunidad}"
 				placeholder="#{msgs.nombrecrearcomunidad}" />
 			<br></br>
+			
 			<p:inputText id="inputDescripcionComunidad"
 				value="#{managecommunitiesbean.descripcionComunidad}"
 				placeholder="#{msgs.descripcioncrearcomunidad}" />
@@ -32,7 +33,7 @@
 				action="#{managecommunitiesbean.creacomunidad}" type="submit"
 				update="messages formNuevaComunidad" />
 			<p:messages id="messages" showDetail="true" />
-			<!-- Mostrar mensajes de error aquí, tras realizar validación server-side -->
+			
 
 
 		</h:form>

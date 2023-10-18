@@ -20,6 +20,10 @@
 				<p:menuitem value="English" actionListener="#{settings.setEnglish}" />
 			</p:submenu>
 			
+			<p:submenu name="lang" style="float:right" label="#{msgs.Acciones}" >
+				<p:menuitem value="#{msgs.CrearComunidades}" action="createCommunity" />
+			</p:submenu>
+			
 			
 		</p:menubar>
 	</ui:define>
