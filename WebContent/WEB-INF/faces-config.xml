@@ -41,6 +41,11 @@
 			<from-outcome>communitiesAdmin</from-outcome>
 			<to-view-id>/restricted/manageCommunities.xhtml</to-view-id>
 		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>createCommunity</from-outcome>
+			<to-view-id>/restricted/createCommunity.xhtml</to-view-id>
+		</navigation-case>
 
 		<navigation-case>
 			<from-outcome>error</from-outcome>
