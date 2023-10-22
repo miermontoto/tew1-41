@@ -34,6 +34,7 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 				user.setEmail(rs.getString("email"));
 				user.setPassword(rs.getString("password"));
 				user.setRole(rs.getInt("role"));
+				user.setUsername(rs.getString("username"));
 
 				users.add(user);
 			}
@@ -55,6 +56,7 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 				user.get().setEmail(rs.getString("email"));
 				user.get().setPassword(rs.getString("password"));
 				user.get().setRole(rs.getInt("role"));
+				user.get().setUsername(rs.getString("username"));
 			}
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
@@ -79,10 +81,11 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 		boolean added = true; // FIXME: comprobar que se ha añadido
 
 		try {
-			PreparedStatement ps = getDatabase().getConnection().prepareStatement("INSERT INTO user VALUES (?, ?, ?)");
+			PreparedStatement ps = getDatabase().getConnection().prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?)");
 			ps.setString(1, user.getEmail());
-			ps.setString(2, user.getPassword());
-			ps.setInt(3, user.getRole());
+			ps.setString(2, user.getUsername());
+			ps.setString(3, user.getPassword());
+			ps.setInt(4, user.getRole());
 
 			ps.executeQuery();
 		} catch (SQLException e) {getDatabase().handleException(e);}
@@ -95,10 +98,11 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 		boolean updated = true; // FIXME: comprobar que se ha actualizado
 
 		try {
-			PreparedStatement ps = getDatabase().getConnection().prepareStatement("UPDATE user SET password = ?, role = ? WHERE email = ?");
-			ps.setString(1, user.getPassword());
-			ps.setInt(2, user.getRole());
-			ps.setString(3, user.getEmail());
+			PreparedStatement ps = getDatabase().getConnection().prepareStatement("UPDATE user SET username = ?, password = ?, role = ? WHERE email = ?");
+			ps.setString(1, user.getUsername());
+			ps.setString(2, user.getPassword());
+			ps.setInt(3, user.getRole());
+			ps.setString(4, user.getEmail());
 
 			ps.executeQuery();
 		} catch (SQLException e) {getDatabase().handleException(e);}

@@ -6,6 +6,11 @@
 
 	<!-- Misc -->
 
+	<validator>
+		<validator-id>emailValidator</validator-id>
+		<validator-class>com.tewrrss.util.EmailValidator</validator-class>
+	</validator>
+
 	<application>
 		<resource-bundle>
 			<base-name>messages</base-name>
@@ -24,7 +29,7 @@
 
 		<navigation-case>
 			<from-outcome>registro</from-outcome>
-			<to-view-id>/registro.xhtml</to-view-id>
+			<to-view-id>/register.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>
@@ -74,8 +79,6 @@
 			<from-outcome>unauthorized</from-outcome>
 			<to-view-id>/restricted/communities.xhtml</to-view-id>
 		</navigation-case>
-
-
 	</navigation-rule>
 
 </faces-config>

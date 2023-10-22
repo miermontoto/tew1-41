@@ -25,7 +25,8 @@
 				placeholder="#{msgs.session_register_placeholder_pass2}" required="true" />
 			<br />
 
-			<h:selectBooleanCheckbox value="#{msgs.rgpd}"></h:selectBooleanCheckbox>
+			<h:selectBooleanCheckbox value="#{registro.rgpd}"></h:selectBooleanCheckbox>
+			#{msgs.session_register_rgpd}
 
 			<br />
 			<p:commandButton value="#{msgs.session_register_button}"

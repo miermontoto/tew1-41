@@ -19,6 +19,7 @@ public class BeanRegistro {
 	private String email;
 	private String contrasena;
 	private String confirmarContrasena;
+	private boolean rgpd;
 
 	// Getters y Setters para las propiedades
 
@@ -54,6 +55,14 @@ public class BeanRegistro {
 		this.confirmarContrasena = confirmarContrasena;
 	}
 
+	public boolean isRgpd() {
+		return rgpd;
+	}
+
+	public void setRgpd(boolean rgpd) {
+		this.rgpd = rgpd;
+	}
+
 	/**
 	 * Lógica para el registro de usuarios.
 	 * Verifica que el correo no esté repetido, realiza el registro, etc.
@@ -61,17 +70,26 @@ public class BeanRegistro {
 	public String registrarUsuario() {
 		LoginService service;
 
+		if (!rgpd) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe aceptar la política de privacidad", "Debe aceptar la política de privacidad."));
+			return ""; // Permanece en la página de registro
+		}
+
 		if (!contrasena.equals(confirmarContrasena)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden", "Las contraseñas no coinciden."));
-			return null; // Permanece en la página de registro
+			return ""; // Permanece en la página de registro
 		}
+
+		System.out.println("la contraseña no es igual.");
 
 		service = Factories.services.createLoginService();
 
 		if (service.emailExists(email)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo electrónico ya está en uso", "El correo electrónico ya está en uso."));
-			return null; // Permanece en la página de registro
+			return ""; // Permanece en la página de registro
 		}
+
+		System.out.println("el email no está ya presente.");
 
 		User newUser = new User(email, nombre, contrasena);
 

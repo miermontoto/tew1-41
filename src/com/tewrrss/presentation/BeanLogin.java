@@ -46,6 +46,7 @@ public class BeanLogin implements Serializable {
 
 		User user = login.verify(name, password);
 		if (user != null) {
+			System.out.println(user.getUsername());
 			BeanLogin.putUserInSession(user);
 			return "success";
 		}
