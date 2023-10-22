@@ -4,22 +4,25 @@ import java.io.Serializable;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 
-import com.tewrrss.model.Role;
-import com.tewrrss.model.User;
+import com.tewrrss.dto.User;
+import com.tewrrss.util.Role;
 
 @ManagedBean(name = "user")
 @SessionScoped
 public class BeanUser implements Serializable {
 	private static final long serialVersionUID = 55556L;
 
-	public String getSessionUsername() {
+	public User getSessionUser() {
 		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("LOGGEDIN_USER");
-		return user.getName();
+		return user;
+	}
+
+	public String getSessionUsername() {
+		return getSessionUser().getUsername();
 	}
 
 	public int getSessionRole() {
-		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("LOGGEDIN_USER");
-		return user.getRole();
+		return getSessionUser().getRole();
 	}
 
 	public String getSessionRoleName() {

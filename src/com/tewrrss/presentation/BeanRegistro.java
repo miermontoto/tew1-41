@@ -5,8 +5,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import com.tewrrss.model.Role;
-import com.tewrrss.model.User;
+import com.tewrrss.business.LoginService;
+import com.tewrrss.dto.User;
+import com.tewrrss.infrastructure.Factories;
+import com.tewrrss.util.Role;
 
 @ManagedBean(name = "registro")
 @SessionScoped
@@ -17,6 +19,7 @@ public class BeanRegistro {
 	private String email;
 	private String contrasena;
 	private String confirmarContrasena;
+	private boolean rgpd;
 
 	// Getters y Setters para las propiedades
 
@@ -52,33 +55,46 @@ public class BeanRegistro {
 		this.confirmarContrasena = confirmarContrasena;
 	}
 
+	public boolean isRgpd() {
+		return rgpd;
+	}
+
+	public void setRgpd(boolean rgpd) {
+		this.rgpd = rgpd;
+	}
+
 	/**
 	 * Lógica para el registro de usuarios.
 	 * Verifica que el correo no esté repetido, realiza el registro, etc.
 	 */
 	public String registrarUsuario() {
-		if(!contrasena.equals(confirmarContrasena)) {
+		LoginService service;
+
+		if (!rgpd) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe aceptar la política de privacidad", "Debe aceptar la política de privacidad."));
+			return ""; // Permanece en la página de registro
+		}
+
+		if (!contrasena.equals(confirmarContrasena)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden", "Las contraseñas no coinciden."));
-			return null; // Permanece en la página de registro
+			return ""; // Permanece en la página de registro
 		}
 
-		if (emailYaExiste(email)) {
+		System.out.println("la contraseña no es igual.");
+
+		service = Factories.services.createLoginService();
+
+		if (service.emailExists(email)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo electrónico ya está en uso", "El correo electrónico ya está en uso."));
-			return null; // Permanece en la página de registro
+			return ""; // Permanece en la página de registro
 		}
 
-		// Realiza el registro del usuario y redirige a una página de éxito
+		System.out.println("el email no está ya presente.");
 
-		// TODO: implementar registro en BBDD
-		BeanLogin.putUserInSession(new User(nombre, email, Role.USER));
+		User newUser = new User(email, nombre, contrasena);
+
+		service.register(newUser);
+		BeanLogin.putUserInSession(newUser);
 		return "success";
-	}
-
-	/**
-	 * Implementa la l�gica para verificar si el correo ya está en uso en el sistema.
-	 * @return true si el correo ya está en uso, false en caso contrario.
-	 */
-	private boolean emailYaExiste(String email) {
-		return false; // TODO: implementar comprobación con BBDD
 	}
 }

@@ -11,8 +11,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import com.tewrrss.business.LoginService;
+import com.tewrrss.dto.User;
 import com.tewrrss.infrastructure.Factories;
-import com.tewrrss.model.User;
 
 @ManagedBean(name = "login")
 @SessionScoped
@@ -47,17 +47,17 @@ public class BeanLogin implements Serializable {
 		User user = login.verify(name, password);
 		if (user != null) {
 			BeanLogin.putUserInSession(user);
-			return "success"; //Sesión iniciada con éxito
+			return "success";
 		}
 
-		// Si el usuario no se encuentra, se prepara el mensaje que saldrá en la vista.
+		// Si el usuario no se encuentra, se prepara el mensaje que saldrï¿½ en la vista.
 		FacesMessage msgs = new FacesMessage(FacesMessage.SEVERITY_WARN, bundle.getString("error_login_unknown"), null);
 		jsfCtx.addMessage(null, msgs);
 
-		return "login"; //El usuario ha de dirigirse a login.
+		return "login";
 	}
 
-	// Método para manejar la desconexión de usuaris.
+	// MÃ©todo para manejar la desconexiï¿½n de usuaris.
 	public String logout() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "login";
