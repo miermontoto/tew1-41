@@ -23,24 +23,31 @@ public class Post implements Serializable, DTO {
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 	public Date getCreationDate() {
 		return creationDate;
 	}
+
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
+
 	public String getUserEmail() {
 		return userEmail;
 	}
+
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
+
 	public String getCommunityName() {
 		return communityName;
 	}
+
 	public void setCommunityName(String communityName) {
 		this.communityName = communityName;
 	}

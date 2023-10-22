@@ -15,8 +15,8 @@ import com.tewrrss.persistence.UserDAO;
 
 public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 
-	public static List<User> allUsers = null;
-	public static boolean dirtyAllUsers = true;
+	private static List<User> allUsers = null;
+	private static boolean dirtyAllUsers = true;
 
 	public List<User> getUsers() {
 		if (allUsers != null && allUsers.size() > 0 && !dirtyAllUsers) {
@@ -71,6 +71,7 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 			ps.executeQuery();
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
+		dirtyAllUsers &= removed;
 		return removed;
 	}
 
@@ -86,6 +87,7 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 			ps.executeQuery();
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
+		dirtyAllUsers &= added;
 		return added;
 	}
 
@@ -101,6 +103,7 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 			ps.executeQuery();
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
+		dirtyAllUsers &= updated;
 		return updated;
 	}
 }
