@@ -5,8 +5,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import com.tewrrss.model.Role;
-import com.tewrrss.model.User;
+import com.tewrrss.dto.User;
+import com.tewrrss.util.Role;
 
 @ManagedBean(name = "registro")
 @SessionScoped
@@ -70,7 +70,7 @@ public class BeanRegistro {
 		// Realiza el registro del usuario y redirige a una página de éxito
 
 		// TODO: implementar registro en BBDD
-		BeanLogin.putUserInSession(new User(nombre, email, Role.USER));
+		BeanLogin.putUserInSession(new User(email, email, contrasena));
 		return "success";
 	}
 

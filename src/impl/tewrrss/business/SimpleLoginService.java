@@ -1,20 +1,22 @@
 package impl.tewrrss.business;
 
-import com.tewrrss.model.Role;
-import com.tewrrss.model.User;
+import java.util.Optional;
 
-// TODO: implementar un servicio que no sea de juguete (con conexión a BD y comprobaciones)
+import com.tewrrss.dto.User;
+import com.tewrrss.infrastructure.Factories;
+
 public class SimpleLoginService implements com.tewrrss.business.LoginService {
 
 	@Override
-	public User verify(String login, String password) {
-		if (!validLogin(login, password)) return null;
-		return new User(login, "admin", Role.ADMIN);
-	}
+	public User verify(String email, String password) {
+		Optional<User> user = Factories.persistence.getUserDAO().findByEmail(email);
 
-	@Override
-	public boolean validLogin(String login, String password) {
-		// TODO: login en BBDD. Guardado de datos.
-		return login.equals("admin") && password.equals("tew");
+		if (user.isPresent()) {
+			if (user.get().getPassword().equals(password)) {
+				return user.get();
+			}
+		}
+
+		return null;
 	}
 }

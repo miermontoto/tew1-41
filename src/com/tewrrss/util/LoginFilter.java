@@ -1,4 +1,4 @@
-package com.tewrrss.presentation.filter;
+package com.tewrrss.util;
 
 import java.io.IOException;
 import javax.servlet.DispatcherType;

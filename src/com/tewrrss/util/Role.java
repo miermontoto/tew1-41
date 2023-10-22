@@ -1,4 +1,4 @@
-package com.tewrrss.model;
+package com.tewrrss.util;
 
 import java.util.ResourceBundle;
 
