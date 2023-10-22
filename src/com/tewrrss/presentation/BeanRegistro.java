@@ -5,7 +5,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import com.tewrrss.business.LoginService;
 import com.tewrrss.dto.User;
+import com.tewrrss.infrastructure.Factories;
 import com.tewrrss.util.Role;
 
 @ManagedBean(name = "registro")
@@ -57,28 +59,24 @@ public class BeanRegistro {
 	 * Verifica que el correo no esté repetido, realiza el registro, etc.
 	 */
 	public String registrarUsuario() {
-		if(!contrasena.equals(confirmarContrasena)) {
+		LoginService service;
+
+		if (!contrasena.equals(confirmarContrasena)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden", "Las contraseñas no coinciden."));
 			return null; // Permanece en la página de registro
 		}
 
-		if (emailYaExiste(email)) {
+		service = Factories.services.createLoginService();
+
+		if (service.emailExists(email)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo electrónico ya está en uso", "El correo electrónico ya está en uso."));
 			return null; // Permanece en la página de registro
 		}
 
-		// Realiza el registro del usuario y redirige a una página de éxito
+		User newUser = new User(email, nombre, contrasena);
 
-		// TODO: implementar registro en BBDD
-		BeanLogin.putUserInSession(new User(email, email, contrasena));
+		service.register(newUser);
+		BeanLogin.putUserInSession(newUser);
 		return "success";
-	}
-
-	/**
-	 * Implementa la l�gica para verificar si el correo ya está en uso en el sistema.
-	 * @return true si el correo ya está en uso, false en caso contrario.
-	 */
-	private boolean emailYaExiste(String email) {
-		return false; // TODO: implementar comprobación con BBDD
 	}
 }

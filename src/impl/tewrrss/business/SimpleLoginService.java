@@ -19,4 +19,14 @@ public class SimpleLoginService implements com.tewrrss.business.LoginService {
 
 		return null;
 	}
+
+	@Override
+	public boolean emailExists(String email) {
+		return Factories.persistence.getUserDAO().findByEmail(email).isPresent();
+	}
+
+	@Override
+	public void register(User user) {
+		Factories.persistence.getUserDAO().add(user);
+	}
 }
