@@ -15,17 +15,17 @@
 		<h:dataTable var="mensaje" value="#{BeanMensajes.getMensajesUsuario}">
 			<h:column>
 				<f:facet name="header">Comunidad</f:facet>
-                #{mensaje.comunidad}
+                #{mensaje.getCommunityName}
             </h:column>
 			<h:column>
 				<f:facet name="header">Fecha y Hora</f:facet>
-                #{mensaje.fechaHora}
+                #{mensaje.getCreationDate}
             </h:column>
 			<h:column>
 				<f:facet name="header">Contenido del Mensaje</f:facet>
-                #{mensaje.contenido}
+                #{mensaje.getContent}
                 <p:commandButton value="Eliminar"
-					action="#{BeanMensajes.eliminarMensaje(mensaje)}" />
+					action="#{BeanMensajes.borrarMensaje(mensaje)}" />
 			</h:column>
 		</h:dataTable>
 

@@ -4,17 +4,22 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
-import com.tewrrss.model.Role;
-import com.tewrrss.model.User;
+import com.tewrrss.dto.Post;
+import com.tewrrss.dto.User;
+
+import impl.tewrrss.persistence.jdbc.PostJdbcDAO;
+
+
 
 @ManagedBean(name = "managecommunitiesbean") // ManagedBean para gestión de usuarios.
 public class BeanMensajes {
 	
-	BeanUser user; //Necesario ???
+	PostJdbcDAO postClase;
 	
 	public BeanMensajes() {
-		user = new BeanUser(); // Accedo al usuario
+		postClase=new PostJdbcDAO();
 	}
 	
 	/*
@@ -24,15 +29,15 @@ public class BeanMensajes {
 	 * */
 	
 	
-    private List<Object> mensajes;		
+    private List<Post> mensajes;		
     private String nuevoPost;
     
     
-    public List<Object> getMensajes() {
+    public List<Post> getMensajes() {
 		return mensajes;
 	}
 
-	public void setMensajes(List<Object> mensajes) {
+	public void setMensajes(List<Post> mensajes) {
 		this.mensajes = mensajes;
 	}
 
@@ -45,10 +50,11 @@ public class BeanMensajes {
 	}
 
 	
-	public void borrarMensaje(Object mensaje) {	//BASE DE DATOS CAMBIAR OBJECT POR OBJETO MENSAJE
+	public void borrarMensaje(Post mensaje) {	//BASE DE DATOS CAMBIAR OBJECT POR OBJETO MENSAJE
 		// acceder a la base de datos y eliminar este mensaje
 		
-		
+		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("LOGGEDIN_USER");
+		postClase.remove(mensaje);
 		
 	}
 	
@@ -74,7 +80,7 @@ public class BeanMensajes {
     }
     
 	
-	public List<Object> getMensajesNuevos(){
+	public List<Post> getMensajesNuevos(){
 		
 		//Sacar de la base de datos los mensajes delas comunidades a las que pertenezca el usuario
 		//Hay que filtrar que solo se  muestren los ultimos 5
@@ -83,14 +89,17 @@ public class BeanMensajes {
 		return mensajes;
 	}
 	
-	public List<Object> getMensajesUsuario(){
-		
-		//Sacar de la base de datos los mensajes del usuario y meterlos en mensajes 
-		
+	public List<Post> getMensajesUsuario(){
+		//Sacamos el usuario del contexto
+		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("LOGGEDIN_USER");
+		//Sacamos los mensajes de ese usuario 
+		PostJdbcDAO postClase=new PostJdbcDAO();
+		mensajes =postClase.getPostsFromUser(user.getEmail());
+
 		return mensajes;
 	}
 	
-    public List<Object> getMensajesComunidad(int comunidadId) {		//MODIFICAR CON LA BASE DE DATOS
+    public List<Post> getMensajesComunidad(int comunidadId) {		//MODIFICAR CON LA BASE DE DATOS
         // Usar un DAO (Data Access Object) para obtener los mensajes desde la base de datos.
          
     	
