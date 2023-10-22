@@ -6,11 +6,6 @@
 
 	<!-- Misc -->
 
-	<validator>
-		<validator-id>emailValidator</validator-id>
-		<validator-class>com.tewrrss.presentation.EmailValidator</validator-class>
-	</validator>
-
 	<application>
 		<resource-bundle>
 			<base-name>messages</base-name>
@@ -65,7 +60,7 @@
 			<to-view-id>/restricted/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<!--  Gestión de comunidades -->
 	<navigation-rule>
 		<from-view-id>/communities.xhtml</from-view-id>
@@ -74,13 +69,13 @@
 			<from-outcome>success</from-outcome>
 			<to-view-id>/restricted/communities.xhtml</to-view-id>
 		</navigation-case>
-		
+
 		<navigation-case>
 			<from-outcome>unauthorized</from-outcome>
 			<to-view-id>/restricted/communities.xhtml</to-view-id>
 		</navigation-case>
-		
-		
+
+
 	</navigation-rule>
 
 </faces-config>
