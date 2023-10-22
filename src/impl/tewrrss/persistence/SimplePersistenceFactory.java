@@ -12,17 +12,12 @@ public class SimplePersistenceFactory implements PersistenceFactory {
 
 	@Override
 	public CommunityDAO getCommunityDAO() {
-		return null;
+		return new CommunityJdbcDAO();
 	}
 
 	@Override
 	public PostDAO getPostDAO() {
-		return null;
-	}
-
-	@Override
-	public MemberDAO getMemberDAO() {
-		return null;
+		return new PostJdbcDAO();
 	}
 
 }
