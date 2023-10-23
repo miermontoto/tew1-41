@@ -7,10 +7,10 @@
 ## Funcionalidades
 - [ ] Registro de usuario
   - [x] Registro básico
-  - [ ] Conexión con BBDD
-- [ ] Iniciar sesión
+  - [x] Conexión con BBDD
+- [x] Iniciar sesión
   - [x] Login básico
-  - [ ] Conexión con BBDD
+  - [x] Conexión con BBDD
   - [x] Persistencia entre vistas
   - [x] Redirección al login
 - [x] Salir de sesión
@@ -27,7 +27,7 @@
 
 ## Características y metas
 - [x] Navegación con PrimeFaces
-- [ ] Inicio de BBDD con datos de prueba
+- [x] Inicio de BBDD con datos de prueba
 - [ ] Informe obligatorio
 - [x] Traducciones
 - [x] Manejo de errores

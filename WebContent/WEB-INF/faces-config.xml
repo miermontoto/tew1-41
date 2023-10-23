@@ -8,7 +8,7 @@
 
 	<validator>
 		<validator-id>emailValidator</validator-id>
-		<validator-class>com.tewrrss.presentation.EmailValidator</validator-class>
+		<validator-class>com.tewrrss.util.EmailValidator</validator-class>
 	</validator>
 
 	<application>
@@ -29,7 +29,7 @@
 
 		<navigation-case>
 			<from-outcome>registro</from-outcome>
-			<to-view-id>/registro.xhtml</to-view-id>
+			<to-view-id>/register.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>
@@ -39,14 +39,16 @@
 
 		<!-- Reglas de navegación para la gestión de comunidades. -->
 		<navigation-case>
-			<from-outcome>communitiesAdmin</from-outcome>
+			<from-outcome>communities</from-outcome>
 			<to-view-id>/restricted/manageCommunities.xhtml</to-view-id>
 		</navigation-case>
+
 
 		<navigation-case>
 			<from-outcome>createCommunity</from-outcome>
 			<to-view-id>/restricted/createCommunity.xhtml</to-view-id>
 		</navigation-case>
+
 
 		<navigation-case>
 			<from-outcome>error</from-outcome>
@@ -65,13 +67,13 @@
 
 	<navigation-rule>
 		<from-view-id>/register.xhtml</from-view-id>
+
 		<navigation-case>
 			<from-outcome>success</from-outcome>
 			<to-view-id>/restricted/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
-	<!-- Si devuelve success, pasamos a ver mensajes de la comunidad -->
 	<navigation-rule>
 		<from-view-id>/restricted/listarcomunidadesuser.xhtml</from-view-id>
 		<navigation-case>
@@ -80,8 +82,8 @@
 			<to-view-id>/restricted/publicaciones_Comunidad.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
-		<!-- Si devuelve success, pasamos a ver mensajes de la comunidad -->
+
+	<!-- Si devuelve success, pasamos a ver mensajes de la comunidad -->
 	<navigation-rule>
 		<from-view-id>/restricted/unircomunidadexistente.xhtml</from-view-id>
 		<navigation-case>
@@ -90,17 +92,17 @@
 			<to-view-id>/restricted/publicaciones_Comunidad.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
 
 
 
 
 
-	<!-- Gestión de comunidades por admin-->
+
+	<!-- Gestión de comunidades por admin -->
+	<!-- Gestión de comunidades -->
 	<navigation-rule>
-		<from-view-id>/manageCommunities.xhtml</from-view-id>
+		<from-view-id>/communities.xhtml</from-view-id>
 
-		<!-- Borrado de una comunidad -->
 		<navigation-case>
 			<from-action>#{managecommunitiesbean.borrarcomunidad}</from-action>
 			<from-outcome>success</from-outcome>
@@ -112,6 +114,7 @@
 	</navigation-rule>
 
 	<!-- Creación de comunidades -->
+
 
 
 

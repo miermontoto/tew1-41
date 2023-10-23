@@ -11,13 +11,13 @@
 
 	<ui:define name="cuerpo">
 
-		<p>#{msgs.listadocomunidades}</p>
+		<p>#{msgs.communities_list}</p>
 
-		<br></br>
+		<br />
 
 		<h:form>
-			<p:dataTable 
-				var="item" id="tablaComunidades" border="4" style="width: 500px" value="#{managecommunitiesbean.listarComunidades()}">
+			<p:dataTable
+				var="item" id="tablaComunidades" border="4" style="width: 500px" value="#{communities.listarComunidades()}">
 				<p:column>
 					<f:facet name="header">Nombre de la comunidad</f:facet>#{item.nombre}</p:column>
 				<p:column >
@@ -26,13 +26,13 @@
 
 				<p:column>
 
-					<f:facet name="header">Acciones</f:facet>
+					<f:facet name="header">menu_actions</f:facet>
 
 					<p:commandLink value="Eliminar comunidad"
-						action="#{managecommunitiesbean.borrarcomunidad(item)}" type="submit"
+						action="#{communities.borrarComunidad(item)}" type="submit"
 						immediate="true" update="tablaComunidades"></p:commandLink>
-						
-						
+
+
 				</p:column>
 			</p:dataTable>
 		</h:form>

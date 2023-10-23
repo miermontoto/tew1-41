@@ -11,26 +11,26 @@
 
 	<ui:define name="cuerpo">
 
-		<p>#{msgs.crearcomunidad}</p>
+		<p>#{msgs.communities_create}</p>
 
 		<br></br>
 
 		<h:form id="formNuevaComunidad">
 
 			<p:inputText id="inputNombreComunidad"
-				value="#{managecommunitiesbean.nombreComunidad}"
-				placeholder="#{msgs.nombrecrearcomunidad}" />
+				value="#{communities.nombre}"
+				placeholder="#{msgs.communities_create_name}" />
 			<br></br>
 			
 			<p:inputText id="inputDescripcionComunidad"
-				value="#{managecommunitiesbean.descripcionComunidad}"
-				placeholder="#{msgs.descripcioncrearcomunidad}" />
+				value="#{communities.descripcion}"
+				placeholder="#{msgs.communities_create_desc}" />
 
 			<br></br>
 
 			<!-- Form AJAXIFICADO. -->
 			<p:commandButton value="Crear"
-				action="#{managecommunitiesbean.creacomunidad}" type="submit"
+				action="#{communities.crearComunidad}" type="submit"
 				update="messages formNuevaComunidad" />
 			<p:messages id="messages" />
 			
