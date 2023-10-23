@@ -19,9 +19,9 @@
 			<p:dataTable
 				var="item" id="tablaComunidades" border="4" style="width: 500px" value="#{communities.listarComunidades()}">
 				<p:column>
-					<f:facet name="header">Nombre de la comunidad</f:facet>#{item.nombre}</p:column>
+					<f:facet name="header">Nombre de la comunidad</f:facet>#{item.name}</p:column>
 				<p:column >
-					<f:facet name="header">Descripcion de la comunidad</f:facet>#{item.descripcion}</p:column>
+					<f:facet name="header">Descripcion de la comunidad</f:facet>#{item.description}</p:column>
 
 
 				<p:column>

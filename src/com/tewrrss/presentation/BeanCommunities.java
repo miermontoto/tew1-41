@@ -1,12 +1,17 @@
 package com.tewrrss.presentation;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import com.tewrrss.dto.Community;
 import com.tewrrss.dto.User;
+import com.tewrrss.infrastructure.Factories;
+import com.tewrrss.persistence.CommunityDAO;
+import com.tewrrss.persistence.PersistenceFactory;
 import com.tewrrss.util.Role;
 
 @ManagedBean(name = "communities") // ManagedBean para gestiï¿½n de usuarios.
@@ -14,34 +19,43 @@ public class BeanCommunities {
 
 
 	private BeanUser loginInfo;
-
+	private PersistenceFactory BBDD;
 
 	private String nombre;
 	private String descripcion;
 
 	public BeanCommunities() {
 		loginInfo = new BeanUser();
+		BBDD = Factories.persistence;
 	}
 
-	public String listarComunidades() {
+	public List<Community> listarComunidades() {
 
 
 		if(loginInfo.getSessionRole() == Role.USER) {
 			// Muestro sólo las comunidades de ese usuario, sin posibilidad de borrarlas. Útil para ver las comunidades a las qe está unido.
+			
+			
 		} else if (loginInfo.getSessionRole() == Role.ADMIN) {
 			// Muestro TODAS las comunidades, con posibilidad de borrar.
+			
+			//CommunityDAO comunidades = BBDD.getCommunityDAO();
+			//return comunidades.getCommunities(); //Obtengo todas las comunidades
 
-			if (loginInfo.getSessionRole() == Role.USER) {
+			/*if (loginInfo.getSessionRole() == Role.USER) {
 				// TODO: mostrar sï¿½lo las comunidades de ese usuario, sin posibilidad de borrarlas.
 			} else {
 				// TODO: mostrar TODAS las comunidades, con posibilidad de borrar.
-			}
+			}*/
 			//De momento, se devuelve no implementado.
 
 
 		}
 		
-		return "unimplemented";
+		CommunityDAO comunidades = BBDD.getCommunityDAO();
+		return comunidades.getCommunities();
+		
+		//return "unimplemented";
 
 	}
 
