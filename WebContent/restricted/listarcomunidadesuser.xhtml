@@ -18,11 +18,11 @@
 		<h:form>
 			<p:dataTable var="item" id="tablaComunidades" border="4"
 				style="width: 500px"
-				value="#{managecommunitiesbean.listarComunidades()}">
+				value="#{communities.listarComunidades()}">
 				<p:column>
-					<f:facet name="header">Nombre de la comunidad</f:facet>#{item.nombre}</p:column>
+					<f:facet name="header">Nombre de la comunidad</f:facet>#{item.name}</p:column>
 				<p:column>
-					<f:facet name="header">Descripcion de la comunidad</f:facet>#{item.descripcion}</p:column>
+					<f:facet name="header">Descripcion de la comunidad</f:facet>#{item.description}</p:column>
 
 
 				<p:column>
@@ -31,8 +31,8 @@
 
 					<!-- Guardo la comunidad en el bean, para que se haga co ella lo que se necesite -->
 					<p:commandLink value="#{msgs.vermensajescomunidad}"
-						action="#{managecommunitiesbean.guardarComunidad(item)}" type="submit"
-						immediate="true" update="tablaComunidades"></p:commandLink>
+						action="#{communities.guardarComunidad(item)}" type="submit"
+						immediate="true"></p:commandLink>
 
 
 				</p:column>

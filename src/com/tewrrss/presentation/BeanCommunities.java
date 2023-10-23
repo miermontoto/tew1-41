@@ -21,14 +21,18 @@ public class BeanCommunities {
 	private BeanUser loginInfo;
 	private PersistenceFactory BBDD;
 
-	private String nombre;
-	private String descripcion;
+	Community comunidad; // Elemento que guarda la comunidad sobre la que actualmente estamos trabjando.
+	
+	String nombre; // Nombre de la comunidad
+	String descripcion; // Descripción de la comunidad
 
 	public BeanCommunities() {
 		loginInfo = new BeanUser();
 		BBDD = Factories.persistence;
 	}
 
+	// Si el usuario es administrador -> Se listan todas las comunidades
+	// Si el usuario es usuario normañ -> Se listan sólo las comuniddes a las que pertenece
 	public List<Community> listarComunidades() {
 
 
@@ -78,8 +82,9 @@ public class BeanCommunities {
 	}
 
 	// MÃ©todo para declarar el borrado de comunidades. Se verifica antes que el usuario sea admin
-	public String borrarComunidad() {
+	public String borrarComunidad(Community comunidad) {
 		if(loginInfo.getSessionRole() == Role.ADMIN) {
+			//BBDD.getCommunityDAO().remove(comunidad.getName()); // Elimino la comunidad solicitada en la BBDD.
 			// TODO: Borrado de la columunidad en la BBDD
 			return "success"; // El borrado ha tenido ï¿½xito
 		}
@@ -87,6 +92,7 @@ public class BeanCommunities {
 		return "unauthorized"; // La comunidad no se ha podido borrar
 	}
 
+	
 	public String crearComunidad() {
 		FacesContext jsfCtx = FacesContext.getCurrentInstance();
 		ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
@@ -100,6 +106,11 @@ public class BeanCommunities {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_create_error_emptyDesc"), null));
 			return null; // Descripciï¿½n vacï¿½a, no continï¿½o
 		}
+		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_create_ok"), null));
+
+		comunidad = new Community(nombre, descripcion);		// 
+		BBDD.getCommunityDAO().add(comunidad);				// Guardo en la comunidad
 
 		// TODO: Gestiï¿½n de las comunidades en la BBDD.
 		return "success"; // Retorno un mensaje de ï¿½xito. A continuaciï¿½n, se redirige al usuario a ver sus comunidades.
@@ -108,11 +119,45 @@ public class BeanCommunities {
 
 	// Método que permite guardar una comunidad en el objeto de este Bean, de forma que sea accesible por las acciones que se desencadenen a continuación.
 	// (Unirse a comunidades, Ver mensajes de la comunidad, etc)
-	public String guardarComunidad(/*Comunidad comunidad*/) {
-		//this.comunidad = comunidad;
-		return "success";
+	public String guardarComunidad(Community comunidad) {
+		this.comunidad = comunidad; // Guardo la comunidad
+		return "success"; // Retorno éxito.
 	}
 
+	public Community getComunidad() {
+		return comunidad;
+	}
+
+	public void setComunidad(Community comunidad) {
+		this.comunidad = comunidad;
+	}
+
+	public BeanUser getLoginInfo() {
+		return loginInfo;
+	}
+
+	public void setLoginInfo(BeanUser loginInfo) {
+		this.loginInfo = loginInfo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+
+	
 
 
 
