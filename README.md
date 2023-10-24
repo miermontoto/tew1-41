@@ -14,11 +14,11 @@
   - [x] Persistencia entre vistas
   - [x] Redirección al login
 - [x] Salir de sesión
-- [ ] Borrado de comunicaciones
+- [x] Borrado de comunidades
 - [ ] Reinicio de la base de datos (admin)
-- [ ] Crear una comunidad (en desarrollo en `comunidades`)
-- [ ] Unirse a una comunidad
-- [ ] Listar comunidades (en desarrollo en `comunidades`)
+- [x] Crear una comunidad
+- [x] Unirse a una comunidad
+- [x] Listar comunidades
 - [ ] Ver mensajes de una comunidad
 - [ ] Ver mensajes nuevos
 - [ ] Publicar en una comunidad

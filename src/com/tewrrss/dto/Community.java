@@ -1,9 +1,8 @@
 package com.tewrrss.dto;
 
 import java.io.Serializable;
-import java.sql.ResultSet;
 
-public class Community implements Serializable, DTO {
+public class Community implements Serializable {
 	private static final long serialVersionUID = 88282L;
 
 	private String name;

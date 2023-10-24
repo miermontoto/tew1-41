@@ -1,5 +1,7 @@
 package com.tewrrss.presentation;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -12,7 +14,8 @@ import com.tewrrss.util.Role;
 
 @ManagedBean(name = "registro")
 @SessionScoped
-public class BeanRegistro {
+public class BeanRegistro implements Serializable {
+	private static final long serialVersionUID = 6076632229413784370L;
 
 	// Datos del cliente.
 	private String nombre;
@@ -79,7 +82,7 @@ public class BeanRegistro {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden", "Las contraseñas no coinciden."));
 			return ""; // Permanece en la página de registro
 		}
-		
+    
 		service = Factories.services.createLoginService();
 
 		if (service.emailExists(email)) {

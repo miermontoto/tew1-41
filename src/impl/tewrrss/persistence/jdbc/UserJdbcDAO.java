@@ -18,7 +18,7 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 	private static boolean dirtyAllUsers = true;
 
 	public List<User> getUsers() {
-		if (allUsers != null && allUsers.size() > 0 && !dirtyAllUsers) {
+		if (allUsers != null && !dirtyAllUsers) {
 			return allUsers;
 		}
 

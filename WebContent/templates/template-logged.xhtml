@@ -7,7 +7,13 @@
 
 	<ui:define name="menubar">
 		<p:menubar>
-			<p:menuitem value="#{msgs.app_title}" icon="ui-icon-home" />
+			<p:menuitem value="#{msgs.app_title}" icon="ui-icon-home" action="index" />
+
+			<p:submenu name="lang" label="#{msgs.communities}" update="@all">
+				<p:menuitem value="#{msgs.communities_create}" action="createCommunity" update="@all"/>
+				<p:menuitem value="#{msgs.communities_list}" action="listAllCommunities" update="@all"/>
+				<p:menuitem value="#{msgs.communities_list_joined}" action="listJoinedCommunities" update="@all"/>
+			</p:submenu>
 
 			<p:submenu label="#{user.sessionUsername}" icon="ui-icon-person" style="float:right">
 				<p:menuitem value="#{user.sessionRoleName}" style="cursor:default" />
@@ -15,7 +21,7 @@
 				<p:menuitem value="#{msgs.session_logout}" action="#{login.logout}" />
 			</p:submenu>
 
-			<p:submenu name="lang" style="float:right" label="#{msgs.selected_lang}">
+			<p:submenu name="lang" style="float:right" label="#{msgs.selected_lang}" update="@all">
 				<p:menuitem value="Español" actionListener="#{settings.setSpanish}" />
 				<p:menuitem value="English" actionListener="#{settings.setEnglish}" />
 			</p:submenu>
