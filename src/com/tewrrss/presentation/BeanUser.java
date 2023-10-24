@@ -13,8 +13,7 @@ public class BeanUser implements Serializable {
 	private static final long serialVersionUID = 55556L;
 
 	public User getSessionUser() {
-		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("LOGGEDIN_USER");
-		return user;
+		return (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("LOGGEDIN_USER");
 	}
 
 	public String getSessionUsername() {
