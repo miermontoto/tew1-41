@@ -1,4 +1,4 @@
-package com.tewrrss.presentation;
+package com.tewrrss.util;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -28,9 +28,9 @@ public class EmailValidator implements Validator {
         String email = value.toString();
         Matcher matcher = pattern.matcher(email);
 
-        // Si el email no esta bien formado, devolvemos una excepción de validación, lo que causa un mensaje en el Front
+        // Si el email no esta bien formado, devolvemos una excepciï¿½n de validaciï¿½n, lo que causa un mensaje en el Front
         if (!matcher.matches()) {
-            FacesMessage message = new FacesMessage("El email no es válido");
+            FacesMessage message = new FacesMessage("El email no es vï¿½lido");
             throw new ValidatorException(message);
         }
     }
