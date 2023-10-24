@@ -13,17 +13,11 @@
 
 	<h:body>
 		<h:form id="form-cabecera">
-			<table border="5" align="center">
-				<tr>
-					<th class="title"><ui:insert name="titulo">#{msgs.app_title}</ui:insert></th>
-				</tr>
-			</table>
 			<ui:insert name="menubar"></ui:insert>
 		</h:form>
 
 		<ui:insert name="cuerpo"></ui:insert>
 		<ui:insert name="pie"></ui:insert>
-
 	</h:body>
 </f:view>
 </html>

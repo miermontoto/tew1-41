@@ -63,7 +63,7 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 	}
 
 	public boolean add(User user) {
-		boolean added = true; // FIXME: comprobar que se ha añadido
+		boolean added = false;
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?)");
@@ -72,7 +72,7 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 			ps.setString(3, user.getPassword());
 			ps.setInt(4, user.getRole());
 
-			ps.executeQuery();
+			added = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
 		dirtyAllUsers &= added;
@@ -109,13 +109,13 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 
 	@Override
 	public boolean remove(String email) {
-		boolean removed = true; // FIXME: comprobar que se ha borrado
+		boolean removed = false;
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement("DELETE FROM user WHERE email = ?");
 			ps.setString(1, email);
 
-			ps.executeQuery();
+			removed = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
 		dirtyAllUsers &= removed;
@@ -124,7 +124,7 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 
 	@Override
 	public boolean update(User user) {
-		boolean updated = true; // FIXME: comprobar que se ha actualizado
+		boolean updated = false;
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement("UPDATE user SET username = ?, password = ?, role = ? WHERE email = ?");
@@ -133,7 +133,7 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 			ps.setInt(3, user.getRole());
 			ps.setString(4, user.getEmail());
 
-			ps.executeQuery();
+			updated = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
 		dirtyAllUsers &= updated;
