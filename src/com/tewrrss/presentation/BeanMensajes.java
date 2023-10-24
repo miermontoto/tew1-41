@@ -1,10 +1,13 @@
 package com.tewrrss.presentation;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -13,6 +16,7 @@ import com.tewrrss.dto.Post;
 import com.tewrrss.dto.User;
 
 import impl.tewrrss.persistence.jdbc.PostJdbcDAO;
+import impl.tewrrss.persistence.jdbc.UserJdbcDAO;
 
 
 
@@ -25,6 +29,18 @@ public class BeanMensajes {
     private List<Post> mensajes;		
     private String nuevoPost;
 
+    
+    public BeanCommunities getComunidad() {
+		return comunidad;
+	}
+
+
+	public void setComunidad(BeanCommunities comunidad) {
+		this.comunidad = comunidad;
+	}
+
+	@ManagedProperty(value = "#{communities}")
+    private BeanCommunities comunidad;
 	
 	public BeanMensajes() {
 		postClase=new PostJdbcDAO();
@@ -50,37 +66,37 @@ public class BeanMensajes {
 	}
 
 	
-	public void borrarMensaje(Post mensaje) {	//BASE DE DATOS CAMBIAR OBJECT POR OBJETO MENSAJE
-		// acceder a la base de datos y eliminar este mensaje
-		
-		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("LOGGEDIN_USER");
-		postClase.remove(mensaje);
-		
+	public void borrarMensaje(Post mensaje) {	
+
+		// acceder a la base de datos y eliminar este mensaje solo en caso de que sea el dueño del mensaje		
+		User user = new BeanUser().getSessionUser();
+		if(user.getEmail().equals(mensaje.getUserEmail())) {
+			postClase.remove(mensaje);
+			System.out.println("\n\nMensaje eliminado\n");
+			// Obtener el FacesContext
+
+		}		
 	}
 	
 	
-	public void agregarMensaje() {		// MODIFICAR CON LA BASE DE DATOS
+	public void agregarMensaje(BeanCommunities bc) {		
 
 			
-		if (!nuevoPost.equals("") ) {
-			
-	        FacesContext context = FacesContext.getCurrentInstance();
-	        BeanCommunities bean = context.getApplication().evaluateExpressionGet(context, "#{communities}", BeanCommunities.class);
-			
-			
+		if (!nuevoPost.equals("") ) {    
+	        
 			postActual.setContent(nuevoPost);
-			postActual.setCommunityName(bean.getNombre()); 		
-
+			postActual.setCommunityName(bc.comunidad.getName()); 		
 			
 			User user = new BeanUser().getSessionUser();
 			postActual.setUserEmail(user.getEmail());
-			
-			Date fechaUtil = new Date(System.currentTimeMillis());
 
-	        // Convertir la fecha de java.util.Date a java.sql.Date
-	        java.sql.Date fechaSQL = new java.sql.Date(fechaUtil.getTime());
-	        
-			postActual.setCreationDate(fechaSQL);
+			int year = Calendar.getInstance().get(Calendar.YEAR);
+			int month = Calendar.getInstance().get(Calendar.MONTH);
+			int day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+			
+	        @SuppressWarnings("deprecation")
+			Date fecha= new Date(year, month, day);
+			postActual.setCreationDate(fecha);
 			
 			postClase.add(postActual);
 			
@@ -90,7 +106,7 @@ public class BeanMensajes {
     }
     
 	
-	public List<Post> getMensajesNuevos(){
+	public List<Post> getMensajesNuevos(){		//POR COMPLETAR
 		
 		
 		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("LOGGEDIN_USER");
@@ -105,24 +121,29 @@ public class BeanMensajes {
 	
 	public List<Post> getMensajesUsuario(){
 		//Sacamos el usuario del contexto
-		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("LOGGEDIN_USER");
-		//Sacamos los mensajes de ese usuario 
+		User user = new BeanUser().getSessionUser();		//Sacamos los mensajes de ese usuario 
 		PostJdbcDAO postClase=new PostJdbcDAO();
 		mensajes =postClase.getPostsFromUser(user.getEmail());
 
 		return mensajes;
 	}
 	
-    public List<Post> getMensajesComunidad() {		//MODIFICAR CON LA BASE DE DATOS
+    public List<Post> getMensajesComunidad() {		
     	
     	
         FacesContext context = FacesContext.getCurrentInstance();
         BeanCommunities bean = context.getApplication().evaluateExpressionGet(context, "#{communities}", BeanCommunities.class);
     	
     	PostJdbcDAO postClase=new PostJdbcDAO();
-    	mensajes = postClase.getPostsInCommunity(bean.getNombre());
+    	mensajes = postClase.getPostsInCommunity(bean.comunidad.getName());
 
 
+    	UserJdbcDAO usuarioClase = new UserJdbcDAO();
+    	
+    	for(Post p:mensajes) {	//De esta forma cambiamos el nombre de la comunidad por el del usuario que creo el post
+    		p.setCommunityName(usuarioClase.findByEmail(p.getUserEmail()).get().getUsername());
+    	}
+    	
         //Ordenar la lista por fecha
         
 /*        // Definir un Comparator personalizado para ordenar por fecha de publicaci�n.

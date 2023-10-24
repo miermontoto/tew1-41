@@ -124,7 +124,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 	public boolean remove(Post post) {
 		boolean removed = false;
 
-		String query = "DELETE FROM post WHERE creation_date = ?, user_email = ?, community_name = ?";
+		String query = "DELETE FROM post WHERE creation_date = ? AND user_email = ? AND community_name = ?";
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);

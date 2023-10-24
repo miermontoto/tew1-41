@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.tewrrss.dto.Community;
@@ -15,6 +16,7 @@ import com.tewrrss.persistence.PersistenceFactory;
 import com.tewrrss.util.Role;
 
 @ManagedBean(name = "communities") // ManagedBean para gestiï¿½n de usuarios.
+@SessionScoped
 public class BeanCommunities {
 
 

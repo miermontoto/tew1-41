@@ -15,7 +15,7 @@
 			<p:inputTextarea id="nuevoPost" rows="3" cols="30"
 				value="#{BeanMensajes.nuevoPost}" />
 			<p:commandButton value="Publicar"
-				action="#{BeanMensajes.agregarMensaje()}" update="tablaMensajes" />
+				action="#{BeanMensajes.agregarMensaje(communities)}" update="tablaMensajes" />
 		</h:form>
 
 
@@ -24,21 +24,17 @@
 			value="#{BeanMensajes.getMensajesComunidad()}">
 			<h:column>
 				<f:facet name="header">Creador</f:facet>
-				<!-- Modificar los accesos a mensaje en funcion de como se programe la clase en el modelo -->
-	    		#{mensaje.getCommunityName}	
-<!-- ESTO HAY QUE CAMBIARLO POR USUARIO --> 
-<!-- ESTO HAY QUE CAMBIARLO POR USUARIO --> 
-<!-- ESTO HAY QUE CAMBIARLO POR USUARIO --> 
-<!-- ESTO HAY QUE CAMBIARLO POR USUARIO --> 
-<!-- ESTO HAY QUE CAMBIARLO POR USUARIO --> 
+				<!-- Actualmente este campo contiene el nombre del usuario -->
+	    		#{mensaje.communityName}	
+
 		    </h:column>
 					<h:column>
 						<f:facet name="header">Fecha</f:facet>
-		        #{mensaje.getCreationDate}
+		        #{mensaje.creationDate}
 		    </h:column>
 					<h:column>
 						<f:facet name="header">Mensaje</f:facet>
-		        #{mensaje.getContent}
+		        #{mensaje.content}
 		    </h:column>
 		</h:dataTable>
 

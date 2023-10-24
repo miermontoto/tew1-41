@@ -12,20 +12,20 @@
 	<ui:define name="cuerpo">
 
 	<!-- ASEGURARSE DE QUE  -->
-		<h:dataTable var="mensaje" value="#{BeanMensajes.getMensajesUsuario}">
+		<h:dataTable id="tablaMensajes" var="mensaje" value="#{BeanMensajes.getMensajesUsuario()}">
 			<h:column>
 				<f:facet name="header">Comunidad</f:facet>
-                #{mensaje.getCommunityName}
+                #{mensaje.communityName}
             </h:column>
 			<h:column>
 				<f:facet name="header">Fecha y Hora</f:facet>
-                #{mensaje.getCreationDate}
+                #{mensaje.creationDate}
             </h:column>
 			<h:column>
 				<f:facet name="header">Contenido del Mensaje</f:facet>
-                #{mensaje.getContent}
+                #{mensaje.content}
                 <p:commandButton value="Eliminar"
-					action="#{BeanMensajes.borrarMensaje(mensaje)}" />
+					action="#{BeanMensajes.borrarMensaje(mensaje)}" update="tablaMensajes"/>
 			</h:column>
 		</h:dataTable>
 
