@@ -1,11 +1,14 @@
 package com.tewrrss.presentation;
 
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import com.tewrrss.dto.Community;
 import com.tewrrss.dto.Post;
 import com.tewrrss.dto.User;
 
@@ -13,25 +16,22 @@ import impl.tewrrss.persistence.jdbc.PostJdbcDAO;
 
 
 
-@ManagedBean(name = "managecommunitiesbean") // ManagedBean para gestión de usuarios.
+@ManagedBean(name = "BeanMensajes") 
+@SessionScoped
 public class BeanMensajes {
 	
-	PostJdbcDAO postClase;
+	private PostJdbcDAO postClase;
+	private Post postActual;
+    private List<Post> mensajes;		
+    private String nuevoPost;
+
 	
 	public BeanMensajes() {
 		postClase=new PostJdbcDAO();
+		postActual = new Post();
+		
 	}
 	
-	/*
-	 * 
-	 * CAMBIAR OBJECT POR LA CLASE DE MENSAJE DEL MODELO DE LA BASE DE DATOS
-	 * 
-	 * */
-	
-	
-    private List<Post> mensajes;		
-    private String nuevoPost;
-    
     
     public List<Post> getMensajes() {
 		return mensajes;
@@ -60,27 +60,41 @@ public class BeanMensajes {
 	
 	
 	public void agregarMensaje() {		// MODIFICAR CON LA BASE DE DATOS
-		if (nuevoPost != null && !nuevoPost.isEmpty()) {
-            // Crear un nuevo mensaje y agregarlo a la lista
+
 			
-/*			
-            Mensaje mensaje = new Mensaje();
-            mensaje.setContenido(nuevoPost);
-            mensaje.setUsuario("Nombre del usuario actual"); // Sacar del contexto o bean el usuario actual
-			mensaje.setSetFecha();		//Sacar la fecha actual del sistema
-	
-            mensajes.add(mensaje);
-*/
-            // Limpiar el cuadro de texto
+		if (!nuevoPost.equals("") ) {
+			
+	        FacesContext context = FacesContext.getCurrentInstance();
+	        BeanCommunities bean = context.getApplication().evaluateExpressionGet(context, "#{communities}", BeanCommunities.class);
+			
+			
+			postActual.setContent(nuevoPost);
+			postActual.setCommunityName(bean.getNombre()); 		
+
+			
+			User user = new BeanUser().getSessionUser();
+			postActual.setUserEmail(user.getEmail());
+			
+			Date fechaUtil = new Date(System.currentTimeMillis());
+
+	        // Convertir la fecha de java.util.Date a java.sql.Date
+	        java.sql.Date fechaSQL = new java.sql.Date(fechaUtil.getTime());
+	        
+			postActual.setCreationDate(fechaSQL);
+			
+			postClase.add(postActual);
+			
             nuevoPost = "";
             
-            
-            // Aqui habria que ademas añadir ese post a la base de datos
         }
     }
     
 	
 	public List<Post> getMensajesNuevos(){
+		
+		
+		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("LOGGEDIN_USER");
+		
 		
 		//Sacar de la base de datos los mensajes delas comunidades a las que pertenezca el usuario
 		//Hay que filtrar que solo se  muestren los ultimos 5
@@ -99,18 +113,19 @@ public class BeanMensajes {
 		return mensajes;
 	}
 	
-    public List<Post> getMensajesComunidad(int comunidadId) {		//MODIFICAR CON LA BASE DE DATOS
-        // Usar un DAO (Data Access Object) para obtener los mensajes desde la base de datos.
-         
+    public List<Post> getMensajesComunidad() {		//MODIFICAR CON LA BASE DE DATOS
     	
-        // Implementa un método en tu DAO que obtenga mensajes de una comunidad específica.
-        // Este método se comunicará con la base de datos para obtener los mensajes.
-        
-    	// mensajes = mensajeDAO.getMensajesByComunidad(comunidadId);
+    	
+        FacesContext context = FacesContext.getCurrentInstance();
+        BeanCommunities bean = context.getApplication().evaluateExpressionGet(context, "#{communities}", BeanCommunities.class);
+    	
+    	PostJdbcDAO postClase=new PostJdbcDAO();
+    	mensajes = postClase.getPostsInCommunity(bean.getNombre());
+
 
         //Ordenar la lista por fecha
         
-/*        // Definir un Comparator personalizado para ordenar por fecha de publicación.
+/*        // Definir un Comparator personalizado para ordenar por fecha de publicaciï¿½n.
         Comparator<Mensaje> comparadorFecha = new Comparator<Mensaje>() {
             @Override
             public int compare(Mensaje mensaje1, Mensaje mensaje2) {
@@ -121,8 +136,8 @@ public class BeanMensajes {
         // Ordenar la lista utilizando el Comparator.
         Collections.sort(listaMensajes, comparadorFecha);
    */
-    	
-    	
+
+
         return mensajes;
     }
 

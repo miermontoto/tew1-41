@@ -15,26 +15,31 @@
 			<p:inputTextarea id="nuevoPost" rows="3" cols="30"
 				value="#{BeanMensajes.nuevoPost}" />
 			<p:commandButton value="Publicar"
-				action="#{BeanMensajes.agregarMensaje}" update="tablaMensajes" />
+				action="#{BeanMensajes.agregarMensaje()}" update="tablaMensajes" />
 		</h:form>
 
 
 		<!-- En param,comunidadId iria el identificador de la comunidad sobre la que cargar los mensajes puede ser por parametro o variable de un bean-->
 		<h:dataTable id="tablaMensajes" var="mensaje"
-			value="#{BeanMensajes.getMensajesComunidad(param.comunidadId)}">
+			value="#{BeanMensajes.getMensajesComunidad()}">
 			<h:column>
 				<f:facet name="header">Creador</f:facet>
 				<!-- Modificar los accesos a mensaje en funcion de como se programe la clase en el modelo -->
-	    #{mensaje.usuario}
-    </h:column>
-			<h:column>
-				<f:facet name="header">Fecha</f:facet>
-        #{mensaje.fecha}
-    </h:column>
-			<h:column>
-				<f:facet name="header">Mensaje</f:facet>
-        #{mensaje.contenido}
-    </h:column>
+	    		#{mensaje.getCommunityName}	
+<!-- ESTO HAY QUE CAMBIARLO POR USUARIO --> 
+<!-- ESTO HAY QUE CAMBIARLO POR USUARIO --> 
+<!-- ESTO HAY QUE CAMBIARLO POR USUARIO --> 
+<!-- ESTO HAY QUE CAMBIARLO POR USUARIO --> 
+<!-- ESTO HAY QUE CAMBIARLO POR USUARIO --> 
+		    </h:column>
+					<h:column>
+						<f:facet name="header">Fecha</f:facet>
+		        #{mensaje.getCreationDate}
+		    </h:column>
+					<h:column>
+						<f:facet name="header">Mensaje</f:facet>
+		        #{mensaje.getContent}
+		    </h:column>
 		</h:dataTable>
 
 
