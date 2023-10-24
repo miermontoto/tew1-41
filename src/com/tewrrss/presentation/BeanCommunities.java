@@ -22,7 +22,7 @@ public class BeanCommunities {
 	private PersistenceFactory BBDD;
 
 	Community comunidad; // Elemento que guarda la comunidad sobre la que actualmente estamos trabjando.
-	
+
 	String nombre; // Nombre de la comunidad
 	String descripcion; // Descripción de la comunidad
 
@@ -35,14 +35,13 @@ public class BeanCommunities {
 	// Si el usuario es usuario normañ -> Se listan sólo las comuniddes a las que pertenece
 	public List<Community> listarComunidades() {
 
-
 		if(loginInfo.getSessionRole() == Role.USER) {
 			// Muestro sólo las comunidades de ese usuario, sin posibilidad de borrarlas. Útil para ver las comunidades a las qe está unido.
-			
-			
+
+
 		} else if (loginInfo.getSessionRole() == Role.ADMIN) {
 			// Muestro TODAS las comunidades, con posibilidad de borrar.
-			
+
 			//CommunityDAO comunidades = BBDD.getCommunityDAO();
 			//return comunidades.getCommunities(); //Obtengo todas las comunidades
 
@@ -55,10 +54,10 @@ public class BeanCommunities {
 
 
 		}
-		
+
 		CommunityDAO comunidades = BBDD.getCommunityDAO();
 		return comunidades.getCommunities();
-		
+
 		//return "unimplemented";
 
 	}
@@ -84,7 +83,7 @@ public class BeanCommunities {
 	// MÃ©todo para declarar el borrado de comunidades. Se verifica antes que el usuario sea admin
 	public String borrarComunidad(Community comunidad) {
 		if(loginInfo.getSessionRole() == Role.ADMIN) {
-			//BBDD.getCommunityDAO().remove(comunidad.getName()); // Elimino la comunidad solicitada en la BBDD.
+			BBDD.getCommunityDAO().remove(comunidad.getName()); // Elimino la comunidad solicitada en la BBDD.
 			// TODO: Borrado de la columunidad en la BBDD
 			return "success"; // El borrado ha tenido ï¿½xito
 		}
@@ -92,7 +91,7 @@ public class BeanCommunities {
 		return "unauthorized"; // La comunidad no se ha podido borrar
 	}
 
-	
+
 	public String crearComunidad() {
 		FacesContext jsfCtx = FacesContext.getCurrentInstance();
 		ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
@@ -106,7 +105,17 @@ public class BeanCommunities {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_create_error_emptyDesc"), null));
 			return null; // Descripciï¿½n vacï¿½a, no continï¿½o
 		}
-		
+
+		// Obtengo las comunidades y comparo nombre
+
+		for(Community cm : BBDD.getCommunityDAO().getCommunities()) {
+			if(cm.getName().equals(nombre)) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("community_already_existing"), null));
+				return null;
+			}
+		}
+
+		// Todo ha ido bien, por lo que procedo a la inserción de esta comunidad en la base de datos.
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_create_ok"), null));
 
 		comunidad = new Community(nombre, descripcion);		// 
@@ -155,9 +164,9 @@ public class BeanCommunities {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
 
-	
+
+
 
 
 
