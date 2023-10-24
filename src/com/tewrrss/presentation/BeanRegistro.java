@@ -82,7 +82,7 @@ public class BeanRegistro implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden", "Las contraseñas no coinciden."));
 			return ""; // Permanece en la página de registro
 		}
-
+    
 		service = Factories.services.createLoginService();
 
 		if (service.emailExists(email)) {

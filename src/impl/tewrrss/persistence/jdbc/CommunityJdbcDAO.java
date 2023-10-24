@@ -38,6 +38,7 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 	@Override
 	public boolean remove(String name) {
 		boolean removed = true;
+
 		String queryDeleteCommunity = "DELETE FROM community WHERE name = ?";
 		String queryDeleteMembers = "DELETE FROM member WHERE community_name = ?";
 
