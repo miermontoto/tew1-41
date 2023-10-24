@@ -39,14 +39,18 @@
 
 		<!-- Reglas de navegación para la gestión de comunidades. -->
 		<navigation-case>
-			<from-outcome>communities</from-outcome>
-			<to-view-id>/restricted/manageCommunities.xhtml</to-view-id>
+			<from-outcome>listAllCommunities</from-outcome>
+			<to-view-id>/restricted/communities-list-all.xhtml</to-view-id>
 		</navigation-case>
 
+		<navigation-case>
+			<from-outcome>listJoinedCommunities</from-outcome>
+			<to-view-id>/restricted/communities-list-joined.xhtml</to-view-id>
+		</navigation-case>
 
 		<navigation-case>
 			<from-outcome>createCommunity</from-outcome>
-			<to-view-id>/restricted/createCommunity.xhtml</to-view-id>
+			<to-view-id>/restricted/communities-create.xhtml</to-view-id>
 		</navigation-case>
 
 
@@ -75,48 +79,14 @@
 	</navigation-rule>
 
 	<navigation-rule>
-		<from-view-id>/restricted/listarcomunidadesuser.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{managecommunitiesbean.guardarComunidad}</from-action>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/restricted/publicaciones_Comunidad.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-
-	<!-- Si devuelve success, pasamos a ver mensajes de la comunidad -->
-	<navigation-rule>
-		<from-view-id>/restricted/unircomunidadexistente.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{managecommunitiesbean.guardarComunidad}</from-action>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/restricted/publicaciones_Comunidad.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-
-
-
-
-
-
-	<!-- Gestión de comunidades por admin -->
-	<!-- Gestión de comunidades -->
-	<navigation-rule>
-		<from-view-id>/communities.xhtml</from-view-id>
+		<from-view-id>/restricted/communities-list-all.xhtml</from-view-id>
 
 		<navigation-case>
-			<from-action>#{managecommunitiesbean.borrarcomunidad}</from-action>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/restricted/manageCommunities.xhtml</to-view-id>
+			<from-outcome>joined</from-outcome>
+			<to-view-id>/restricted/communities-list-all.xhtml</to-view-id>
 		</navigation-case>
-
-
-
 	</navigation-rule>
 
 	<!-- Creación de comunidades -->
-
-
-
-
 
 </faces-config>

@@ -122,7 +122,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 
 	@Override
 	public boolean remove(Post post) {
-		boolean removed = true; // TODO: reconocer si se ha borrado o no
+		boolean removed = false;
 
 		String query = "DELETE FROM post WHERE creation_date = ?, user_email = ?, community_name = ?";
 
@@ -132,7 +132,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 			ps.setString(2, post.getUserEmail());
 			ps.setString(3, post.getCommunityName());
 
-			ps.executeUpdate();
+			removed = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
 		return removed;
@@ -140,7 +140,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 
 	@Override
 	public boolean add(Post post) {
-		boolean added = true; // TODO: reconocer si se ha añadido o no
+		boolean added = false;
 
 		String query = "INSERT INTO post VALUES (?, ?, ?, ?)";
 
@@ -151,7 +151,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 			ps.setString(3, post.getCommunityName());
 			ps.setString(4, post.getUserEmail());
 
-			ps.executeUpdate();
+			added = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
 		return added;
@@ -159,7 +159,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 
 	@Override
 	public boolean update(Post post) {
-		boolean updated = true; // TODO: reconocer si se ha actualizado o no
+		boolean updated = false;
 
 		String query = "UPDATE post SET content = ? WHERE creation_date = ?, user_email = ?, community_name = ?";
 
@@ -170,7 +170,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 			ps.setString(3, post.getUserEmail());
 			ps.setString(4, post.getCommunityName());
 
-			ps.executeUpdate();
+			updated = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
 		return updated;

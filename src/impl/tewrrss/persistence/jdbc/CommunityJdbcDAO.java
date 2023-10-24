@@ -7,14 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tewrrss.dto.Community;
+import com.tewrrss.dto.User;
 import com.tewrrss.persistence.CommunityDAO;
 
 
 public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 
+	List<Community> allCommunities = null;
+	boolean dirtyAllCommunities = false;
+	List<Community> joinedCommunities = null;
+	boolean dirtyJoinedCommunities = false;
+
 	@Override
 	public boolean add(Community community) {
-		boolean added = true; // FIXME: This is a stub
+		boolean added = false;
 		String query = "INSERT INTO community VALUES (?, ?)";
 
 		try {
@@ -22,30 +28,32 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 			ps.setString(1, community.getName());
 			ps.setString(2, community.getDescription());
 
-			ps.executeUpdate();
+			added = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
+		dirtyAllCommunities &= added;
 		return added;
 	}
 
 	@Override
 	public boolean remove(String name) {
-		boolean removed = true; // FIXME: This is a stub
+		boolean removed = true;
 		String query = "DELETE FROM community WHERE name = ?";
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
 			ps.setString(1, name);
 
-			ps.executeUpdate();
+			removed = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
+		dirtyAllCommunities &= removed;
 		return removed;
 	}
 
 	@Override
 	public boolean update(Community community) {
-		boolean updated = true; // FIXME: This is a stub
+		boolean updated = false;
 		String query = "UPDATE community SET description = ? WHERE name = ?";
 
 		try {
@@ -53,14 +61,17 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 			ps.setString(1, community.getDescription());
 			ps.setString(2, community.getName());
 
-			ps.executeUpdate();
+			updated = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
+		dirtyAllCommunities &= updated;
 		return updated;
 	}
 
 	@Override
 	public List<Community> getCommunities() {
+		if(allCommunities != null && !dirtyAllCommunities) return allCommunities;
+
 		List<Community> communities = new ArrayList<>();
 
 		String query = "SELECT * FROM community";
@@ -79,4 +90,61 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 		return communities;
 	}
 
+	@Override
+	public List<Community> getJoinedCommunities(User user) {
+		if(joinedCommunities != null && !dirtyJoinedCommunities) return joinedCommunities;
+		List<Community> communities = new ArrayList<>();
+
+		String query = "select c.* from member as m " +
+			"inner join community as c on m.community_name = c.name " +
+			"where m.user_email = ?";
+
+		try {
+			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
+			ps.setString(1, user.getEmail());
+
+			ResultSet rs = ps.executeQuery();
+			if (rs == null) return communities;
+
+			while(rs.next()) {
+				communities.add(new Community(rs.getString("name"), rs.getString("description")));
+			}
+		} catch (SQLException e) {getDatabase().handleException(e);}
+
+		return communities;
+	}
+
+	@Override
+	public boolean join(Community community, User user) {
+		boolean joined = false;
+
+		String query = "INSERT INTO member VALUES (?, ?)";
+		try {
+			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
+			ps.setString(1, user.getEmail());
+			ps.setString(2, community.getName());
+
+			joined = ps.executeUpdate() == 1;
+		} catch (SQLException e) {getDatabase().handleException(e);}
+
+		dirtyJoinedCommunities &= joined;
+		return joined;
+	}
+
+	@Override
+	public boolean leave(Community community, User user) {
+		boolean left = false;
+
+		String query = "DELETE FROM member WHERE user_email = ? AND community_name = ?";
+		try {
+			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
+			ps.setString(1, user.getEmail());
+			ps.setString(2, community.getName());
+
+			left = ps.executeUpdate() == 1;
+		} catch (SQLException e) {getDatabase().handleException(e);}
+
+		dirtyJoinedCommunities &= left;
+		return left;
+	}
 }

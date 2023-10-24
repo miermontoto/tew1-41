@@ -3,7 +3,7 @@ package com.tewrrss.dto;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Post implements Serializable, DTO {
+public class Post implements Serializable {
 	private static final long serialVersionUID = 99834L;
 
 	private String content;

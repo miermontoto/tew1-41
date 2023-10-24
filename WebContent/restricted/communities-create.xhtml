@@ -21,7 +21,7 @@
 				value="#{communities.nombre}"
 				placeholder="#{msgs.communities_create_name}" />
 			<br></br>
-			
+
 			<p:inputText id="inputDescripcionComunidad"
 				value="#{communities.descripcion}"
 				placeholder="#{msgs.communities_create_desc}" />
@@ -30,10 +30,10 @@
 
 			<!-- Form AJAXIFICADO. -->
 			<p:commandButton value="Crear"
-				action="#{communities.crearComunidad}" type="submit"
+				action="#{communities.create}" type="submit"
 				update="messages formNuevaComunidad" />
 			<p:messages id="messages" />
-			
+
 
 
 		</h:form>

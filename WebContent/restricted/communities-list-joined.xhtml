@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-logged.xhtml">
+
+	<ui:define name="titulo">
+		#{msgs.app_title}
+	</ui:define>
+
+	<ui:define name="cuerpo">
+		<p:panel header="#{msgs.communities_list_joined}" update="@all">
+		<h:form>
+			<p:dataTable
+				var="item" id="table" border="4" style="width: 500px" value="#{communities.listJoined()}">
+				<p:column>
+					<f:facet name="header">#{msgs.communities_list_name}</f:facet>#{item.name}
+				</p:column>
+				<p:column>
+					<f:facet name="header">#{msgs.communities_list_desc}</f:facet>#{item.description}
+				</p:column>
+				<p:column>
+					<f:facet name="header">#{msgs.communities_list_actions}</f:facet>
+					<p:commandLink value="#{msgs.communities_list_proceed}"
+						type="submit"
+						immediate="true" update="table" />
+					<br />
+					<p:commandLink value="#{msgs.communities_list_leave}"
+						action="#{communities.leave(item)}" type="submit"
+						immediate="true" update="table" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		</p:panel>
+	</ui:define>
+
+	<ui:define name="pie">
+	</ui:define>
+
+</ui:composition>
