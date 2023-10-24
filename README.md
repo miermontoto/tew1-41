@@ -5,7 +5,7 @@
 - Manuel Revilla Hernández		UO281932@uniovi.es
 
 ## Funcionalidades
-- [ ] Registro de usuario
+- [x] Registro de usuario
   - [x] Registro básico
   - [x] Conexión con BBDD
 - [x] Iniciar sesión
@@ -16,9 +16,9 @@
 - [x] Salir de sesión
 - [ ] Borrado de comunicaciones
 - [ ] Reinicio de la base de datos (admin)
-- [ ] Crear una comunidad
+- [ ] Crear una comunidad (en desarrollo en `comunidades`)
 - [ ] Unirse a una comunidad
-- [ ] Listar comunidades
+- [ ] Listar comunidades (en desarrollo en `comunidades`)
 - [ ] Ver mensajes de una comunidad
 - [ ] Ver mensajes nuevos
 - [ ] Publicar en una comunidad

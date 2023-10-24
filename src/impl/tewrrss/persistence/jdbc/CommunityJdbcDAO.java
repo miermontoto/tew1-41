@@ -14,7 +14,7 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 
 	@Override
 	public boolean add(Community community) {
-		boolean added = true; // FIXME: This is a stub
+		boolean added = false;
 		String query = "INSERT INTO community VALUES (?, ?)";
 
 		try {
@@ -22,7 +22,7 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 			ps.setString(1, community.getName());
 			ps.setString(2, community.getDescription());
 
-			ps.executeUpdate();
+			added = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
 		return added;
@@ -30,14 +30,14 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 
 	@Override
 	public boolean remove(String name) {
-		boolean removed = true; // FIXME: This is a stub
+		boolean removed = true;
 		String query = "DELETE FROM community WHERE name = ?";
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
 			ps.setString(1, name);
 
-			ps.executeUpdate();
+			removed = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
 		return removed;
@@ -45,7 +45,7 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 
 	@Override
 	public boolean update(Community community) {
-		boolean updated = true; // FIXME: This is a stub
+		boolean updated = false;
 		String query = "UPDATE community SET description = ? WHERE name = ?";
 
 		try {
@@ -53,7 +53,7 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 			ps.setString(1, community.getDescription());
 			ps.setString(2, community.getName());
 
-			ps.executeUpdate();
+			updated = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
 		return updated;

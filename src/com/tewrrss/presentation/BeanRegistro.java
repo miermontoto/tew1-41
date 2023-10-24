@@ -79,17 +79,13 @@ public class BeanRegistro {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden", "Las contraseñas no coinciden."));
 			return ""; // Permanece en la página de registro
 		}
-
-		System.out.println("la contraseña no es igual.");
-
+		
 		service = Factories.services.createLoginService();
 
 		if (service.emailExists(email)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo electrónico ya está en uso", "El correo electrónico ya está en uso."));
 			return ""; // Permanece en la página de registro
 		}
-
-		System.out.println("el email no está ya presente.");
 
 		User newUser = new User(email, nombre, contrasena);
 
