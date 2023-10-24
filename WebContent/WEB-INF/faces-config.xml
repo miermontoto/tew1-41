@@ -18,7 +18,7 @@
 		</resource-bundle>
 	</application>
 
-	<!-- Reglas de navegaci贸n -->
+	<!-- Reglas de navegaci髇 -->
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 
@@ -37,7 +37,7 @@
 			<to-view-id>/restricted/index.xhtml</to-view-id>
 		</navigation-case>
 
-		<!-- Reglas de navegaci贸n para la gesti贸n de comunidades. -->
+		<!-- Reglas de navegaci髇 para la gesti髇 de comunidades. -->
 		<navigation-case>
 			<from-outcome>listAllCommunities</from-outcome>
 			<to-view-id>/restricted/communities-list-all.xhtml</to-view-id>
@@ -86,7 +86,4 @@
 			<to-view-id>/restricted/communities-list-all.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-
-	<!-- Creaci贸n de comunidades -->
-
 </faces-config>

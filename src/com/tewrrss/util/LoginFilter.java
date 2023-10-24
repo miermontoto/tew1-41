@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * Servlet Filter implementation class LoginFilter
  */
 @WebFilter(dispatcherTypes = { DispatcherType.FORWARD }, urlPatterns = { "/restricted/*" }, initParams = {
-		@WebInitParam(name = "LoginParam", value = "/login.xhtml", description = "PÃ¡gina de login") })
+		@WebInitParam(name = "LoginParam", value = "/login.xhtml", description = "Página de login") })
 public class LoginFilter implements Filter {
 
 	FilterConfig config = null;

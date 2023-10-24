@@ -20,8 +20,8 @@ public class BeanCommunities implements Serializable {
 	private BeanUser loginInfo;
 	private CommunityDAO dao;
 
-	private String nombre; // Nombre de la comunidad
-	private String descripcion; // Descripciï¿½n de la comunidad
+	private String nombre;
+	private String descripcion;
 
 	private List<Community> joined;
 	private List<Community> all;
@@ -31,29 +31,29 @@ public class BeanCommunities implements Serializable {
 		loginInfo = new BeanUser();
 	}
 
-	// FunciÃ³n que devuelve todas las comunidades
+	// Función que devuelve todas las comunidades
 	public List<Community> listAll() {
 		this.joined = this.listJoined();
 		this.all = dao.getCommunities();
 		return all;
 	}
 
-	// FunciÃ³n que devuelve las comunidades a las que pertenece el usuario
+	// Función que devuelve las comunidades a las que pertenece el usuario
 	public List<Community> listJoined() {
 		return dao.getJoinedCommunities(loginInfo.getSessionUser());
 	}
 
 	public boolean ableToJoin(Community comunidad) {
 		// No funciona con el contains ni reescribiendo el equals de Community
-		// no sÃ© por quÃ© :')
+		// no sé por qué :')
 		return this.joined.stream().noneMatch(c -> c.getName().equals(comunidad.getName()));
 	}
 
-	// MÃ©todo para declarar el borrado de comunidades. Se verifica antes que el usuario sea admin
+	// Método para declarar el borrado de comunidades. Se verifica antes que el usuario sea admin
 	public String delete(Community comunidad) {
 		if(loginInfo.getSessionRole() == Role.ADMIN) {
 			dao.remove(comunidad.getName()); // Elimino la comunidad solicitada en la BBDD.
-			return "success"; // El borrado ha tenido ï¿½xito
+			return "success"; // El borrado ha tenido éxito
 		}
 
 		return "unauthorized"; // La comunidad no se ha podido borrar
@@ -65,15 +65,15 @@ public class BeanCommunities implements Serializable {
 
 		if (nombre == null || nombre.trim().isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_create_error_emptyName"), null));
-			return null; // Nombre vacï¿½o, no continï¿½o
+			return null; // Nombre vacío, no continúo
 		}
 
 		if (descripcion == null || descripcion.trim().isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_create_error_emptyDesc"), null));
-			return null; // Descripciï¿½n vacï¿½a, no continï¿½o
+			return null; // Descripción vacía, no continúo
 		}
 
-		// ComprobaciÃ³n bÃ¡sica no exhaustiva antes de fallo por base de datos.
+		// Comprobación básica no exhaustiva antes de fallo por base de datos.
 		if (all == null) this.listAll();
 		for(Community cm : all) {
 			if(cm.getName().equals(nombre)) {
@@ -94,12 +94,12 @@ public class BeanCommunities implements Serializable {
 
 		if (community == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_list_join_error"), null));
-			return null; // Nombre vacï¿½o, no continï¿½o
+			return null; // Nombre vacío, no continúo
 		}
 
 		if (!ableToJoin(community)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_list_join_error"), null));
-			return null; // Nombre vacï¿½o, no continï¿½o
+			return null; // Nombre vacío, no continúo
 		}
 
 		dao.join(community, loginInfo.getSessionUser());
@@ -114,7 +114,7 @@ public class BeanCommunities implements Serializable {
 
 		if (community == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_list_leave_error"), null));
-			return null; // Nombre vacï¿½o, no continï¿½o
+			return null; // Nombre vacío, no continúo
 		}
 
 		dao.leave(community, loginInfo.getSessionUser());

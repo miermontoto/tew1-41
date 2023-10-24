@@ -24,8 +24,6 @@ public class BeanRegistro implements Serializable {
 	private String confirmarContrasena;
 	private boolean rgpd;
 
-	// Getters y Setters para las propiedades
-
 	public String getNombre() {
 		return nombre;
 	}
@@ -67,27 +65,27 @@ public class BeanRegistro implements Serializable {
 	}
 
 	/**
-	 * L√≥gica para el registro de usuarios.
-	 * Verifica que el correo no est√© repetido, realiza el registro, etc.
+	 * LÛgica para el registro de usuarios.
+	 * Verifica que el correo no estÈ repetido, realiza el registro, etc.
 	 */
 	public String registrarUsuario() {
 		LoginService service;
 
 		if (!rgpd) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe aceptar la pol√≠tica de privacidad", "Debe aceptar la pol√≠tica de privacidad."));
-			return ""; // Permanece en la p√°gina de registro
+			return ""; // Permanece en la p·gina de registro
 		}
 
 		if (!contrasena.equals(confirmarContrasena)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contrase√±as no coinciden", "Las contrase√±as no coinciden."));
-			return ""; // Permanece en la p√°gina de registro
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseÒas no coinciden", "Las contraseÒas no coinciden."));
+			return ""; // Permanece en la p·gina de registro
 		}
-    
+
 		service = Factories.services.createLoginService();
 
 		if (service.emailExists(email)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo electr√≥nico ya est√° en uso", "El correo electr√≥nico ya est√° en uso."));
-			return ""; // Permanece en la p√°gina de registro
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo electrÛnico ya est· en uso", "El correo electrÛnico ya est· en uso."));
+			return ""; // Permanece en la p·gina de registro
 		}
 
 		User newUser = new User(email, nombre, contrasena);

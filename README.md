@@ -1,19 +1,19 @@
 # 2324-tew1-41
 ## Integrantes
-- Christian	Gonz谩lez Camblor	UO276508@uniovi.es
+- Christian	Gonz醠ez Camblor	UO276508@uniovi.es
 - Juan Francisco Mier Montoto	UO283319@uniovi.es
-- Manuel Revilla Hern谩ndez		UO281932@uniovi.es
+- Manuel Revilla Hern醤dez		UO281932@uniovi.es
 
 ## Funcionalidades
 - [x] Registro de usuario
-  - [x] Registro b谩sico
-  - [x] Conexi贸n con BBDD
-- [x] Iniciar sesi贸n
-  - [x] Login b谩sico
-  - [x] Conexi贸n con BBDD
+  - [x] Registro b醩ico
+  - [x] Conexi髇 con BBDD
+- [x] Iniciar sesi髇
+  - [x] Login b醩ico
+  - [x] Conexi髇 con BBDD
   - [x] Persistencia entre vistas
-  - [x] Redirecci贸n al login
-- [x] Salir de sesi贸n
+  - [x] Redirecci髇 al login
+- [x] Salir de sesi髇
 - [x] Borrado de comunidades
 - [ ] Reinicio de la base de datos (admin)
 - [x] Crear una comunidad
@@ -26,7 +26,7 @@
 
 
 ## Caracter铆sticas y metas
-- [x] Navegaci贸n con PrimeFaces
+- [x] Navegaci髇 con PrimeFaces
 - [x] Inicio de BBDD con datos de prueba
 - [ ] Informe obligatorio
 - [x] Traducciones

@@ -11,10 +11,10 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "berror")
 @SessionScoped
 public class BeanError implements Serializable {
-	// Los detalles de cada error a considerar deber√°n ser:
-	// 	1. La vista desde la que se redireccion√≥ el error.
-	// 	2. El m√©todo donde se produjo el error.
-	// 	3. La clase correspondiente al m√©todo.
+	// Los detalles de cada error a considerar deber·n ser:
+	// 	1. La vista desde la que se redireccionÛ el error.
+	// 	2. El mÈtodo donde se produjo el error.
+	// 	3. La clase correspondiente al mÈtodo.
 	// 	4. El mensaje de error.
 
 	private static final long serialVersionUID = 1L;
