@@ -9,9 +9,16 @@
 		#{msgs.app_title}
 	</ui:define>
 
+	<ui:define name="titulo">
+		
+	</ui:define>
+	
 	<ui:define name="cuerpo">
 
-	<!-- ASEGURARSE DE QUE  -->
+	<p>Pagina de borrado de publicaciones</p>
+	<br></br>
+
+
 		<h:dataTable id="tablaMensajes" var="mensaje" value="#{BeanMensajes.getMensajesUsuario()}"
 		border="4" style="width: 1000px">
 			<h:column>
