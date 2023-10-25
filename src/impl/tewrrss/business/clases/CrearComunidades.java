@@ -4,8 +4,11 @@ import com.tewrrss.dto.Community;
 
 public class CrearComunidades {
 	
-	public boolean crearComunidad(Community comunidad) {
-		return true;
+	public String crearComunidad(Community comunidad) {
+		
+		//dao.add(new Community(nombre, descripcion));
+		return "success";
+		
 	}
 
 }

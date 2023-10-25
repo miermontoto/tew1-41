@@ -1,11 +1,15 @@
 package impl.tewrrss.business.clases;
 
 import com.tewrrss.dto.Community;
+import com.tewrrss.dto.User;
 
 public class Leave {
 
-	public String leave(Community community) {
+	public String leave(Community community, User user) {
 		
-		return "unimplementhed";
+		// Dejo la comunidad en la BBDD.
+		//dao.leave(community, user.getUsername());
+		return "left";
+		//return "unimplementhed";
 	}
 }
