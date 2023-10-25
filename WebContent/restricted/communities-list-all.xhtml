@@ -20,12 +20,14 @@
 				<p:column>
 					<f:facet name="header">#{msgs.communities_list_desc}</f:facet>#{item.description}
 				</p:column>
+				
 				<p:column>
 					<f:facet name="header">#{msgs.communities_list_actions}</f:facet>
 					<p:commandLink value="#{msgs.communities_list_join}"
 						action="#{communities.join(item)}" type="submit"
 						immediate="true" update="table" rendered="#{communities.ableToJoin(item)}" />
 					<br />
+					<!-- Sólo se muestra esta opción, si el usuario es admin (rol = 0) -->
 					<p:commandLink value="#{msgs.communities_list_delete}"
 						action="#{communities.delete(item)}" type="submit"
 						immediate="true" update="table" rendered="#{user.sessionRole eq 0}" />
