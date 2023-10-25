@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import com.tewrrss.business.ComunidadesService;
 import com.tewrrss.dto.Community;
 import com.tewrrss.infrastructure.Factories;
 import com.tewrrss.persistence.CommunityDAO;
@@ -25,9 +26,14 @@ public class BeanCommunities implements Serializable {
 
 	private List<Community> joined;
 	private List<Community> all;
+	
+	private ComunidadesService CS;
 
 	public BeanCommunities() {
-		dao = Factories.persistence.getCommunityDAO();
+		CS = Factories.services.createCommunityService(); // Creo el servicio de comunidades.
+		
+		//dao = Factories.persistence.getCommunityDAO();
+		
 		loginInfo = new BeanUser();
 	}
 
@@ -60,6 +66,15 @@ public class BeanCommunities implements Serializable {
 	}
 
 	public String create() {
+		
+		//LLAMAR A LA LÓGICA DE CREATECOMUNIDADES
+		
+		CS.crearComunidad(new Community(this.nombre, this.descripcion)); // LLamo a la comunidades. PASAR implementación
+		
+		
+		
+		
+		
 		FacesContext jsfCtx = FacesContext.getCurrentInstance();
 		ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
 
