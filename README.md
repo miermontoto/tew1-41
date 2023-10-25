@@ -15,17 +15,17 @@
   - [x] Redirección al login
 - [x] Salir de sesión
 - [x] Borrado de comunidades
-- [ ] Reinicio de la base de datos (admin)
+- [x] Reinicio de la base de datos (admin)
 - [x] Crear una comunidad
 - [x] Unirse a una comunidad
 - [x] Listar comunidades
-- [ ] Ver mensajes de una comunidad
-- [ ] Ver mensajes nuevos
+- [ ] Ver posts de una comunidad
+- [ ] Ver posts nuevos
 - [ ] Publicar en una comunidad
-- [ ] Borrado de publicaciones
+- [ ] Borrado de posts
 
 
-## CaracterÃ­sticas y metas
+## Caracterí­sticas y metas
 - [x] Navegación con PrimeFaces
 - [x] Inicio de BBDD con datos de prueba
 - [ ] Informe obligatorio
