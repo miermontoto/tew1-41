@@ -176,4 +176,37 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 		return updated;
 	}
 
+	@Override
+	public List<Post> getPostsFromComunitysUser(String userEmail) {
+		List<Post> posts = new ArrayList<>();
+
+		String query = "SELECT P.CONTENT, P.CREATION_DATE, U.USERNAME AS USER_NAME, P.COMMUNITY_NAME " +
+                "FROM PUBLIC.POST P " +
+                "JOIN PUBLIC.MEMBER M ON P.COMMUNITY_NAME = M.COMMUNITY_NAME " +
+                "JOIN PUBLIC.USER U ON M.USER_EMAIL = U.EMAIL " +
+                "WHERE M.USER_EMAIL = ? " +
+                "ORDER BY P.CREATION_DATE DESC " +
+                "LIMIT 5";
+
+		try {
+			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
+			ps.setString(1, userEmail);
+
+			ResultSet rs = ps.executeQuery();
+			if (rs == null) return posts;
+
+			while (rs.next()) {
+				Post post = new Post();
+				post.setContent(rs.getString("CONTENT"));
+				post.setCreationDate(rs.getDate("CREATION_DATE"));
+				post.setCommunityName(rs.getString("COMMUNITY_NAME"));
+				post.setUserEmail(rs.getString("USER_NAME"));	//Se necesita el nombre y no el email
+
+				posts.add(post);
+			}
+		} catch (SQLException e) {getDatabase().handleException(e);}
+
+		return posts;
+	}
+
 }

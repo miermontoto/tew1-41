@@ -12,19 +12,25 @@
 	<ui:define name="cuerpo">
 
 	<!-- ASEGURARSE DE QUE EN MENSAJE SE TENGAN LOS DATOS DEL MENSAJE Y EL NOMBRE DEL USUARIO CREADOR -->
-		<h:dataTable var="mensaje" value="#{BeanMensajes.getMensajesNuevos}">
+		<h:dataTable var="mensaje" value="#{BeanMensajes.getMensajesNuevos()}"
+		border="4" style="width: 1000px">
 			<h:column>
 				<f:facet name="header">Comunidad</f:facet>
-                #{mensaje.comunidad}
+                #{mensaje.communityName}
             </h:column>
+			<h:column>
+				<f:facet name="header">Usuario del Post</f:facet>
+                #{mensaje.userEmail}
+			</h:column>
 			<h:column>
 				<f:facet name="header">Fecha y Hora</f:facet>
-                #{mensaje.fechaHora}
+                #{mensaje.creationDate}
             </h:column>
 			<h:column>
-				<f:facet name="header">Contenido del Mensaje</f:facet>
-                #{mensaje.contenido}
+				<f:facet name="header">Contenido del Post</f:facet>
+                #{mensaje.content}
 			</h:column>
+			
 		</h:dataTable>
 
 

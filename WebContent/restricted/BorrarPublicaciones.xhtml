@@ -12,7 +12,8 @@
 	<ui:define name="cuerpo">
 
 	<!-- ASEGURARSE DE QUE  -->
-		<h:dataTable id="tablaMensajes" var="mensaje" value="#{BeanMensajes.getMensajesUsuario()}">
+		<h:dataTable id="tablaMensajes" var="mensaje" value="#{BeanMensajes.getMensajesUsuario()}"
+		border="4" style="width: 1000px">
 			<h:column>
 				<f:facet name="header">Comunidad</f:facet>
                 #{mensaje.communityName}
