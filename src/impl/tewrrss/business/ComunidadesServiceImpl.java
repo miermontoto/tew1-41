@@ -6,6 +6,10 @@ import java.util.List;
 import com.tewrrss.business.ComunidadesService;
 import com.tewrrss.dto.Community;
 import impl.tewrrss.business.clases.CrearComunidades;
+import impl.tewrrss.business.clases.Join;
+import impl.tewrrss.business.clases.Leave;
+import impl.tewrrss.business.clases.ListAll;
+import impl.tewrrss.business.clases.ListJoined;
 import impl.tewrrss.business.clases.BorrarComunidades;
 
 public class ComunidadesServiceImpl implements ComunidadesService{
@@ -23,25 +27,22 @@ public class ComunidadesServiceImpl implements ComunidadesService{
 
 	@Override
 	public List<Community> listAll() {
-		return null;
+		return new ListAll().listAll();
 	}
 
 	@Override
 	public List<Community> listJoined() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ListJoined().listJoined();
 	}
 
 	@Override
 	public String join(Community community) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Join().join(community);
 	}
 
 	@Override
 	public String leave(Community community) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Leave().leave(community);
 	}
 
 }
