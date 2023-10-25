@@ -10,9 +10,10 @@
 	</ui:define>
 
 	<ui:define name="cuerpo">
-		<h:outputText value="Pagina de listado de mensajes de la comunidad: #{communities.comunidad.getName()}" />
+		#{msgs.post_communities_tittle} 
+		#{communities.comunidad.getName()}
 		<br></br>
-		<p>Inserte un comentario para publicar en la comunidad</p>		
+		<h:outputText value="#{msgs.post_communities_post}" />				
 		
 		<h:form>
 		<p:messages id="formMessages"/>
@@ -20,30 +21,30 @@
 				value="#{BeanMensajes.nuevoPost}" required="true" 
 				requiredMessage="El campo no puede estar vacío."/>
 				<br></br>
-			<p:commandButton value="Publicar"
+			<p:commandButton value="#{msgs.post_button}"
 				action="#{BeanMensajes.agregarMensaje()}" update="formMessages tablaMensajes" > 
 				
 			</p:commandButton>
 				
 		</h:form>
 		<br></br>
-		<p>Listado de mensajes de la comunidad</p>
+		<h:outputText value="#{msg.post_communities_list}" />
 		<!-- En param,comunidadId iria el identificador de la comunidad sobre la que cargar los mensajes puede ser por parametro o variable de un bean-->
 		<h:dataTable id="tablaMensajes" var="mensaje"
 			value="#{BeanMensajes.getMensajesComunidad()}" border="4"
 				style="width: 1000px">
 			<h:column>
-				<f:facet name="header">Creador</f:facet>
+				<f:facet name="header">#{msgs.menu_actions}</f:facet>
 				<!-- Actualmente este campo contiene el nombre del usuario -->
 	    		#{mensaje.communityName}	
 
 		    </h:column>
 					<h:column>
-						<f:facet name="header">Fecha</f:facet>
+						<f:facet name="header"><h:outputText value="#{msgs.post_communities_date}" /></f:facet>
 		        #{mensaje.creationDate}
 		    </h:column>
 					<h:column>
-						<f:facet name="header">Mensaje</f:facet>
+						<f:facet name="header"><h:outputText value="#{msgs.post_communities_content}" /></f:facet>
 		        #{mensaje.content}
 		    </h:column>
 		</h:dataTable>

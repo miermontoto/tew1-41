@@ -16,8 +16,8 @@
 			</p:submenu>
 
 			<p:submenu name="lang" style="float:right" label="#{msgs.selected_lang}">
-				<p:menuitem value="Español" actionListener="#{settings.setSpanish}" />
-				<p:menuitem value="English" actionListener="#{settings.setEnglish}" />
+				<p:menuitem value="Español" actionListener="#{settings.setSpanish}" update="@all"/>
+				<p:menuitem value="English" actionListener="#{settings.setEnglish}" update="@all"/>
 			</p:submenu>
 		</p:menubar>
 	</ui:define>
