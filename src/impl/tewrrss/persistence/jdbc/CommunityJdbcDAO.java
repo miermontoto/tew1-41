@@ -153,4 +153,12 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 		dirtyJoinedCommunities &= left;
 		return left;
 	}
+
+	@Override
+	public boolean dropAll() {
+		boolean droppedAll = false;
+
+		String queryDeleteMembers = "DELETE FROM memeber
+		return getDatabase().executeUpdate("DELETE FROM COMMUNITY") >= 0;
+	}
 }

@@ -53,24 +53,19 @@ public class Database {
 		return rs;
 	}
 
+	public int executeUpdate(String query) {
+		int result = 0;
+
+		try {
+			result = conn.prepareStatement(query).executeUpdate();
+		} catch (SQLException e) { handleException(e); }
+
+		return result;
+	}
+
 	public void handleException(Exception e) {
 		System.err.println("DB handled exception: " + e.getMessage());
 		System.err.println("The connection is being shut down.");
 		this.closeConnection();
-	}
-
-	public boolean reset() {
-		boolean reset = false;
-
-		try {
-			// Reset the database
-			conn.prepareStatement("DROP SCHEMA PUBLIC CASCADE").execute();
-			conn.prepareStatement("CREATE SCHEMA PUBLIC AUTHORIZATION DBA").execute();
-			conn.prepareStatement("SET DATABASE DEFAULT INITIAL SCHEMA PUBLIC").execute();
-			conn.prepareStatement("RUNSCRIPT FROM 'localDB.script'").execute();
-			reset = true;
-		} catch (SQLException e) { handleException(e); }
-
-		return reset;
 	}
 }

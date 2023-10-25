@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.tewrrss.dto.Post;
 
-public interface PostDAO {
+public interface PostDAO extends DAO {
 
 	List<Post> getPostsInCommunity(String communityName);
 	List<Post> getPostsFromUser(String userEmail);
