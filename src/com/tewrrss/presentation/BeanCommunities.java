@@ -17,7 +17,7 @@ import com.tewrrss.util.Role;
 public class BeanCommunities implements Serializable {
 	private static final long serialVersionUID = -1325688208166211122L;
 
-	private BeanUser loginInfo;
+	private BeanInfo loginInfo;
 	private CommunityDAO dao;
 
 	private String nombre;
@@ -28,7 +28,7 @@ public class BeanCommunities implements Serializable {
 
 	public BeanCommunities() {
 		dao = Factories.persistence.getCommunityDAO();
-		loginInfo = new BeanUser();
+		loginInfo = new BeanInfo();
 	}
 
 	// Función que devuelve todas las comunidades
@@ -123,11 +123,11 @@ public class BeanCommunities implements Serializable {
 		return "left";
 	}
 
-	public BeanUser getLoginInfo() {
+	public BeanInfo getLoginInfo() {
 		return loginInfo;
 	}
 
-	public void setLoginInfo(BeanUser loginInfo) {
+	public void setLoginInfo(BeanInfo loginInfo) {
 		this.loginInfo = loginInfo;
 	}
 

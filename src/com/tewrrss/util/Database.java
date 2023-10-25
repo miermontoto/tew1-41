@@ -58,4 +58,19 @@ public class Database {
 		System.err.println("The connection is being shut down.");
 		this.closeConnection();
 	}
+
+	public boolean reset() {
+		boolean reset = false;
+
+		try {
+			// Reset the database
+			conn.prepareStatement("DROP SCHEMA PUBLIC CASCADE").execute();
+			conn.prepareStatement("CREATE SCHEMA PUBLIC AUTHORIZATION DBA").execute();
+			conn.prepareStatement("SET DATABASE DEFAULT INITIAL SCHEMA PUBLIC").execute();
+			conn.prepareStatement("RUNSCRIPT FROM 'localDB.script'").execute();
+			reset = true;
+		} catch (SQLException e) { handleException(e); }
+
+		return reset;
+	}
 }

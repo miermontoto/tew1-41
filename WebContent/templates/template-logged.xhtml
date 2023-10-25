@@ -9,21 +9,25 @@
 		<p:menubar>
 			<p:menuitem value="#{msgs.app_title}" icon="ui-icon-home" action="index" />
 
-			<p:submenu name="lang" label="#{msgs.communities}" update="@all">
-				<p:menuitem value="#{msgs.communities_create}" action="createCommunity" update="@all"/>
-				<p:menuitem value="#{msgs.communities_list}" action="listAllCommunities" update="@all"/>
-				<p:menuitem value="#{msgs.communities_list_joined}" action="listJoinedCommunities" update="@all"/>
+			<p:submenu name="communities" label="#{msgs.communities}" icon="ui-icon-note">
+				<p:menuitem value="#{msgs.communities_create}" action="createCommunity" />
+				<p:menuitem value="#{msgs.communities_list}" action="listAllCommunities" />
+				<p:menuitem value="#{msgs.communities_list_joined}" action="listJoinedCommunities" />
 			</p:submenu>
 
-			<p:submenu label="#{user.sessionUsername}" icon="ui-icon-person" style="float:right">
-				<p:menuitem value="#{user.sessionRoleName}" style="cursor:default" />
+			<p:submenu name="admin" label="#{msgs.menu_admin}" icon="ui-icon-key" rendered="#{info.sessionRole eq 0}">
+				<p:menuitem value="#{msgs.menu_admin_resetdb}" actionListener="#{info.resetDatabase}" />
+			</p:submenu>
+
+			<p:submenu label="#{info.sessionUsername}" icon="ui-icon-person" style="float:right">
+				<p:menuitem value="#{info.sessionRoleName}" style="cursor:default" />
 				<p:separator />
 				<p:menuitem value="#{msgs.session_logout}" action="#{login.logout}" />
 			</p:submenu>
 
-			<p:submenu name="lang" style="float:right" label="#{msgs.selected_lang}" update="@all">
-				<p:menuitem value="Español" actionListener="#{settings.setSpanish}" />
-				<p:menuitem value="English" actionListener="#{settings.setEnglish}" />
+			<p:submenu name="lang" style="float:right" label="#{msgs.selected_lang}">
+				<p:menuitem value="Español" actionListener="#{settings.setSpanish}" update="@all" />
+				<p:menuitem value="English" actionListener="#{settings.setEnglish}" update="@all" />
 			</p:submenu>
 		</p:menubar>
 	</ui:define>
