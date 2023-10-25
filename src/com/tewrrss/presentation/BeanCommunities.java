@@ -37,8 +37,12 @@ public class BeanCommunities implements Serializable {
 		loginInfo = new BeanUser();
 	}
 
-	// Función que devuelve todas las comunidades 
+	// Función que devuelve todas las comunidades
+	
 	public List<Community> listAll() {
+		CS.listAll(); // Listo todas las comunidades
+		
+		
 		this.joined = this.listJoined();
 		this.all = dao.getCommunities();
 		return all;
