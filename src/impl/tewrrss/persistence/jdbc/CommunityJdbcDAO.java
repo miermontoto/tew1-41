@@ -43,7 +43,9 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 		String queryDeleteMembers = "DELETE FROM member WHERE community_name = ?";
 
 		try {
+			// Se ejecuta la primera consulta para bprrar los miembros de una comunidad (restricciones de integridad)
 			PreparedStatement ps1 = getDatabase().getConnection().prepareStatement(queryDeleteMembers);
+			// Se procede al borrado de la comunidad.
 			PreparedStatement ps2 = getDatabase().getConnection().prepareStatement(queryDeleteCommunity);
 			ps1.setString(1, name);
 			ps2.setString(1, name);
