@@ -53,6 +53,16 @@ public class Database {
 		return rs;
 	}
 
+	public int executeUpdate(String query) {
+		int result = 0;
+
+		try {
+			result = conn.prepareStatement(query).executeUpdate();
+		} catch (SQLException e) { handleException(e); }
+
+		return result;
+	}
+
 	public void handleException(Exception e) {
 		System.err.println("DB handled exception: " + e.getMessage());
 		System.err.println("The connection is being shut down.");

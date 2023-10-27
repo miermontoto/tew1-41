@@ -30,7 +30,7 @@
 					<!-- Sólo se muestra esta opción, si el usuario es admin (rol = 0) -->
 					<p:commandLink value="#{msgs.communities_list_delete}"
 						action="#{communities.delete(item)}" type="submit"
-						immediate="true" update="table" rendered="#{user.sessionRole eq 0}" />
+						immediate="true" update="table" rendered="#{info.sessionRole eq 0}" />
 				</p:column>
 			</p:dataTable>
 		</h:form>

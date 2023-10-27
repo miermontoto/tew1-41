@@ -5,7 +5,7 @@ import java.util.List;
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.User;
 
-public interface CommunityDAO {
+public interface CommunityDAO extends DAO {
 
 	boolean add(Community community);
 	boolean remove(String name);

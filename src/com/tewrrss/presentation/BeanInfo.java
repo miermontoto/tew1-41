@@ -5,11 +5,12 @@ import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 
 import com.tewrrss.dto.User;
+import com.tewrrss.infrastructure.Factories;
 import com.tewrrss.util.Role;
 
-@ManagedBean(name = "user")
+@ManagedBean(name = "info")
 @SessionScoped
-public class BeanUser implements Serializable {
+public class BeanInfo implements Serializable {
 	private static final long serialVersionUID = 55556L;
 
 	public User getSessionUser() {
@@ -26,5 +27,9 @@ public class BeanUser implements Serializable {
 
 	public String getSessionRoleName() {
 		return Role.toString(this.getSessionRole());
+	}
+
+	public String resetDatabase() {
+		return Factories.services.createDatabaseService().reset() ? "index" : "";
 	}
 }

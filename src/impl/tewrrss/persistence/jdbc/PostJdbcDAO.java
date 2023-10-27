@@ -176,4 +176,8 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 		return updated;
 	}
 
+	@Override
+	public boolean dropAll() {
+		return getDatabase().executeUpdate("DELETE FROM POST") >= 1;
+	}
 }

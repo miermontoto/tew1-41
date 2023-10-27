@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.User;
 
-public interface UserDAO {
+public interface UserDAO extends DAO {
 
 	List<User> getUsers();
 	Optional<User> findByEmail(String email);

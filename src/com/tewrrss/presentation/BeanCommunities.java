@@ -15,14 +15,11 @@ import com.tewrrss.infrastructure.Factories;
 import com.tewrrss.persistence.CommunityDAO;
 import com.tewrrss.util.Role;
 
-@ManagedBean(name = "communities") // ManagedBean para gestiï¿½n de usuarios.
+@ManagedBean(name = "communities") // ManagedBean para gestiÃ¯Â¿Â½n de usuarios.
 public class BeanCommunities implements Serializable {
 	private static final long serialVersionUID = -1325688208166211122L;
 
-	@ManagedProperty(value="#{user}") 
-	public BeanUser loginInfo; // Información de la sesión del usuario (parámetros de inicio de sesión)
-	
-	private CommunityDAO dao; // DAO para gestinar las comunidades.
+  private BeanInfo loginInfo;
 
 	private String nombre;
 	private String descripcion;
@@ -34,19 +31,16 @@ public class BeanCommunities implements Serializable {
 
 	public BeanCommunities() {
 		CS = Factories.services.createCommunityService(); // Creo el servicio de comunidades.
-		
-		//dao = Factories.persistence.getCommunityDAO();
-		
-		//loginInfo = new BeanUser();
+    loginInfo = new BeanInfo();
 	}
 
-	// Función que devuelve todas las comunidades
+	// FunciÃ³n que devuelve todas las comunidades
 	
 	public List<Community> listAll() {
 		return CS.listAll(); // Listo todas las comunidades
 	}
 
-	// Función que devuelve las comunidades a las que pertenece el usuario
+	// FunciÃ³n que devuelve las comunidades a las que pertenece el usuario
 	public List<Community> listJoined() {
 		return CS.listJoined(loginInfo.getSessionUser());
 		
@@ -57,7 +51,7 @@ public class BeanCommunities implements Serializable {
 		return CS.ableToJoin(comunidad, loginInfo.getSessionUser());
 	}
 
-	// Método para declarar el borrado de comunidades. Se verifica antes que el usuario sea admin
+	// MÃ©todo para declarar el borrado de comunidades. Se verifica antes que el usuario sea admin
 	public String delete(Community comunidad) {
 		
 		return CS.borrarComunidad(comunidad, loginInfo.getSessionUser());
@@ -71,12 +65,12 @@ public class BeanCommunities implements Serializable {
 
 		if (nombre == null || nombre.trim().isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_create_error_emptyName"), null));
-			return null; // Nombre vacío, no continúo
+			return null; // Nombre vacÃ­o, no continÃºo
 		}
 
 		if (descripcion == null || descripcion.trim().isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_create_error_emptyDesc"), null));
-			return null; // Descripción vacía, no continúo
+			return null; // DescripciÃ³n vacÃ­a, no continÃºo
 		}
 
 		for(Community cm : CS.listAll()) {
@@ -100,12 +94,12 @@ public class BeanCommunities implements Serializable {
 
 		if (community == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_list_join_error"), null));
-			return null; // Nombre vacío, no continúo
+			return null; // Nombre vacÃ­o, no continÃºo
 		}
 
 		if (!ableToJoin(community)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_list_join_error"), null));
-			return null; // Nombre vacío, no continúo
+			return null; // Nombre vacÃ­o, no continÃºo
 		}
 		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_list_join_ok"), null));
@@ -121,7 +115,7 @@ public class BeanCommunities implements Serializable {
 
 		if (community == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_list_leave_error"), null));
-			return null; // Nombre vacío, no continúo
+			return null; // Nombre vacÃ­o, no continÃºo
 		}
 
 
@@ -131,11 +125,11 @@ public class BeanCommunities implements Serializable {
 		return CS.leave(community, loginInfo.getSessionUser());
 	}
 
-	public BeanUser getLoginInfo() {
+	public BeanInfo getLoginInfo() {
 		return loginInfo;
 	}
 
-	public void setLoginInfo(BeanUser loginInfo) {
+	public void setLoginInfo(BeanInfo loginInfo) {
 		this.loginInfo = loginInfo;
 	}
 
