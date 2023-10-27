@@ -6,7 +6,7 @@ import java.util.List;
 import com.tewrrss.business.DatabaseService;
 import com.tewrrss.dto.*;
 import com.tewrrss.infrastructure.Factories;
-import com.tewrrss.util.Database;
+import com.tewrrss.persistence.*;
 import com.tewrrss.util.Role;
 
 public class SimpleDatabaseService implements DatabaseService {
@@ -19,13 +19,14 @@ public class SimpleDatabaseService implements DatabaseService {
 
 		// Drop all values
 		postDAO.dropAll();
-		userDAO.dropAll();
 		communityDAO.dropAll();
-
+		userDAO.dropAll();
+		
+		
 		// Fill with sample values
 		List<Community> sampleCommunities = new ArrayList<>();
 		List<User> sampleUsers = new ArrayList<>();
-		List<Pair<Community, User>> sampleMemberships = new ArrayList<>();
+		List<Object[]> sampleMemberships = new ArrayList<>();
 
 		sampleCommunities.add(new Community("tew.music", "the music community."));
 		sampleCommunities.add(new Community("tew.food", "the food community."));
@@ -44,15 +45,15 @@ public class SimpleDatabaseService implements DatabaseService {
 		for (User u : sampleUsers) {
 			for (Community c : sampleCommunities) {
 				if (Math.random() < 0.33) {
-					sampleMemberships.add(new Pair<>(c, u));
+					sampleMemberships.add(new Object[] {c, u});
 				}
 			}
 		}
 
 		sampleCommunities.forEach(communityDAO::add);
 		sampleUsers.forEach(userDAO::add);
-		for(Pair<Community, User> p : sampleMemberships) {
-			communityDAO.join(p.first, p.second);
+		for(Object[] p : sampleMemberships) {
+			communityDAO.join((Community) p[0], (User) p[1]);
 		}
 
 		return true;

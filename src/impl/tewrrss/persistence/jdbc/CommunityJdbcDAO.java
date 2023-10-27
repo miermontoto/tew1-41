@@ -156,9 +156,7 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 
 	@Override
 	public boolean dropAll() {
-		boolean droppedAll = false;
-
-		String queryDeleteMembers = "DELETE FROM memeber
-		return getDatabase().executeUpdate("DELETE FROM COMMUNITY") >= 0;
+		getDatabase().executeUpdate("DELETE FROM member"); // First delete all members
+		return getDatabase().executeUpdate("DELETE FROM community") == 1; // Then delete all communities
 	}
 }

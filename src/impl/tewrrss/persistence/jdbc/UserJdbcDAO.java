@@ -139,4 +139,9 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 		dirtyAllUsers &= updated;
 		return updated;
 	}
+
+	@Override
+	public boolean dropAll() {
+		return getDatabase().executeUpdate("DELETE FROM user") >= 1;
+	}
 }
