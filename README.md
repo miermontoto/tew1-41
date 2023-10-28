@@ -19,10 +19,10 @@
 - [x] Crear una comunidad
 - [x] Unirse a una comunidad
 - [x] Listar comunidades
-- [ ] Ver posts de una comunidad
-- [ ] Ver posts nuevos
-- [ ] Publicar en una comunidad
-- [ ] Borrado de posts
+- [x] Ver posts de una comunidad
+- [x] Ver posts nuevos
+- [x] Publicar en una comunidad
+- [x] Borrado de posts
 
 
 ## Caracterí­sticas y metas
