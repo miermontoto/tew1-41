@@ -1,32 +1,32 @@
 # 2324-tew1-41
 ## Integrantes
-- Christian	Gonz谩lez Camblor	UO276508@uniovi.es
+- Christian	Gonz醠ez Camblor	UO276508@uniovi.es
 - Juan Francisco Mier Montoto	UO283319@uniovi.es
-- Manuel Revilla Hern谩ndez		UO281932@uniovi.es
+- Manuel Revilla Hern醤dez		UO281932@uniovi.es
 
 ## Funcionalidades
 - [x] Registro de usuario
-  - [x] Registro b谩sico
-  - [x] Conexi贸n con BBDD
-- [x] Iniciar sesi贸n
-  - [x] Login b谩sico
-  - [x] Conexi贸n con BBDD
+  - [x] Registro b醩ico
+  - [x] Conexi髇 con BBDD
+- [x] Iniciar sesi髇
+  - [x] Login b醩ico
+  - [x] Conexi髇 con BBDD
   - [x] Persistencia entre vistas
-  - [x] Redirecci贸n al login
-- [x] Salir de sesi贸n
-- [ ] Borrado de comunicaciones
-- [ ] Reinicio de la base de datos (admin)
-- [ ] Crear una comunidad (en desarrollo en `comunidades`)
-- [ ] Unirse a una comunidad
-- [ ] Listar comunidades (en desarrollo en `comunidades`)
-- [ ] Ver mensajes de una comunidad
-- [ ] Ver mensajes nuevos
+  - [x] Redirecci髇 al login
+- [x] Salir de sesi髇
+- [x] Borrado de comunidades
+- [x] Reinicio de la base de datos (admin)
+- [x] Crear una comunidad
+- [x] Unirse a una comunidad
+- [x] Listar comunidades
+- [ ] Ver posts de una comunidad
+- [ ] Ver posts nuevos
 - [ ] Publicar en una comunidad
-- [ ] Borrado de publicaciones
+- [ ] Borrado de posts
 
 
-## Caracter铆sticas y metas
-- [x] Navegaci贸n con PrimeFaces
+## Caracter憝sticas y metas
+- [x] Navegaci髇 con PrimeFaces
 - [x] Inicio de BBDD con datos de prueba
 - [ ] Informe obligatorio
 - [x] Traducciones

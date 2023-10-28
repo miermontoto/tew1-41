@@ -3,7 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	template="/templates/template-logged-admin.xhtml">
+	template="/templates/template-logged.xhtml">
 
 	<ui:define name="titulo">
 		#{msgs.app_title}
@@ -11,35 +11,31 @@
 
 	<ui:define name="cuerpo">
 
-		<p>#{msgs.communities_create}</p>
-
-		<br></br>
-
+		<p:panel header="#{msgs.communities_create}" update="@all">
 		<h:form id="formNuevaComunidad">
-
 			<p:inputText id="inputNombreComunidad"
 				value="#{communities.nombre}"
 				placeholder="#{msgs.communities_create_name}" />
-			<br></br>
+
+			<br />
+
 			<p:inputText id="inputDescripcionComunidad"
 				value="#{communities.descripcion}"
 				placeholder="#{msgs.communities_create_desc}" />
 
-			<br></br>
+			<br />
 
 			<!-- Form AJAXIFICADO. -->
-			<p:commandButton value="Crear"
-				action="#{communities.crearComunidad}" type="submit"
+			<p:commandButton value="#{msgs.communities_create_button}"
+				action="#{communities.create}" type="submit"
 				update="messages formNuevaComunidad" />
-			<p:messages id="messages" showDetail="true" />
-			<!-- Mostrar mensajes de error aquí, tras realizar validación server-side -->
-
-
+			<p:messages id="messages" />
 		</h:form>
-
+		</p:panel>
 	</ui:define>
 
 	<ui:define name="pie">
+		<p:commandButton value="#{msgs.link_back}" action="index" />
 	</ui:define>
 
 </ui:composition>

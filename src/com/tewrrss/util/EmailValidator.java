@@ -17,20 +17,20 @@ public class EmailValidator implements Validator {
 
     private static final Pattern pattern = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
 
-    public EmailValidator() { /* Se necesita un constructor, aunque estÃ© vacÃ­o */ }
+    public EmailValidator() { /* Se necesita un constructor, aunque esté vací­o */ }
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         if (value == null) {
-            return; // Deja la validaciï¿½n para el atributo 'required'
+            return; // Deja la validación para el atributo 'required'
         }
 
         String email = value.toString();
         Matcher matcher = pattern.matcher(email);
 
-        // Si el email no esta bien formado, devolvemos una excepciï¿½n de validaciï¿½n, lo que causa un mensaje en el Front
+        // Si el email no esta bien formado, devolvemos una excepción de validación, lo que causa un mensaje en el Front
         if (!matcher.matches()) {
-            FacesMessage message = new FacesMessage("El email no es vï¿½lido");
+            FacesMessage message = new FacesMessage("invalid_email_error");
             throw new ValidatorException(message);
         }
     }

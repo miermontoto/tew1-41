@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.tewrrss.util.Role;
 
-public class User implements Serializable, DTO {
+public class User implements Serializable {
 	private static final long serialVersionUID = 56556L;
 
 	private String email;

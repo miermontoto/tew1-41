@@ -1,4 +1,4 @@
-package com.tewrrss.persistence;
+package com.tewrrss.business;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,13 +6,13 @@ import java.util.Optional;
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.User;
 
-public interface UserDAO extends DAO {
+public interface UserService {
 
 	List<User> getUsers();
 	Optional<User> findByEmail(String email);
-	boolean remove(String email);
-	boolean add(User user);
-	boolean update(User user);
+	String remove(String email);
+	String add(User user);
+	String update(User user);
 	List<User> getUsersInCommunity(Community community);
-
+	
 }
