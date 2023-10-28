@@ -1,5 +1,6 @@
 package com.tewrrss.presentation;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -14,7 +15,7 @@ import com.tewrrss.infrastructure.Factories;
 import com.tewrrss.util.Role;
 
 
-@ManagedBean(name = "posts") 
+@ManagedBean(name = "posts")
 @SessionScoped
 public class BeanPosts {
     private String nuevoPost;
@@ -26,11 +27,11 @@ public class BeanPosts {
 		service = Factories.services.createPostsService();
 		loginInfo = new BeanInfo();
 	}
-	
+
 	public void setCurrentCommunity(Community community) {
 		this.currentCommunity = community;
 	}
-	
+
 	public Community getCurrentCommunity() {
 		return this.currentCommunity;
 	}
@@ -42,40 +43,39 @@ public class BeanPosts {
 	public void setNuevoPost(String nuevoPost) {
 		this.nuevoPost = nuevoPost;
 	}
-	
+
 	public String remove(Post mensaje) {
 		User user = loginInfo.getSessionUser();
 		if (user.getEmail().equals(mensaje.getUserEmail()) || user.getRole() == Role.ADMIN) {
-			service.borrarMensajes(mensaje);
+			service.remove(mensaje);
 			return "success";
-		}	
-		
+		}
+
 		return "unauthorized";
 	}
-	
-	
-	public String add() {	
+
+	public String add() {
 		User user = loginInfo.getSessionUser();
-		if (!nuevoPost.isEmpty())  {    
-	        service.agregarMensaje(nuevoPost, currentCommunity, user);          
+		if (!nuevoPost.isEmpty())  {
+	        service.add(new Post(nuevoPost, new Date(0).toString(), user.getEmail(), currentCommunity.getName()));
 	        nuevoPost = "";
-	        
+
 	        return "success";
         }
-		
+
 		return "error";
     }
-	
-	public List<Post> getMensajesNuevos() {
-		return service.getMensajesNuevos(loginInfo.getSessionUser());
+
+	public List<Post> getNewPosts() {
+		return service.getNewPosts(loginInfo.getSessionUser());
 	}
-	
-	public List<Post> getMensajesUsuario() {
-		return service.getMensajesUsuario(loginInfo.getSessionUser().getEmail());
+
+	public List<Post> getPostsByUser() {
+		return service.getPostsByUser(loginInfo.getSessionUser());
 	}
-	
-    public List<Post> getMensajesComunidad() {
-        return service.getMensajesComunidad(currentCommunity.getName(), loginInfo.getSessionUsername());
+
+    public List<Post> getPostsInCommunity() {
+        return service.getPostsInCommunity(currentCommunity);
     }
 
 }

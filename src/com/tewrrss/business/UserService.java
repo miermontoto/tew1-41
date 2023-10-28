@@ -8,7 +8,7 @@ import com.tewrrss.dto.User;
 
 public interface UserService {
 
-	List<User> getUsers();
+	List<User> listAll();
 	Optional<User> findByEmail(String email);
 	String remove(String email);
 	String add(User user);

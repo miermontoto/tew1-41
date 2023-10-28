@@ -7,10 +7,10 @@ import com.tewrrss.dto.User;
 import com.tewrrss.infrastructure.Factories;
 import com.tewrrss.persistence.PersistenceFactory;
 
-public class GetMensajesNuevos {
+import impl.tewrrss.persistence.jdbc.PostJdbcDAO;
 
-	public List<Post> getMensajesNuevos(User user){
-		PersistenceFactory factoria = Factories.persistence;
-		return factoria.getPostDAO().getPostsFromComunitysUser(user.getEmail());
+public class GetPostsByUser {
+	public List<Post> getPostsByUser(User user) {
+		return Factories.persistence.getPostDAO().getPostsByUser(user);
 	}
 }

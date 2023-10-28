@@ -11,7 +11,7 @@ import com.tewrrss.dto.User;
 public class UserServiceImpl implements UserService {
 
 	@Override
-	public List<User> getUsers() {
+	public List<User> listAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

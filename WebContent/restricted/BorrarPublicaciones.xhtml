@@ -10,16 +10,16 @@
 	</ui:define>
 
 	<ui:define name="titulo">
-		
+
 	</ui:define>
-	
+
 	<ui:define name="cuerpo">
 
 	<p>#{msgs.delete_post_tittle}</p>
 	<br></br>
 
 
-		<h:dataTable id="tablaMensajes" var="mensaje" value="#{BeanMensajes.getMensajesUsuario()}"
+		<h:dataTable id="tablaMensajes" var="mensaje" value="#{posts.getMensajesUsuario()}"
 		border="4" style="width: 1000px">
 			<h:column>
 				<f:facet name="header">#{msgs.delete_post_community}</f:facet>
@@ -33,7 +33,7 @@
 				<f:facet name="header">#{msgs.post_communities_content}</f:facet>
                 #{mensaje.content}
                 <p:commandButton value="#{msgs.delete_button}"
-					action="#{BeanMensajes.borrarMensaje(mensaje)}" update="tablaMensajes"/>
+					action="#{posts.borrarMensaje(mensaje)}" update="tablaMensajes"/>
 			</h:column>
 		</h:dataTable>
 

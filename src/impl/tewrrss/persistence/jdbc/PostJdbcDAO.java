@@ -5,21 +5,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.tewrrss.dto.Community;
 import com.tewrrss.dto.Post;
+import com.tewrrss.dto.User;
 import com.tewrrss.persistence.PostDAO;
 
 
 public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 
 	@Override
-	public List<Post> getPostsInCommunity(String communityName) {
+	public List<Post> getPostsInCommunity(Community community) {
 		List<Post> posts = new ArrayList<>();
 
 		String query = "SELECT * FROM post WHERE community_name = ?";
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
-			ps.setString(1, communityName);
+			ps.setString(1, community.getName());
 
 			ResultSet rs = ps.executeQuery();
 			if (rs == null) return posts;
@@ -39,14 +42,14 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 	}
 
 	@Override
-	public List<Post> getPostsFromUser(String userEmail) {
+	public List<Post> getPostsByUser(User user) {
 		List<Post> posts = new ArrayList<>();
 
 		String query = "SELECT * FROM post WHERE user_email = ?";
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
-			ps.setString(1, userEmail);
+			ps.setString(1, user.getEmail());
 
 			ResultSet rs = ps.executeQuery();
 			if (rs == null) return posts;
@@ -66,15 +69,15 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 	}
 
 	@Override
-	public List<Post> getPostsFromUserInCommunity(String userEmail, String communityName) {
+	public List<Post> getPostsByUserInCommunity(User user, Community community) {
 		List<Post> posts = new ArrayList<>();
 
 		String query = "SELECT * FROM post WHERE user_email = ?, community_name = ?";
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
-			ps.setString(1, userEmail);
-			ps.setString(2, communityName);
+			ps.setString(1, user.getEmail());
+			ps.setString(2, community.getName());
 
 			ResultSet rs = ps.executeQuery();
 			if (rs == null) return posts;
@@ -177,7 +180,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 	}
 
 	@Override
-	public List<Post> getPostsFromComunitysUser(String userEmail) {
+	public List<Post> getPostsInCommunitiesOfUser(User user) {
 		List<Post> posts = new ArrayList<>();
 
 		String query = "SELECT P.CONTENT, P.CREATION_DATE, U.USERNAME AS USER_NAME, P.COMMUNITY_NAME " +
@@ -190,7 +193,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
-			ps.setString(1, userEmail);
+			ps.setString(1, user.getEmail());
 
 			ResultSet rs = ps.executeQuery();
 			if (rs == null) return posts;
@@ -211,8 +214,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 
 	@Override
 	public boolean dropAll() {
-		// TODO Auto-generated method stub
-		return false;
+		return getDatabase().executeUpdate("DELETE FROM post") >= 1;
 	}
 
 }

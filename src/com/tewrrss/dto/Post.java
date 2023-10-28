@@ -10,7 +10,7 @@ public class Post implements Serializable {
 	private Date creationDate;
 	private String userEmail;
 	private String communityName;
-
+	
 	public Post() { }
 
 	public Post(String content, String creationDate, String userEmail, String communityName) {

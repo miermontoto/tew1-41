@@ -8,7 +8,7 @@ import impl.tewrrss.persistence.jdbc.CommunityJdbcDAO;
 
 public class Remove {
 
-	public String borrarComunidad(Community comunidad) {
-		return new CommunityJdbcDAO().remove(comunidad.getName()) ? "success" : "error";
+	public String borrarComunidad(Community community) {
+		return new CommunityJdbcDAO().remove(community) ? "success" : "error";
 	}
 }

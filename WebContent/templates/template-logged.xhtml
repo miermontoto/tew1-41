@@ -15,6 +15,10 @@
 				<p:menuitem value="#{msgs.communities_list_joined}" action="listJoinedCommunities" />
 			</p:submenu>
 
+			<p:submenu name="posts" label="#{msgs.posts}" icon="ui-icon-comment">
+				
+			</p:submenu>
+
 			<p:submenu name="admin" label="#{msgs.menu_admin}" icon="ui-icon-key" rendered="#{info.sessionRole eq 0}">
 				<p:menuitem value="#{msgs.menu_admin_resetdb}" actionListener="#{info.resetDatabase}" />
 			</p:submenu>

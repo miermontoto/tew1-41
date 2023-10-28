@@ -108,12 +108,12 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 	}
 
 	@Override
-	public boolean remove(String email) {
+	public boolean remove(User user) {
 		boolean removed = false;
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement("DELETE FROM user WHERE email = ?");
-			ps.setString(1, email);
+			ps.setString(1, user.getEmail());
 
 			removed = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}

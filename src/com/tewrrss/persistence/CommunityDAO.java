@@ -8,7 +8,7 @@ import com.tewrrss.dto.User;
 public interface CommunityDAO extends DAO {
 
 	boolean add(Community community);
-	boolean remove(String name);
+	boolean remove(Community community);
 	boolean update(Community community);
 	List<Community> getCommunities();
 	List<Community> getJoinedCommunities(User user);

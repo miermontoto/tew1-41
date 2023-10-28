@@ -8,16 +8,11 @@ import com.tewrrss.dto.User;
 
 public interface PostsService {
 
-	void agregarMensaje(String contenido, Community com, User user);
+	String add(Post post);
+	String remove(Post post);
+	List<Post> getPostsByUser(User user);
+	List<Post> getPostsInCommunity(Community community);
+	List<Post> getNewPosts(User user);
+	List<Post> getPostsByUserInCommunity(User user, Community community);
 
-	void borrarMensajes(Post post);
-
-	List<Post> getMensajesUsuario(String useremail);
-
-	List<Post> getMensajesComunidad(String nombreComunidad, String useremail);
-
-	List<Post> getMensajesNuevos(User user);
-
-
-	
 }

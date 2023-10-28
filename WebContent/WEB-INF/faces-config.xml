@@ -98,14 +98,6 @@
 
 
 
-	<navigation-rule>
-		<from-view-id>/restricted/listarcomunidadesuser.xhtml</from-view-id>
-
-		<navigation-case>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/restricted/publicaciones_Comunidad</to-view-id>
-		</navigation-case>
-	</navigation-rule>
 
 
 

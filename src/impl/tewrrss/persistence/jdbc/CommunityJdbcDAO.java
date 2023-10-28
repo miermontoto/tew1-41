@@ -36,23 +36,25 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 	}
 
 	@Override
-	public boolean remove(String name) {
+	public boolean remove(Community community) {
 		boolean removed = true;
 
 		String queryDeleteCommunity = "DELETE FROM community WHERE name = ?";
 		String queryDeleteMembers = "DELETE FROM member WHERE community_name = ?";
+		String queryDeletePosts = "DELETE FROM post WHERE community_name = ?";
 
 		try {
-			// Se ejecuta la primera consulta para bprrar los miembros de una comunidad (restricciones de integridad)
 			PreparedStatement ps1 = getDatabase().getConnection().prepareStatement(queryDeleteMembers);
-			// Se procede al borrado de la comunidad.
-			PreparedStatement ps2 = getDatabase().getConnection().prepareStatement(queryDeleteCommunity);
-			ps1.setString(1, name);
-			ps2.setString(1, name);
+			PreparedStatement ps2 = getDatabase().getConnection().prepareStatement(queryDeletePosts);
+			PreparedStatement ps3 = getDatabase().getConnection().prepareStatement(queryDeleteCommunity);
+			ps1.setString(1, community.getName());
+			ps2.setString(1, community.getName());
+			ps3.setString(1, community.getName());
 
-			// Primero eliminar membresías, luego la comunidad.
+			// Primero eliminar members�as y publicaciones, luego la comunidad.
 			ps1.executeUpdate();
-			removed = ps2.executeUpdate() == 1;
+			ps2.executeUpdate();
+			removed = ps3.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
 
 		dirtyAllCommunities &= removed;
@@ -82,10 +84,8 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 
 		List<Community> communities = new ArrayList<>();
 
-		String query = "SELECT * FROM community";
-
 		try {
-			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
+			PreparedStatement ps = getDatabase().getConnection().prepareStatement("SELECT * FROM community");
 
 			ResultSet rs = ps.executeQuery();
 			if (rs == null) return communities;
