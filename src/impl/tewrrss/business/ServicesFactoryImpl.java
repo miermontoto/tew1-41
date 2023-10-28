@@ -23,4 +23,9 @@ public class ServicesFactoryImpl implements ServicesFactory {
 	public UserService createUserService() {
 		return new UserServiceImpl();
 	}
+	
+	@Override
+	public PostsService createPostsService() {
+		return new PostsServiceImpl();
+	}
 }

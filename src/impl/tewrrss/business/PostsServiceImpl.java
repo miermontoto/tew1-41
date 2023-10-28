@@ -2,20 +2,20 @@ package impl.tewrrss.business;
 
 import java.util.List;
 
-import com.tewrrss.business.InterfacePublicacionesService;
+import com.tewrrss.business.PostsService;
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.Post;
 import com.tewrrss.dto.User;
 
-import impl.tewrrss.business.classesPublicaciones.AgregarMensaje;
-import impl.tewrrss.business.classesPublicaciones.BorrarMensaje;
-import impl.tewrrss.business.classesPublicaciones.GetMensajesComunidad;
-import impl.tewrrss.business.classesPublicaciones.GetMensajesNuevos;
-import impl.tewrrss.business.classesPublicaciones.GetMensajesUsuario;
+import impl.tewrrss.business.posts.AgregarMensaje;
+import impl.tewrrss.business.posts.BorrarMensaje;
+import impl.tewrrss.business.posts.GetMensajesComunidad;
+import impl.tewrrss.business.posts.GetMensajesNuevos;
+import impl.tewrrss.business.posts.GetMensajesUsuario;
 import impl.tewrrss.persistence.jdbc.PostJdbcDAO;
 import impl.tewrrss.persistence.jdbc.UserJdbcDAO;
 
-public class PublicacionesService implements InterfacePublicacionesService{
+public class PostsServiceImpl implements PostsService{
 
 	@Override
 	/*

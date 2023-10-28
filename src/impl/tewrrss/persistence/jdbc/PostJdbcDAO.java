@@ -209,4 +209,10 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 		return posts;
 	}
 
+	@Override
+	public boolean dropAll() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

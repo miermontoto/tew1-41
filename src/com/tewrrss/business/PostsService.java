@@ -6,7 +6,7 @@ import com.tewrrss.dto.Community;
 import com.tewrrss.dto.Post;
 import com.tewrrss.dto.User;
 
-public interface InterfacePublicacionesService {
+public interface PostsService {
 
 	void agregarMensaje(String contenido, Community com, User user);
 

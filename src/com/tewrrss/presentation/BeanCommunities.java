@@ -6,14 +6,11 @@ import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 import com.tewrrss.business.CommunityService;
 import com.tewrrss.dto.Community;
 import com.tewrrss.infrastructure.Factories;
-import com.tewrrss.persistence.CommunityDAO;
-import com.tewrrss.util.Role;
 
 @ManagedBean(name = "communities") // ManagedBean para gestiï¿½n de usuarios.
 public class BeanCommunities implements Serializable {
@@ -78,8 +75,6 @@ public class BeanCommunities implements Serializable {
 
 		// Todo ha ido bien, llamo a crear comunidad
 		return CS.create(new Community(this.nombre, this.descripcion)); // Llamo a la lista de comunidades
-
-
 	}
 
 	public String join(Community community) {

@@ -1,4 +1,4 @@
-package impl.tewrrss.business.classesPublicaciones;
+package impl.tewrrss.business.posts;
 
 import com.tewrrss.dto.Post;
 import com.tewrrss.infrastructure.Factories;

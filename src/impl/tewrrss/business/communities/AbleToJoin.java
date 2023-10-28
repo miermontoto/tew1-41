@@ -1,4 +1,4 @@
-package impl.tewrrss.business.methods;
+package impl.tewrrss.business.communities;
 
 
 import java.util.List;
