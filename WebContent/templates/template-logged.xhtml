@@ -16,7 +16,8 @@
 			</p:submenu>
 
 			<p:submenu name="posts" label="#{msgs.posts}" icon="ui-icon-comment">
-				
+				<p:menuitem value="#{msgs.posts_list}" action="listUserPosts" />
+				<p:menuitem value="#{msgs.posts_last}" action="listLastPosts" />
 			</p:submenu>
 
 			<p:submenu name="admin" label="#{msgs.menu_admin}" icon="ui-icon-key" rendered="#{info.sessionRole eq 0}">

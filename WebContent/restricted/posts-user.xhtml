@@ -5,10 +5,21 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/templates/template-logged.xhtml">
 
+	<ui:define name="titulo">
+		#{msgs.app_title}
+	</ui:define>
+
 	<ui:define name="cuerpo">
+
+		<p:panel header="#{msgs.posts_list}" update="@all">
+		<h:form>
+
+		</h:form>
+		</p:panel>
 	</ui:define>
 
 	<ui:define name="pie">
+		<p:commandButton value="#{msgs.link_back}" action="index" />
 	</ui:define>
 
 </ui:composition>

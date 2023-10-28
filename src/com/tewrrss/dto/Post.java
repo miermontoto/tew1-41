@@ -10,7 +10,8 @@ public class Post implements Serializable {
 	private Date creationDate;
 	private String userEmail;
 	private String communityName;
-	
+	private String userName;
+
 	public Post() { }
 
 	public Post(String content, String creationDate, String userEmail, String communityName) {
@@ -50,5 +51,13 @@ public class Post implements Serializable {
 
 	public void setCommunityName(String communityName) {
 		this.communityName = communityName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserName() {
+		return userName;
 	}
 }

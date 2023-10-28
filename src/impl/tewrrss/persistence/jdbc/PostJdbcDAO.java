@@ -203,7 +203,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 				post.setContent(rs.getString("CONTENT"));
 				post.setCreationDate(rs.getDate("CREATION_DATE"));
 				post.setCommunityName(rs.getString("COMMUNITY_NAME"));
-				post.setUserEmail(rs.getString("USER_NAME"));	//Se necesita el nombre y no el email
+				post.setUserName(rs.getString("USER_NAME"));
 
 				posts.add(post);
 			}

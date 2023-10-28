@@ -10,30 +10,28 @@
 	</ui:define>
 
 	<ui:define name="cuerpo">
-	<p>#{msgs.new_posts_tittle}</p>
+	<p:panel header="#{msgs.posts_last}" update="@all">
 	<!-- ASEGURARSE DE QUE EN MENSAJE SE TENGAN LOS DATOS DEL MENSAJE Y EL NOMBRE DEL USUARIO CREADOR -->
-		<h:dataTable var="mensaje" value="#{posts.getMensajesNuevos()}"
-		border="4" style="width: 1000px">
-			<h:column>
-				<f:facet name="header">#{msgs.delete_post_community}</f:facet>
+		<p:dataTable var="mensaje" value="#{posts.getNewPosts()}" border="4" style="width: 1000px">
+			<p:column>
+				<f:facet name="header">#{msgs.posts_list_community}</f:facet>
                 #{mensaje.communityName}
-            </h:column>
-			<h:column>
-				<f:facet name="header">#{msgs.post_communities_user}</f:facet>
-                #{mensaje.userEmail}
-			</h:column>
-			<h:column>
-				<f:facet name="header">#{msgs.post_communities_date}</f:facet>
+			</p:column>
+			<p:column>
+				<f:facet name="header">#{msgs.posts_list_user}</f:facet>
+                #{mensaje.userName}
+			</p:column>
+			<p:column>
+				<f:facet name="header">#{msgs.posts_list_date}</f:facet>
                 #{mensaje.creationDate}
-            </h:column>
-			<h:column>
-				<f:facet name="header">#{msgs.post_communities_content}</f:facet>
+			</p:column>
+			<p:column>
+				<f:facet name="header">#{msgs.posts_list_content}</f:facet>
                 #{mensaje.content}
-			</h:column>
+			</p:column>
 
-		</h:dataTable>
-
-
+		</p:dataTable>
+	</p:panel>
 	</ui:define>
 
 	<ui:define name="pie">
