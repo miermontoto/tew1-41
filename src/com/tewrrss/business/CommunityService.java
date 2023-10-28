@@ -5,14 +5,14 @@ import java.util.List;
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.User;
 
-public interface ComunidadesService {
+public interface CommunityService {
 	
 	List<Community> listAll();
 	List<Community> listJoined(User user);
 	String join(Community community, User user);
 	String leave(Community community, User user);
-	String crearComunidad(Community comunidad);
-	String borrarComunidad(Community comunidad, User user);
+	String create(Community comunidad);
+	String remove(Community comunidad);
 	boolean ableToJoin(Community comunidad, User user);
 
 }

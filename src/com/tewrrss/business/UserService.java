@@ -1,0 +1,18 @@
+package com.tewrrss.business;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.tewrrss.dto.Community;
+import com.tewrrss.dto.User;
+
+public interface UserService {
+
+	List<User> getUsers();
+	Optional<User> findByEmail(String email);
+	String remove(String email);
+	String add(User user);
+	String update(User user);
+	List<User> getUsersInCommunity(Community community);
+	
+}

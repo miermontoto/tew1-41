@@ -1,16 +1,15 @@
-package impl.tewrrss.business.clases;
+package impl.tewrrss.business.methods;
 
 import java.util.List;
 
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.User;
 
+import impl.tewrrss.persistence.jdbc.CommunityJdbcDAO;
+
 public class ListJoined {
 
 	public List<Community> listJoined(User user){
-		
-		//return dao.getJoinedCommunities(user);
-
-		return null;
+		return new CommunityJdbcDAO().getJoinedCommunities(user);
 	}
 }

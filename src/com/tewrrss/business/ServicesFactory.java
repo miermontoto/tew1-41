@@ -3,5 +3,6 @@ package com.tewrrss.business;
 public interface ServicesFactory {
 	LoginService createLoginService();
 	DatabaseService createDatabaseService();
-	ComunidadesService createCommunityService();
+	CommunityService createCommunityService();
+	UserService createUserService();
 }

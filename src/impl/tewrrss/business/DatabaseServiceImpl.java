@@ -9,7 +9,7 @@ import com.tewrrss.infrastructure.Factories;
 import com.tewrrss.persistence.*;
 import com.tewrrss.util.Role;
 
-public class SimpleDatabaseService implements DatabaseService {
+public class DatabaseServiceImpl implements DatabaseService {
 
 	@Override
 	public boolean reset() {

@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
-import com.tewrrss.business.ComunidadesService;
+import com.tewrrss.business.CommunityService;
 import com.tewrrss.dto.Community;
 import com.tewrrss.infrastructure.Factories;
 import com.tewrrss.persistence.CommunityDAO;
@@ -23,15 +23,12 @@ public class BeanCommunities implements Serializable {
 
 	private String nombre;
 	private String descripcion;
-
-	private List<Community> joined;
-	private List<Community> all;
 	
-	private ComunidadesService CS;
+	private CommunityService CS;
 
 	public BeanCommunities() {
 		CS = Factories.services.createCommunityService(); // Creo el servicio de comunidades.
-    loginInfo = new BeanInfo();
+		loginInfo = new BeanInfo();
 	}
 
 	// Función que devuelve todas las comunidades
@@ -53,13 +50,10 @@ public class BeanCommunities implements Serializable {
 
 	// Método para declarar el borrado de comunidades. Se verifica antes que el usuario sea admin
 	public String delete(Community comunidad) {
-		
-		return CS.borrarComunidad(comunidad, loginInfo.getSessionUser());
-		
+		return CS.remove(comunidad);
 	}
 
 	public String create() {
-		
 		FacesContext jsfCtx = FacesContext.getCurrentInstance();
 		ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
 
@@ -83,7 +77,7 @@ public class BeanCommunities implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_create_ok"), null));
 	
 		// Todo ha ido bien, llamo a crear comunidad
-		return CS.crearComunidad(new Community(this.nombre, this.descripcion)); // LLamo a la lista de comunidades
+		return CS.create(new Community(this.nombre, this.descripcion)); // Llamo a la lista de comunidades
 
 		
 	}
