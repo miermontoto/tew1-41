@@ -4,8 +4,6 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
 	version="2.3">
 
-	<!-- Misc -->
-
 	<validator>
 		<validator-id>emailValidator</validator-id>
 		<validator-class>com.tewrrss.util.EmailValidator</validator-class>
@@ -18,7 +16,6 @@
 		</resource-bundle>
 	</application>
 
-	<!-- Reglas de navegación -->
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 
@@ -37,7 +34,6 @@
 			<to-view-id>/restricted/index.xhtml</to-view-id>
 		</navigation-case>
 
-		<!-- Reglas de navegación para la gesti�n de comunidades. -->
 		<navigation-case>
 			<from-outcome>listAllCommunities</from-outcome>
 			<to-view-id>/restricted/communities-list-all.xhtml</to-view-id>
