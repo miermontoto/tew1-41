@@ -8,7 +8,7 @@ import com.tewrrss.dto.User;
 
 public interface UserDAO extends DAO {
 
-	List<User> getUsers();
+	List<User> listAll();
 	Optional<User> findByEmail(String email);
 	boolean remove(User user);
 	boolean add(User user);

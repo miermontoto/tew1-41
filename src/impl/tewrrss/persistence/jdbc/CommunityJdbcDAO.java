@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.User;
@@ -154,6 +155,46 @@ public class CommunityJdbcDAO extends JdbcDAO implements CommunityDAO {
 
 		dirtyJoinedCommunities &= left;
 		return left;
+	}
+
+	@Override
+	public Optional<Community> findByName(String name) {
+		Optional<Community> community = Optional.empty();
+
+		String query = "SELECT * FROM community WHERE name = ?";
+		try {
+			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
+			ps.setString(1, name);
+
+			ResultSet rs = ps.executeQuery();
+			if (rs == null) return community;
+
+			if(rs.next()) {
+				community = Optional.of(new Community(rs.getString("name"), rs.getString("description")));
+			}
+		} catch (SQLException e) {getDatabase().handleException(e);}
+
+		return community;
+	}
+
+	@Override
+	public List<Community> search(String search) {
+		List<Community> communities = new ArrayList<>();
+
+		String query = "SELECT * FROM community WHERE name LIKE ?";
+		try {
+			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
+			ps.setString(1, "%" + search + "%");
+
+			ResultSet rs = ps.executeQuery();
+			if (rs == null) return communities;
+
+			while(rs.next()) {
+				communities.add(new Community(rs.getString("name"), rs.getString("description")));
+			}
+		} catch (SQLException e) {getDatabase().handleException(e);}
+
+		return communities;
 	}
 
 	@Override

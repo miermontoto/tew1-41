@@ -15,7 +15,6 @@ public class BeanInfo implements Serializable {
 
 	public User getSessionUser() {
 		return (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("LOGGEDIN_USER");
-		
 	}
 
 	public String getSessionUsername() {

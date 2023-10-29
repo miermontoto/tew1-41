@@ -2,18 +2,13 @@ package impl.tewrrss.business;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import com.tewrrss.business.CommunityService;
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.User;
 
-import impl.tewrrss.business.communities.AbleToJoin;
-import impl.tewrrss.business.communities.Create;
-import impl.tewrrss.business.communities.Join;
-import impl.tewrrss.business.communities.Leave;
-import impl.tewrrss.business.communities.ListAll;
-import impl.tewrrss.business.communities.ListJoined;
-import impl.tewrrss.business.communities.Remove;
+import impl.tewrrss.business.communities.*;
 
 public class CommunityServiceImpl implements CommunityService {
 
@@ -50,6 +45,16 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public boolean ableToJoin(Community comunidad, User user) {
 		return new AbleToJoin().ableToJoin(comunidad, user);
+	}
+
+	@Override
+	public Optional<Community> findByName(String name) {
+		return new FindByName().findByName(name);
+	}
+
+	@Override
+	public List<Community> search(String search) {
+		return new Search().search(search);
 	}
 
 }

@@ -32,6 +32,10 @@ public class Post implements Serializable {
 	public String getCreationDate() {
 		return creationDate.split("\\.")[0];
 	}
+	
+	public String getRawCreationDate() {
+		return this.creationDate;
+	}
 
 	public void setCreationDate(String string) {
 		this.creationDate = string;

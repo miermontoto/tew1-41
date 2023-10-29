@@ -42,4 +42,9 @@ public class PostsServiceImpl implements PostsService{
 	public List<Post> getPostsByUserInCommunity(User user, Community community) {
 		return new GetPostsByUserInCommunity().getPostsByUserInCommunity(user, community);
 	}
+
+	@Override
+	public boolean ableToRemove(Post post, User user) {
+		return new AbleToRemove().ableToRemove(post, user);
+	}
 }

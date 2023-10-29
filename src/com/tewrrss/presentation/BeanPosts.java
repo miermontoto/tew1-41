@@ -46,7 +46,7 @@ public class BeanPosts {
 
 	public String remove(Post mensaje) {
 		User user = loginInfo.getSessionUser();
-		if (user.getEmail().equals(mensaje.getUserEmail()) || user.getRole() == Role.ADMIN) {
+		if (service.ableToRemove(mensaje, user)) {
 			return service.remove(mensaje);
 		}
 

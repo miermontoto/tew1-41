@@ -2,6 +2,7 @@ package com.tewrrss.presentation;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
@@ -12,7 +13,7 @@ import com.tewrrss.business.CommunityService;
 import com.tewrrss.dto.Community;
 import com.tewrrss.infrastructure.Factories;
 
-@ManagedBean(name = "communities") // ManagedBean para gestiï¿½n de usuarios.
+@ManagedBean(name = "communities")
 public class BeanCommunities implements Serializable {
 	private static final long serialVersionUID = -1325688208166211122L;
 
@@ -24,7 +25,7 @@ public class BeanCommunities implements Serializable {
 	private CommunityService CS;
 
 	public BeanCommunities() {
-		CS = Factories.services.createCommunityService(); // Creo el servicio de comunidades.
+		CS = Factories.services.createCommunityService();
 		loginInfo = new BeanInfo();
 	}
 
@@ -66,7 +67,7 @@ public class BeanCommunities implements Serializable {
 		}
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_create_ok"), null));
-		return CS.create(new Community(this.nombre, this.descripcion)); // Llamo a la lista de comunidades
+		return CS.create(new Community(this.nombre, this.descripcion));
 	}
 
 	public String join(Community community) {
@@ -98,6 +99,14 @@ public class BeanCommunities implements Serializable {
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_list_leave_ok"), null));
 		return CS.leave(community, loginInfo.getSessionUser());
+	}
+
+	public Community findByName(String name) {
+		Optional<Community> community = CS.findByName(name);
+		if (community.isPresent()) {
+			return community.get();
+		}
+		return null;
 	}
 
 	public BeanInfo getLoginInfo() {

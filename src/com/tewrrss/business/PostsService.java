@@ -14,5 +14,6 @@ public interface PostsService {
 	List<Post> getPostsInCommunity(Community community);
 	List<Post> getNewPosts(User user);
 	List<Post> getPostsByUserInCommunity(User user, Community community);
+	boolean ableToRemove(Post post, User user);
 
 }

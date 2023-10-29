@@ -1,6 +1,5 @@
 package impl.tewrrss.business.communities;
 
-
 import java.util.List;
 
 import com.tewrrss.dto.Community;

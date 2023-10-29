@@ -133,7 +133,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
-			ps.setString(1, post.getCreationDate());
+			ps.setString(1, post.getRawCreationDate());
 			ps.setString(2, post.getUserEmail());
 			ps.setString(3, post.getCommunityName());
 
@@ -152,7 +152,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
 			ps.setString(1, post.getContent());
-			ps.setString(2, post.getCreationDate());
+			ps.setString(2, post.getRawCreationDate());
 			ps.setString(3, post.getUserEmail());
 			ps.setString(4, post.getCommunityName());
 
@@ -171,7 +171,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
 			ps.setString(1, post.getContent());
-			ps.setString(2, post.getCreationDate());
+			ps.setString(2, post.getRawCreationDate());
 			ps.setString(3, post.getUserEmail());
 			ps.setString(4, post.getCommunityName());
 
