@@ -5,24 +5,28 @@
 - Manuel Revilla Hernández		UO281932@uniovi.es
 
 ## Funcionalidades
-- [x] Registro de usuario
-  - [x] Registro básico
-  - [x] Conexión con BBDD
-- [x] Iniciar sesión
-  - [x] Login básico
-  - [x] Conexión con BBDD
-  - [x] Persistencia entre vistas
-  - [x] Redirección al login
-- [x] Salir de sesión
-- [x] Borrado de comunidades
+- [x] Sesión
+  - [x] Registro de usuario
+    - [x] Registro básico
+    - [x] Conexión con BBDD
+  - [x] Iniciar sesión
+    - [x] Login básico
+    - [x] Conexión con BBDD
+    - [x] Persistencia entre vistas
+    - [x] Redirección al login
+  - [x] Salir de sesión
+- [ ] Comunidades
+  - [x] Crear una comunidad
+  - [x] Unirse a una comunidad
+  - [x] Borrado de comunidades
+  - [x] Listar comunidades
+  - [ ] Filtrado de comunidades
+- [x] Posts
+  - [x] Ver posts de una comunidad
+  - [x] Ver posts nuevos
+  - [x] Publicar en una comunidad
+  - [x] Borrado de posts
 - [x] Reinicio de la base de datos (admin)
-- [x] Crear una comunidad
-- [x] Unirse a una comunidad
-- [x] Listar comunidades
-- [x] Ver posts de una comunidad
-- [x] Ver posts nuevos
-- [x] Publicar en una comunidad
-- [x] Borrado de posts
 
 
 ## Caracterí­sticas y metas
