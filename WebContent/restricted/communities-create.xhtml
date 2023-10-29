@@ -5,12 +5,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/templates/template-logged.xhtml">
 
-	<ui:define name="titulo">
-		#{msgs.app_title}
-	</ui:define>
-
 	<ui:define name="cuerpo">
-
 		<p:panel header="#{msgs.communities_create}" update="@all">
 		<h:form id="formNuevaComunidad">
 			<p:inputText id="inputNombreComunidad"

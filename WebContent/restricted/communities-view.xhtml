@@ -5,11 +5,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/templates/template-logged.xhtml">
 
-	<ui:define name="titulo">
-		#{msgs.app_title}
-	</ui:define>
-
 	<ui:define name="cuerpo">
+		<br />
 		<p:panel header="#{msgs.posts_create}" update="@all">
 			<h:form>
 			<p:messages id="formMessages"/>
@@ -21,9 +18,11 @@
 				action="#{posts.add()}" update="formMessages tablaMensajes" />
 			</h:form>
 		</p:panel>
+		<br />
 		<hr />
+		<br />
 		<p:panel header="#{msgs.communities_view}" update="@all">
-		<p:dataTable id="tablaMensajes" var="mensaje" value="#{posts.getPostsInCommunity()}" border="4" style="width: 1000px">
+		<p:dataTable id="tablaMensajes" var="mensaje" value="#{posts.getPostsInCommunity()}">
 			<p:column>
 				<f:facet name="header">#{msgs.posts_list_content}</f:facet>
 				#{mensaje.content}

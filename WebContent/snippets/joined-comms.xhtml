@@ -6,7 +6,7 @@
 
     <p:panel header="#{msgs.communities_list_joined}" update="@all">
 	<h:form>
-		<p:dataTable var="item" id="table" border="4" style="width: 60vw" value="#{communities.listJoined()}">
+		<p:dataTable var="item" id="table" value="#{communities.listJoined()}" style="width: 60vw;">
 			<p:column>
 				<f:facet name="header">#{msgs.communities_list_name}</f:facet>
 				<p:commandLink value="#{item.name}" action="viewCommunity" actionListener="#{posts.setCurrentCommunity(item)}" update="@all" />
@@ -22,6 +22,7 @@
 					immediate="true" update="table" />
 			</p:column>
 		</p:dataTable>
+		<br />
 		<p:commandButton value="#{msgs.communities_list_view_all}" action="listAllCommunities" update="@all" />
 	</h:form>
 	</p:panel>
