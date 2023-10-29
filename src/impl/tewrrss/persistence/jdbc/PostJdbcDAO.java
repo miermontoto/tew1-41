@@ -18,7 +18,9 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 	public List<Post> getPostsInCommunity(Community community) {
 		List<Post> posts = new ArrayList<>();
 
-		String query = "SELECT * FROM post WHERE community_name = ?";
+		String query = "SELECT p.*, u.username FROM post as p "
+			+ "INNER JOIN user as u ON p.user_email = u.email "
+			+ "WHERE community_name = ?";
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
@@ -30,9 +32,9 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 			while (rs.next()) {
 				Post post = new Post();
 				post.setContent(rs.getString("content"));
-				post.setCreationDate(rs.getDate("creation_date"));
+				post.setCreationDate(rs.getString("creation_date"));
 				post.setCommunityName(rs.getString("community_name"));
-				post.setUserEmail(rs.getString("user_email"));
+				post.setUserName(rs.getString("username"));
 
 				posts.add(post);
 			}
@@ -57,7 +59,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 			while (rs.next()) {
 				Post post = new Post();
 				post.setContent(rs.getString("content"));
-				post.setCreationDate(rs.getDate("creation_date"));
+				post.setCreationDate(rs.getString("creation_date"));
 				post.setCommunityName(rs.getString("community_name"));
 				post.setUserEmail(rs.getString("user_email"));
 
@@ -85,7 +87,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 			while (rs.next()) {
 				Post post = new Post();
 				post.setContent(rs.getString("content"));
-				post.setCreationDate(rs.getDate("creation_date"));
+				post.setCreationDate(rs.getString("creation_date"));
 				post.setCommunityName(rs.getString("community_name"));
 				post.setUserEmail(rs.getString("user_email"));
 
@@ -112,7 +114,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 			while (rs.next()) {
 				Post post = new Post();
 				post.setContent(rs.getString("content"));
-				post.setCreationDate(rs.getDate("creation_date"));
+				post.setCreationDate(rs.getString("creation_date"));
 				post.setCommunityName(rs.getString("community_name"));
 				post.setUserEmail(rs.getString("user_email"));
 
@@ -131,7 +133,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
-			ps.setDate(1, post.getCreationDate());
+			ps.setString(1, post.getCreationDate());
 			ps.setString(2, post.getUserEmail());
 			ps.setString(3, post.getCommunityName());
 
@@ -150,9 +152,9 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
 			ps.setString(1, post.getContent());
-			ps.setDate(2, post.getCreationDate());
-			ps.setString(3, post.getCommunityName());
-			ps.setString(4, post.getUserEmail());
+			ps.setString(2, post.getCreationDate());
+			ps.setString(3, post.getUserEmail());
+			ps.setString(4, post.getCommunityName());
 
 			added = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}
@@ -169,7 +171,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
 			ps.setString(1, post.getContent());
-			ps.setDate(2, post.getCreationDate());
+			ps.setString(2, post.getCreationDate());
 			ps.setString(3, post.getUserEmail());
 			ps.setString(4, post.getCommunityName());
 
@@ -186,7 +188,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 		String query = "SELECT P.CONTENT, P.CREATION_DATE, U.USERNAME AS USER_NAME, P.COMMUNITY_NAME " +
                 "FROM PUBLIC.POST P " +
                 "JOIN PUBLIC.MEMBER M ON P.COMMUNITY_NAME = M.COMMUNITY_NAME " +
-                "JOIN PUBLIC.USER U ON M.USER_EMAIL = U.EMAIL " +
+                "JOIN PUBLIC.USER U ON P.USER_EMAIL = U.EMAIL " +
                 "WHERE M.USER_EMAIL = ? " +
                 "ORDER BY P.CREATION_DATE DESC " +
                 "LIMIT 5";
@@ -201,7 +203,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 			while (rs.next()) {
 				Post post = new Post();
 				post.setContent(rs.getString("CONTENT"));
-				post.setCreationDate(rs.getDate("CREATION_DATE"));
+				post.setCreationDate(rs.getString("CREATION_DATE"));
 				post.setCommunityName(rs.getString("COMMUNITY_NAME"));
 				post.setUserName(rs.getString("USER_NAME"));
 

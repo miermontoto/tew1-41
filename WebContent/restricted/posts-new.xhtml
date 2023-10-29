@@ -10,28 +10,7 @@
 	</ui:define>
 
 	<ui:define name="cuerpo">
-	<p:panel header="#{msgs.posts_last}" update="@all">
-	<!-- ASEGURARSE DE QUE EN MENSAJE SE TENGAN LOS DATOS DEL MENSAJE Y EL NOMBRE DEL USUARIO CREADOR -->
-		<p:dataTable var="mensaje" value="#{posts.getNewPosts()}" border="4" style="width: 1000px">
-			<p:column>
-				<f:facet name="header">#{msgs.posts_list_community}</f:facet>
-                #{mensaje.communityName}
-			</p:column>
-			<p:column>
-				<f:facet name="header">#{msgs.posts_list_user}</f:facet>
-                #{mensaje.userName}
-			</p:column>
-			<p:column>
-				<f:facet name="header">#{msgs.posts_list_date}</f:facet>
-                #{mensaje.creationDate}
-			</p:column>
-			<p:column>
-				<f:facet name="header">#{msgs.posts_list_content}</f:facet>
-                #{mensaje.content}
-			</p:column>
-
-		</p:dataTable>
-	</p:panel>
+		<ui:include src="/snippets/last.xhtml" />
 	</ui:define>
 
 	<ui:define name="pie">

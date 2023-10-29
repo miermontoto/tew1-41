@@ -7,7 +7,7 @@ public class Post implements Serializable {
 	private static final long serialVersionUID = 99834L;
 
 	private String content;
-	private Date creationDate;
+	private String creationDate;
 	private String userEmail;
 	private String communityName;
 	private String userName;
@@ -16,7 +16,7 @@ public class Post implements Serializable {
 
 	public Post(String content, String creationDate, String userEmail, String communityName) {
 		this.setContent(content);
-		this.setCreationDate(Date.valueOf(creationDate));
+		this.setCreationDate(creationDate);
 		this.setUserEmail(userEmail);
 		this.setCommunityName(communityName);
 	}
@@ -29,12 +29,12 @@ public class Post implements Serializable {
 		this.content = content;
 	}
 
-	public Date getCreationDate() {
-		return creationDate;
+	public String getCreationDate() {
+		return creationDate.split("\\.")[0];
 	}
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+	public void setCreationDate(String string) {
+		this.creationDate = string;
 	}
 
 	public String getUserEmail() {

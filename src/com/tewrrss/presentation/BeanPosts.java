@@ -1,6 +1,6 @@
-package com.tewrrss.presentation;
+		package com.tewrrss.presentation;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -18,7 +18,7 @@ import com.tewrrss.util.Role;
 @ManagedBean(name = "posts")
 @SessionScoped
 public class BeanPosts {
-    private String nuevoPost;
+    private String content;
     private BeanInfo loginInfo;
     private PostsService service;
     private Community currentCommunity;
@@ -36,19 +36,18 @@ public class BeanPosts {
 		return this.currentCommunity;
 	}
 
-	public String getNuevoPost() {
-		return nuevoPost;
+	public String getContent() {
+		return content;
 	}
 
-	public void setNuevoPost(String nuevoPost) {
-		this.nuevoPost = nuevoPost;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public String remove(Post mensaje) {
 		User user = loginInfo.getSessionUser();
 		if (user.getEmail().equals(mensaje.getUserEmail()) || user.getRole() == Role.ADMIN) {
-			service.remove(mensaje);
-			return "success";
+			return service.remove(mensaje);
 		}
 
 		return "unauthorized";
@@ -56,11 +55,10 @@ public class BeanPosts {
 
 	public String add() {
 		User user = loginInfo.getSessionUser();
-		if (!nuevoPost.isEmpty())  {
-	        service.add(new Post(nuevoPost, new Date(0).toString(), user.getEmail(), currentCommunity.getName()));
-	        nuevoPost = "";
-
-	        return "success";
+		if (!content.isEmpty()) {
+			String temp = content;
+			content = "";
+	        return service.add(new Post(temp, LocalDateTime.now().toString().replace('T', ' '), user.getEmail(), currentCommunity.getName()));
         }
 
 		return "error";

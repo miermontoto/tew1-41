@@ -10,6 +10,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import java.util.regex.Pattern;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 
 @FacesValidator("emailValidator")
@@ -17,20 +18,23 @@ public class EmailValidator implements Validator {
 
     private static final Pattern pattern = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
 
-    public EmailValidator() { /* Se necesita un constructor, aunque esté vací­o */ }
+    public EmailValidator() { /* Se necesita un constructor, aunque estÃ© vacÃ­o */ }
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         if (value == null) {
-            return; // Deja la validación para el atributo 'required'
+            return; // Deja la validaciï¿½n para el atributo 'required'
         }
 
         String email = value.toString();
         Matcher matcher = pattern.matcher(email);
 
-        // Si el email no esta bien formado, devolvemos una excepción de validación, lo que causa un mensaje en el Front
+        // Si el email no esta bien formado, devolvemos una excepciÃ³n de validaciÃ³n, lo que causa un mensaje en el Front
         if (!matcher.matches()) {
-            FacesMessage message = new FacesMessage("invalid_email_error");
+            FacesContext jsfCtx = FacesContext.getCurrentInstance();
+		    ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
+
+            FacesMessage message = new FacesMessage(bundle.getString("session_register_invalid_email"));
             throw new ValidatorException(message);
         }
     }

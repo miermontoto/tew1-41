@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+    <p:panel header="#{msgs.posts_last}" update="@all">
+		<p:dataTable var="mensaje" value="#{posts.getNewPosts()}" border="4" style="width: 1000px">
+			<p:column>
+				<f:facet name="header">#{msgs.posts_list_community}</f:facet>
+				#{mensaje.communityName}
+			</p:column>
+			<p:column>
+				<f:facet name="header">#{msgs.posts_list_user}</f:facet>
+				#{mensaje.userName}
+			</p:column>
+			<p:column>
+				<f:facet name="header">#{msgs.posts_list_date}</f:facet>
+				#{mensaje.creationDate}
+			</p:column>
+			<p:column>
+				<f:facet name="header">#{msgs.posts_list_content}</f:facet>
+				#{mensaje.content}
+			</p:column>
+
+		</p:dataTable>
+	</p:panel>
+
+</ui:composition>
