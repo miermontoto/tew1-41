@@ -15,12 +15,12 @@
     - [x] Persistencia entre vistas
     - [x] Redirección al login
   - [x] Salir de sesión
-- [ ] Comunidades
+- [x] Comunidades
   - [x] Crear una comunidad
   - [x] Unirse a una comunidad
   - [x] Borrado de comunidades
   - [x] Listar comunidades
-  - [ ] Filtrado de comunidades
+  - [x] Filtrado de comunidades
 - [x] Posts
   - [x] Ver posts de una comunidad
   - [x] Ver posts nuevos
