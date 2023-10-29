@@ -21,8 +21,7 @@
 			</p:submenu>
 
 			<p:submenu name="admin" label="#{msgs.menu_admin}" icon="ui-icon-key" rendered="#{info.sessionRole eq 0}">
-				<p:menuitem value="#{msgs.menu_admin_resetdb}" actionListener="#{info.resetDatabase}" update="@all"
-					onclick="return confirm('#{msgs.alert_db_reset}');"/>
+				<p:menuitem value="#{msgs.menu_admin_resetdb}" actionListener="#{info.resetDatabase}" update="@all" />
 			</p:submenu>
 
 			<p:submenu label="#{info.sessionUsername}" icon="ui-icon-person" style="float:right">

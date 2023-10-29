@@ -1,7 +1,10 @@
 package impl.tewrrss.business;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.tewrrss.business.DatabaseService;
 import com.tewrrss.dto.*;
@@ -10,6 +13,8 @@ import com.tewrrss.persistence.*;
 import com.tewrrss.util.Role;
 
 public class DatabaseServiceImpl implements DatabaseService {
+
+	private Random random = new Random();
 
 	@Override
 	public boolean reset() {
@@ -25,7 +30,8 @@ public class DatabaseServiceImpl implements DatabaseService {
 		// Fill with sample values
 		List<Community> sampleCommunities = new ArrayList<>();
 		List<User> sampleUsers = new ArrayList<>();
-		List<Object[]> sampleMemberships = new ArrayList<>();
+		List<Member> sampleMemberships = new ArrayList<>();
+		List<Post> samplePosts = new ArrayList<>();
 
 		sampleCommunities.add(new Community("tew.music", "the music community."));
 		sampleCommunities.add(new Community("tew.food", "the food community."));
@@ -35,25 +41,42 @@ public class DatabaseServiceImpl implements DatabaseService {
 		sampleCommunities.add(new Community("tew.linux", "the linux community."));
 
 		sampleUsers.add(new User("admin@email.com", "admin", "admin", Role.ADMIN));
-		for(int i = 1; i <= 10; i++) {
-			sampleUsers.add(new User(String.format("user%d@email.com", i),
+		sampleCommunities.forEach(c -> sampleMemberships.add(new Member(c, sampleUsers.get(0)))); // add admin to all communities
+		for (int i = 1; i <= 10; i++) {
+			sampleUsers.add(new User(String.format("user%d@email.com", i), // add sample users
 				String.format("user%d", i), String.format("user%d", i)));
 		}
 
-		// Generate random memberships
-		for (User u : sampleUsers) {
-			for (Community c : sampleCommunities) {
-				if (Math.random() < 0.33) {
-					sampleMemberships.add(new Object[] {c, u});
-				}
-			}
-		}
+		// generate random memberships
+		sampleUsers.stream().filter(u -> u.getRole() != Role.ADMIN).forEach(u -> 
+			sampleCommunities.stream()
+				.filter(c -> Math.random() < 0.33)
+				.forEach(c -> sampleMemberships.add(new Member(c, u)))
+		);
+
 
 		sampleCommunities.forEach(communityDAO::add);
 		sampleUsers.forEach(userDAO::add);
-		for(Object[] p : sampleMemberships) {
-			communityDAO.join((Community) p[0], (User) p[1]);
+		for(Member m : sampleMemberships) {
+			communityDAO.join(m.getCommunity(), m.getUser());
+
+			if(m.getUser().getRole() == Role.ADMIN) continue; // don't generate posts for admin
+
+			String date = LocalDateTime.now().minusDays(random.nextInt(365))
+				.minusHours(random.nextInt(24))
+				.minusMinutes(random.nextInt(60))
+				.minusSeconds(random.nextInt(60))
+				.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+			String content = random.ints(97, 123)
+				.limit(random.nextInt(100))
+				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+				.toString();
+
+			samplePosts.add(new Post(content, date, m.getUser().getEmail(), m.getCommunity().getName())); // build random posts
 		}
+
+		samplePosts.forEach(postDAO::add);
 
 		return true;
 	}

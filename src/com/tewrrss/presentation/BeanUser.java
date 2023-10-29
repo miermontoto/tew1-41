@@ -60,4 +60,9 @@ public class BeanUser implements Serializable {
 
 		return null;
 	}
+
+	public boolean displayActions() {
+		User loggedUser = new BeanInfo().getSessionUser();
+		return loggedUser.getRole() == Role.ADMIN || user.getEmail().equals(loggedUser.getEmail());
+	}
 }

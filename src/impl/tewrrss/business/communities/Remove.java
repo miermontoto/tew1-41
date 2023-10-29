@@ -9,7 +9,7 @@ import impl.tewrrss.persistence.jdbc.CommunityJdbcDAO;
 
 public class Remove {
 
-	public String borrarComunidad(Community community) {
+	public String remove(Community community) {
 		return Factories.persistence.getCommunityDAO().remove(community) ? "success" : "error";
 	}
 }

@@ -1,6 +1,9 @@
 package com.tewrrss.presentation;
 
 import java.io.Serializable;
+import java.util.ResourceBundle;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 
@@ -30,6 +33,15 @@ public class BeanInfo implements Serializable {
 	}
 
 	public String resetDatabase() {
-		return Factories.services.createDatabaseService().reset() ? "index" : "";
+		boolean status = Factories.services.createDatabaseService().reset();
+		if (!status) {
+			FacesContext context = FacesContext.getCurrentInstance();
+			ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
+			context.addMessage("messages", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+				bundle.getString("error_reset_db"), null));
+			return "error";
+		}
+
+		return "success";
 	}
 }

@@ -4,24 +4,25 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-	<p:panel header="#{msgs.user_posts_list}" update="@all">
-		<p:dataTable var="post" value="#{user.listPosts()}" border="4" id="table">
+	<p:panel header="#{msgs.posts_list}" update="@all">
+		<p:dataTable var="mensaje" value="#{posts.getPostsByUser()}" border="4">
 			<p:column>
 				<f:facet name="header">#{msgs.posts_list_community}</f:facet>
-				<p:commandLink value="#{post.communityName}" action="viewCommunity" actionListener="#{posts.setCurrentCommunity(communities.findByName(post.communityName))}" update="@all" />
+				<p:commandLink value="#{mensaje.communityName}" action="viewCommunity" actionListener="#{posts.setCurrentCommunity(communities.findByName(mensaje.communityName))}" update="@all" />
 			</p:column>
 			<p:column>
 				<f:facet name="header">#{msgs.posts_list_date}</f:facet>
-				#{post.creationDate}
+				#{mensaje.creationDate}
 			</p:column>
 			<p:column>
 				<f:facet name="header">#{msgs.posts_list_content}</f:facet>
-				#{post.content}
+				#{mensaje.content}
 			</p:column>
-			<p:column rendered="#{user.displayActions()}">
+			<p:column>
 				<f:facet name="header">#{msgs.posts_list_actions}</f:facet>
-				<p:commandLink value="#{msgs.posts_list_delete}" action="#{posts.remove(post)}" update="@all" />
+				<p:commandLink value="#{msgs.posts_list_delete}" action="#{posts.remove(mensaje)}" update="@all" />
 			</p:column>
+
 		</p:dataTable>
 	</p:panel>
 

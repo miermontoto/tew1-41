@@ -68,6 +68,12 @@
 			<from-outcome>viewUser</from-outcome>
 			<to-view-id>/restricted/user-profile.xhtml</to-view-id>
 		</navigation-case>
+
+		<navigation-case>
+			<from-action>#{info.resetDatabase}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/restricted/index.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 
 	<navigation-rule>

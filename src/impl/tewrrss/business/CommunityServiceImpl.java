@@ -14,12 +14,12 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public String create(Community comunidad) {
-		return new Create().crearComunidad(comunidad);
+		return new Create().create(comunidad);
 	}
 
 	@Override
 	public String remove(Community comunidad) {
-		return new Remove().borrarComunidad(comunidad);
+		return new Remove().remove(comunidad);
 	}
 
 	@Override

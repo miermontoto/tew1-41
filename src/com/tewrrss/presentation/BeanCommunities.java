@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -21,16 +22,46 @@ public class BeanCommunities implements Serializable {
 
 	private String nombre;
 	private String descripcion;
-
 	private CommunityService CS;
+
+	private List<Community> listado;
+	private String input;
 
 	public BeanCommunities() {
 		CS = Factories.services.createCommunityService();
 		loginInfo = new BeanInfo();
+		listAll();
+	}
+
+	public void search() {
+		if (input == null || input.trim().isEmpty()) {
+			listAll();
+			return;
+		}
+
+		this.listado = this.listado.stream().filter(c -> c.getName().contains(input)).collect(Collectors.toList());
+	}
+
+	public String getInput() {
+		return this.input;
+	}
+
+	public void setInput(String inputSearch) {
+		this.input = inputSearch;
+	}
+
+	public List<Community> getListado() {
+		return listado;
+	}
+
+	public void setListado(List<Community> listado) {
+		this.listado = listado;
 	}
 
 	public List<Community> listAll() {
-		return CS.listAll();
+		List<Community> list = CS.listAll();
+		this.listado = list;
+		return list;
 	}
 
 	public List<Community> listJoined() {
@@ -42,7 +73,9 @@ public class BeanCommunities implements Serializable {
 	}
 
 	public String delete(Community comunidad) {
-		return CS.remove(comunidad);
+		String temp = CS.remove(comunidad);
+		listAll();
+		return temp;
 	}
 
 	public String create() {
@@ -67,7 +100,10 @@ public class BeanCommunities implements Serializable {
 		}
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_create_ok"), null));
-		return CS.create(new Community(this.nombre, this.descripcion));
+		String result = CS.create(new Community(this.nombre, this.descripcion));
+		if (!result.equals("success")) return result;
+		listAll();
+		return CS.join(findByName(this.nombre), loginInfo.getSessionUser());
 	}
 
 	public String join(Community community) {
@@ -85,6 +121,7 @@ public class BeanCommunities implements Serializable {
 		}
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_list_join_ok"), null));
+		listAll();
 		return CS.join(community, loginInfo.getSessionUser());
 	}
 
@@ -98,6 +135,7 @@ public class BeanCommunities implements Serializable {
 		}
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_list_leave_ok"), null));
+		listAll();
 		return CS.leave(community, loginInfo.getSessionUser());
 	}
 
