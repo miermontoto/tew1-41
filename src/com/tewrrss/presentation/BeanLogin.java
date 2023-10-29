@@ -50,14 +50,12 @@ public class BeanLogin implements Serializable {
 			return "success";
 		}
 
-		// Si el usuario no se encuentra, se prepara el mensaje que saldrá en la vista.
 		FacesMessage msgs = new FacesMessage(FacesMessage.SEVERITY_WARN, bundle.getString("error_login_unknown"), null);
 		jsfCtx.addMessage(null, msgs);
 
 		return "login";
 	}
 
-	// Método para manejar la desconexión de usuarios.
 	public String logout() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "login";

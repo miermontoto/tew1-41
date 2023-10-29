@@ -8,42 +8,38 @@ import com.tewrrss.business.UserService;
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.User;
 
+import impl.tewrrss.business.users.*;
+
 public class UserServiceImpl implements UserService {
 
 	@Override
-	public List<User> getUsers() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> listAll() {
+		return new ListAll().listAll();
 	}
 
 	@Override
 	public Optional<User> findByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		return new FindByEmail().findByEmail(email);
 	}
 
 	@Override
-	public String remove(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public String remove(User user) {
+		return new Remove().remove(user);
 	}
 
 	@Override
 	public String add(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Add().add(user);
 	}
 
 	@Override
 	public String update(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Update().update(user);
 	}
 
 	@Override
 	public List<User> getUsersInCommunity(Community community) {
-		// TODO Auto-generated method stub
-		return null;
+		return new GetUsersInCommunity().getUsersInCommunity(community);
 	}
 
 }

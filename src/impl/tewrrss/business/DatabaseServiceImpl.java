@@ -21,8 +21,7 @@ public class DatabaseServiceImpl implements DatabaseService {
 		postDAO.dropAll();
 		communityDAO.dropAll();
 		userDAO.dropAll();
-		
-		
+
 		// Fill with sample values
 		List<Community> sampleCommunities = new ArrayList<>();
 		List<User> sampleUsers = new ArrayList<>();

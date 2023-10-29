@@ -2,20 +2,18 @@ package com.tewrrss.presentation;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 import com.tewrrss.business.CommunityService;
 import com.tewrrss.dto.Community;
 import com.tewrrss.infrastructure.Factories;
-import com.tewrrss.persistence.CommunityDAO;
-import com.tewrrss.util.Role;
 
-@ManagedBean(name = "communities") // ManagedBean para gestiï¿½n de usuarios.
+@ManagedBean(name = "communities")
 public class BeanCommunities implements Serializable {
 	private static final long serialVersionUID = -1325688208166211122L;
 
@@ -23,32 +21,26 @@ public class BeanCommunities implements Serializable {
 
 	private String nombre;
 	private String descripcion;
-	
+
 	private CommunityService CS;
 
 	public BeanCommunities() {
-		CS = Factories.services.createCommunityService(); // Creo el servicio de comunidades.
+		CS = Factories.services.createCommunityService();
 		loginInfo = new BeanInfo();
 	}
 
-	// Función que devuelve todas las comunidades
-	
 	public List<Community> listAll() {
-		return CS.listAll(); // Listo todas las comunidades
+		return CS.listAll();
 	}
 
-	// Función que devuelve las comunidades a las que pertenece el usuario
 	public List<Community> listJoined() {
 		return CS.listJoined(loginInfo.getSessionUser());
-		
 	}
 
 	public boolean ableToJoin(Community comunidad) {
-		//return this.joined.stream().noneMatch(c -> c.getName().equals(comunidad.getName()));
 		return CS.ableToJoin(comunidad, loginInfo.getSessionUser());
 	}
 
-	// Método para declarar el borrado de comunidades. Se verifica antes que el usuario sea admin
 	public String delete(Community comunidad) {
 		return CS.remove(comunidad);
 	}
@@ -59,12 +51,12 @@ public class BeanCommunities implements Serializable {
 
 		if (nombre == null || nombre.trim().isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_create_error_emptyName"), null));
-			return null; // Nombre vacío, no continúo
+			return null;
 		}
 
 		if (descripcion == null || descripcion.trim().isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_create_error_emptyDesc"), null));
-			return null; // Descripción vacía, no continúo
+			return null;
 		}
 
 		for(Community cm : CS.listAll()) {
@@ -75,11 +67,7 @@ public class BeanCommunities implements Serializable {
 		}
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_create_ok"), null));
-	
-		// Todo ha ido bien, llamo a crear comunidad
-		return CS.create(new Community(this.nombre, this.descripcion)); // Llamo a la lista de comunidades
-
-		
+		return CS.create(new Community(this.nombre, this.descripcion));
 	}
 
 	public String join(Community community) {
@@ -88,19 +76,16 @@ public class BeanCommunities implements Serializable {
 
 		if (community == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_list_join_error"), null));
-			return null; // Nombre vacío, no continúo
+			return null;
 		}
 
 		if (!ableToJoin(community)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_list_join_error"), null));
-			return null; // Nombre vacío, no continúo
+			return null;
 		}
-		
+
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_list_join_ok"), null));
-		
-		// Llamo a unirme a la comunidad.
 		return CS.join(community, loginInfo.getSessionUser());
-		
 	}
 
 	public String leave(Community community) {
@@ -109,14 +94,19 @@ public class BeanCommunities implements Serializable {
 
 		if (community == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_list_leave_error"), null));
-			return null; // Nombre vacío, no continúo
+			return null;
 		}
 
-
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_list_leave_ok"), null));
-		
-		// Todo ha ido bien, procedo a llamar a leave de negocio.
 		return CS.leave(community, loginInfo.getSessionUser());
+	}
+
+	public Community findByName(String name) {
+		Optional<Community> community = CS.findByName(name);
+		if (community.isPresent()) {
+			return community.get();
+		}
+		return null;
 	}
 
 	public BeanInfo getLoginInfo() {
@@ -142,6 +132,4 @@ public class BeanCommunities implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-	
 }

@@ -17,7 +17,7 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 	private static List<User> allUsers = null;
 	private static boolean dirtyAllUsers = true;
 
-	public List<User> getUsers() {
+	public List<User> listAll() {
 		if (allUsers != null && !dirtyAllUsers) {
 			return allUsers;
 		}
@@ -108,12 +108,12 @@ public class UserJdbcDAO extends JdbcDAO implements UserDAO {
 	}
 
 	@Override
-	public boolean remove(String email) {
+	public boolean remove(User user) {
 		boolean removed = false;
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement("DELETE FROM user WHERE email = ?");
-			ps.setString(1, email);
+			ps.setString(1, user.getEmail());
 
 			removed = ps.executeUpdate() == 1;
 		} catch (SQLException e) {getDatabase().handleException(e);}

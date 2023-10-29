@@ -2,29 +2,24 @@ package impl.tewrrss.business;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import com.tewrrss.business.CommunityService;
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.User;
 
-import impl.tewrrss.business.methods.AbleToJoin;
-import impl.tewrrss.business.methods.RemoveCommunities;
-import impl.tewrrss.business.methods.CrearComunidades;
-import impl.tewrrss.business.methods.JoinCommunity;
-import impl.tewrrss.business.methods.LeaveCommunity;
-import impl.tewrrss.business.methods.ListAll;
-import impl.tewrrss.business.methods.ListJoined;
+import impl.tewrrss.business.communities.*;
 
 public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public String create(Community comunidad) {
-		return new CrearComunidades().crearComunidad(comunidad);
+		return new Create().crearComunidad(comunidad);
 	}
 
 	@Override
 	public String remove(Community comunidad) {
-		return new RemoveCommunities().borrarComunidad(comunidad);
+		return new Remove().borrarComunidad(comunidad);
 	}
 
 	@Override
@@ -39,17 +34,27 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public String join(Community community, User user) {
-		return new JoinCommunity().join(community, user);
+		return new Join().join(community, user);
 	}
 
 	@Override
 	public String leave(Community community, User user) {
-		return new LeaveCommunity().leave(community, user);
+		return new Leave().leave(community, user);
 	}
 
 	@Override
 	public boolean ableToJoin(Community comunidad, User user) {
 		return new AbleToJoin().ableToJoin(comunidad, user);
+	}
+
+	@Override
+	public Optional<Community> findByName(String name) {
+		return new FindByName().findByName(name);
+	}
+
+	@Override
+	public List<Community> search(String search) {
+		return new Search().search(search);
 	}
 
 }

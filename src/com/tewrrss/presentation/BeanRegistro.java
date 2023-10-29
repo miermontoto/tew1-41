@@ -17,7 +17,6 @@ import com.tewrrss.util.Role;
 public class BeanRegistro implements Serializable {
 	private static final long serialVersionUID = 6076632229413784370L;
 
-	// Datos del cliente.
 	private String nombre;
 	private String email;
 	private String contrasena;
@@ -65,27 +64,27 @@ public class BeanRegistro implements Serializable {
 	}
 
 	/**
-	 * Lógica para el registro de usuarios.
-	 * Verifica que el correo no esté repetido, realiza el registro, etc.
+	 * LÃ³gica para el registro de usuarios.
+	 * Verifica que el correo no estÃ© repetido, realiza el registro, etc.
 	 */
 	public String registrarUsuario() {
 		LoginService service;
 
 		if (!rgpd) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe aceptar la polÃ­tica de privacidad", "Debe aceptar la polÃ­tica de privacidad."));
-			return ""; // Permanece en la página de registro
+			return "";
 		}
 
 		if (!contrasena.equals(confirmarContrasena)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden", "Las contraseñas no coinciden."));
-			return ""; // Permanece en la página de registro
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseï¿½as no coinciden", "Las contraseï¿½as no coinciden."));
+			return "";
 		}
 
 		service = Factories.services.createLoginService();
 
 		if (service.emailExists(email)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo electrónico ya está en uso", "El correo electrónico ya está en uso."));
-			return ""; // Permanece en la página de registro
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo electrï¿½nico ya estï¿½ en uso", "El correo electrï¿½nico ya estï¿½ en uso."));
+			return "";
 		}
 
 		User newUser = new User(email, nombre, contrasena);
