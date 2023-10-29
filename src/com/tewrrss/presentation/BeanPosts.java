@@ -7,7 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import com.tewrrss.business.PostsService;
+import com.tewrrss.business.PostService;
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.Post;
 import com.tewrrss.dto.User;
@@ -20,11 +20,11 @@ import com.tewrrss.util.Role;
 public class BeanPosts {
     private String content;
     private BeanInfo loginInfo;
-    private PostsService service;
+    private PostService service;
     private Community currentCommunity;
 
 	public BeanPosts() {
-		service = Factories.services.createPostsService();
+		service = Factories.services.createPostService();
 		loginInfo = new BeanInfo();
 	}
 

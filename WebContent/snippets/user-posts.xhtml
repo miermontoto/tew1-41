@@ -5,7 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 	<p:panel header="#{msgs.posts_list}" update="@all">
-		<p:dataTable var="mensaje" value="#{posts.getPostsByUser()}" border="4" style="width: 1000px">
+		<p:dataTable var="mensaje" value="#{posts.getPostsByUser()}" border="4">
 			<p:column>
 				<f:facet name="header">#{msgs.posts_list_community}</f:facet>
 				<p:commandLink value="#{mensaje.communityName}" action="viewCommunity" actionListener="#{posts.setCurrentCommunity(communities.findByName(mensaje.communityName))}" update="@all" />

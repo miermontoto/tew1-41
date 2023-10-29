@@ -6,20 +6,17 @@
 
     <p:panel header="#{msgs.communities_list_joined}" update="@all">
 	<h:form>
-		<p:dataTable
-			var="item" id="table" border="4" style="width: 500px" value="#{communities.listJoined()}">
+		<p:dataTable var="item" id="table" border="4" style="width: 60vw" value="#{communities.listJoined()}">
 			<p:column>
-				<f:facet name="header">#{msgs.communities_list_name}</f:facet>#{item.name}
+				<f:facet name="header">#{msgs.communities_list_name}</f:facet>
+				<p:commandLink value="#{item.name}" action="viewCommunity" actionListener="#{posts.setCurrentCommunity(item)}" update="@all" />
 			</p:column>
 			<p:column>
-				<f:facet name="header">#{msgs.communities_list_desc}</f:facet>#{item.description}
+				<f:facet name="header">#{msgs.communities_list_desc}</f:facet>
+				#{item.description}
 			</p:column>
 			<p:column>
 				<f:facet name="header">#{msgs.communities_list_actions}</f:facet>
-				<p:commandLink value="#{msgs.communities_list_proceed}"
-					type="submit" action="viewCommunity" actionListener="#{posts.setCurrentCommunity(item)}"
-					immediate="true" update="table" />
-				<br />
 				<p:commandLink value="#{msgs.communities_list_leave}"
 					action="#{communities.leave(item)}" type="submit"
 					immediate="true" update="table" />

@@ -8,12 +8,7 @@ import com.tewrrss.business.UserService;
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.User;
 
-import impl.tewrrss.business.users.Add;
-import impl.tewrrss.business.users.FindByEmail;
-import impl.tewrrss.business.users.GetUsersInCommunity;
-import impl.tewrrss.business.users.ListAll;
-import impl.tewrrss.business.users.Remove;
-import impl.tewrrss.business.users.Update;
+import impl.tewrrss.business.users.*;
 
 public class UserServiceImpl implements UserService {
 

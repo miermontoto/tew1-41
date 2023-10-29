@@ -2,9 +2,11 @@ package com.tewrrss.presentation;
 
 import java.io.Serializable;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -17,26 +19,6 @@ public class BeanSettings implements Serializable {
 	private static final Locale SPANISH = new Locale("es");
 	private Locale locale = new Locale("es");
 
-	@ManagedProperty(value="#{berror}")
-	private BeanError error;
-
-	public void setError(BeanError error) {
-		this.error = error;
-	}
-
-	public BeanError getError(){
-		return this.error;
-	}
-
-	@PostConstruct
-	public void init() {
-		error = (BeanError) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("error");
-		if (error == null) {
-			error = new BeanError();
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("error", error);
-		}
-	}
-
 	public Locale getLocale() {
 		return(locale);
 	}
@@ -46,10 +28,10 @@ public class BeanSettings implements Serializable {
 		try {
 			FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
 		} catch (Exception ex) {
-			getError().setView("");
-			getError().setMethod("setSpanish");
-			getError().setClase(this.getClass().getName());
-			getError().setMessage(ex.getMessage());
+			FacesContext jsfCtx = FacesContext.getCurrentInstance();
+			ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
+			FacesMessage msgs = new FacesMessage(FacesMessage.SEVERITY_WARN, bundle.getString("error_locale"), null);
+			jsfCtx.addMessage("messages", msgs);
 		}
 	}
 
@@ -58,10 +40,10 @@ public class BeanSettings implements Serializable {
 		try {
 			FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
 		} catch (Exception ex){
-			getError().setView("");
-			getError().setMethod("setEnglish");
-			getError().setClase(this.getClass().getName());
-			getError().setMessage(ex.getMessage());
+			FacesContext jsfCtx = FacesContext.getCurrentInstance();
+			ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
+			FacesMessage msgs = new FacesMessage(FacesMessage.SEVERITY_WARN, bundle.getString("error_locale"), null);
+			jsfCtx.addMessage("messages", msgs);
 		}
 	}
 }

@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-logged.xhtml">
+
+	<ui:define name="titulo">
+		#{msgs.app_title}
+	</ui:define>
+
+	<ui:define name="cuerpo">
+
+		<p:panel header="#{msgs.user}" update="@all">
+			<h:form>
+				<p:messages id="messages" autoUpdate="true" closable="true" />
+				<p:panelGrid columns="2">
+					<p:outputLabel value="#{msgs.user_name}" for="name" />
+					<h:outputText id="name" value="#{user.name}" />
+					<p:outputLabel value="#{msgs.user_email}" for="email" />
+					<h:outputText id="email" value="#{user.email}" />
+					<p:outputLabel value="#{msgs.user_role}" for="role" />
+					<h:outputText id="role" value="#{user.role}" />
+					<p:outputLabel value="#{msgs.user_communities}" for="communities" />
+					<h:outputText id="communities" value="#{user.communities}" />
+					<p:outputLabel value="#{msgs.user_posts}" for="posts" />
+					<h:outputText id="posts" value="#{user.numberOfPosts}" />
+				</p:panelGrid>
+
+				<hr />
+
+				<p:panel header="#{msgs.user_posts_list}" update="@all">
+					<p:dataTable var="post" value="#{user.listPosts()}" border="4" id="table">
+						<p:column>
+							<f:facet name="header">#{msgs.posts_list_community}</f:facet>
+							<p:commandLink value="#{post.communityName}" action="viewCommunity" actionListener="#{posts.setCurrentCommunity(communities.findByName(post.communityName))}" update="@all" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">#{msgs.posts_list_date}</f:facet>
+							#{post.creationDate}
+						</p:column>
+						<p:column>
+							<f:facet name="header">#{msgs.posts_list_content}</f:facet>
+							#{post.content}
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+		</p:panel>
+	</ui:define>
+
+	<ui:define name="pie">
+		<ui:include src="/snippets/footer.xhtml" />
+	</ui:define>
+
+</ui:composition>

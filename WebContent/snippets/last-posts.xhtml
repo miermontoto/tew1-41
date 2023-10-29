@@ -5,14 +5,14 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
     <p:panel header="#{msgs.posts_last}" update="@all">
-		<p:dataTable var="mensaje" value="#{posts.getNewPosts()}" border="4" style="width: 1000px">
+		<p:dataTable var="mensaje" value="#{posts.getNewPosts()}" border="4">
 			<p:column>
 				<f:facet name="header">#{msgs.posts_list_community}</f:facet>
-				#{mensaje.communityName}
+				<p:commandLink value="#{mensaje.communityName}" action="viewCommunity" actionListener="#{posts.setCurrentCommunity(communities.findByName(mensaje.communityName))}" update="@all" />
 			</p:column>
 			<p:column>
 				<f:facet name="header">#{msgs.posts_list_user}</f:facet>
-				#{mensaje.userName}
+				<p:commandLink value="#{mensaje.userName}" action="viewUser" actionListener="#{user.setUser(user.findByEmail(mensaje.userEmail))}" update="@all" />
 			</p:column>
 			<p:column>
 				<f:facet name="header">#{msgs.posts_list_date}</f:facet>

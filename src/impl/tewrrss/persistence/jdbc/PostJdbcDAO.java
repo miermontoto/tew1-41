@@ -18,9 +18,10 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 	public List<Post> getPostsInCommunity(Community community) {
 		List<Post> posts = new ArrayList<>();
 
-		String query = "SELECT p.*, u.username FROM post as p "
+		String query = "SELECT p.*, u.username, u.email FROM post as p "
 			+ "INNER JOIN user as u ON p.user_email = u.email "
-			+ "WHERE community_name = ?";
+			+ "WHERE community_name = ? "
+			+ "ORDER BY creation_date DESC";
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
@@ -35,6 +36,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 				post.setCreationDate(rs.getString("creation_date"));
 				post.setCommunityName(rs.getString("community_name"));
 				post.setUserName(rs.getString("username"));
+				post.setUserEmail(rs.getString("email"));
 
 				posts.add(post);
 			}
@@ -47,7 +49,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 	public List<Post> getPostsByUser(User user) {
 		List<Post> posts = new ArrayList<>();
 
-		String query = "SELECT * FROM post WHERE user_email = ?";
+		String query = "SELECT * FROM post WHERE user_email = ? LIMIT 10";
 
 		try {
 			PreparedStatement ps = getDatabase().getConnection().prepareStatement(query);
@@ -185,7 +187,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 	public List<Post> getPostsInCommunitiesOfUser(User user) {
 		List<Post> posts = new ArrayList<>();
 
-		String query = "SELECT P.CONTENT, P.CREATION_DATE, U.USERNAME AS USER_NAME, P.COMMUNITY_NAME " +
+		String query = "SELECT P.*, U.USERNAME AS USER_NAME " +
                 "FROM PUBLIC.POST P " +
                 "JOIN PUBLIC.MEMBER M ON P.COMMUNITY_NAME = M.COMMUNITY_NAME " +
                 "JOIN PUBLIC.USER U ON P.USER_EMAIL = U.EMAIL " +
@@ -206,6 +208,7 @@ public class PostJdbcDAO extends JdbcDAO implements PostDAO {
 				post.setCreationDate(rs.getString("CREATION_DATE"));
 				post.setCommunityName(rs.getString("COMMUNITY_NAME"));
 				post.setUserName(rs.getString("USER_NAME"));
+				post.setUserEmail(rs.getString("USER_EMAIL"));
 
 				posts.add(post);
 			}

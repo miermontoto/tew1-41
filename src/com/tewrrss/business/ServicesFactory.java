@@ -6,6 +6,6 @@ public interface ServicesFactory {
 	DatabaseService createDatabaseService();
 	CommunityService createCommunityService();
 	UserService createUserService();
-	PostsService createPostsService();
+	PostService createPostService();
 
 }

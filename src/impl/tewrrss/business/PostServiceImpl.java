@@ -2,14 +2,14 @@ package impl.tewrrss.business;
 
 import java.util.List;
 
-import com.tewrrss.business.PostsService;
+import com.tewrrss.business.PostService;
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.Post;
 import com.tewrrss.dto.User;
 
 import impl.tewrrss.business.posts.*;
 
-public class PostsServiceImpl implements PostsService{
+public class PostServiceImpl implements PostService {
 
 	@Override
 	public String add(Post post) {

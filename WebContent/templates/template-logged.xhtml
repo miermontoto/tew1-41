@@ -28,7 +28,9 @@
 			<p:submenu label="#{info.sessionUsername}" icon="ui-icon-person" style="float:right">
 				<p:menuitem value="#{info.sessionRoleName}" style="cursor:default" />
 				<p:separator />
-				<p:menuitem value="#{msgs.session_logout}" action="#{login.logout}" />
+				<p:menuitem value="#{msgs.session_profile}" action="viewUser" actionListener="#{user.setUser(info.sessionUser)}"
+					update="@all" icon="ui-icon-contact" />
+				<p:menuitem value="#{msgs.session_logout}" action="#{login.logout}" icon="ui-icon-power"/>
 			</p:submenu>
 
 			<p:submenu name="lang" style="float:right" label="#{msgs.selected_lang}">

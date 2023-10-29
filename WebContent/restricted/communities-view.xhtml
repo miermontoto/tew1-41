@@ -21,6 +21,7 @@
 				action="#{posts.add()}" update="formMessages tablaMensajes" />
 			</h:form>
 		</p:panel>
+		<hr />
 		<p:panel header="#{msgs.communities_view}" update="@all">
 		<p:dataTable id="tablaMensajes" var="mensaje" value="#{posts.getPostsInCommunity()}" border="4" style="width: 1000px">
 			<p:column>
@@ -29,7 +30,7 @@
 			</p:column>
 			<p:column>
 				<f:facet name="header">#{msgs.posts_list_user}</f:facet>
-	    		#{mensaje.userName}
+	    		<p:commandLink value="#{mensaje.userName}" action="viewUser" actionListener="#{user.setUser(user.findByEmail(mensaje.userEmail))}" update="@all" />
 			</p:column>
 			<p:column>
 				<f:facet name="header">#{msgs.posts_list_date}</f:facet>
@@ -40,6 +41,7 @@
 	</ui:define>
 
 	<ui:define name="pie">
+		<ui:include src="/snippets/footer.xhtml" />
 	</ui:define>
 
 </ui:composition>

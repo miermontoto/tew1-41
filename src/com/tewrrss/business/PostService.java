@@ -6,7 +6,7 @@ import com.tewrrss.dto.Community;
 import com.tewrrss.dto.Post;
 import com.tewrrss.dto.User;
 
-public interface PostsService {
+public interface PostService {
 
 	String add(Post post);
 	String remove(Post post);
