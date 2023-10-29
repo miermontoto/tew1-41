@@ -17,8 +17,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter(dispatcherTypes = { DispatcherType.FORWARD }, urlPatterns = { "/restricted/*" }, initParams = {
-		@WebInitParam(name = "LoginParam", value = "/login.xhtml", description = "Página de login") })
+
 public class LoginFilter implements Filter {
 
 	FilterConfig config = null;
@@ -52,8 +51,10 @@ public class LoginFilter implements Filter {
 		HttpSession session = req.getSession();
 
 		if (session.getAttribute("LOGGEDIN_USER") == null) {
-			String loginForm = config.getInitParameter("LoginParam");
+			//String loginForm = config.getInitParameter("LoginParam");
+			String loginForm = "/login.xhtml";
 			res.sendRedirect(req.getContextPath() + loginForm);
+			//res.sendRedirect("/Entrega1/login.xhtml");
 			return;
 		}
 

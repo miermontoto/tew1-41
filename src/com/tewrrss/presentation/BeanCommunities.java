@@ -1,67 +1,158 @@
 package com.tewrrss.presentation;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import com.tewrrss.dto.User;
-import com.tewrrss.util.Role;
+import com.tewrrss.business.CommunityService;
+import com.tewrrss.dto.Community;
+import com.tewrrss.infrastructure.Factories;
 
-@ManagedBean(name = "communities") // ManagedBean para gesti�n de usuarios.
-public class BeanCommunities {
+@ManagedBean(name = "communities")
+public class BeanCommunities implements Serializable {
+	private static final long serialVersionUID = -1325688208166211122L;
 
-	private BeanUser loginInfo;
+  private BeanInfo loginInfo;
 
-	// Variables para almacenar cuando nos pasen nuevas comunidades a crear, o acceder a una nueva.
 	private String nombre;
 	private String descripcion;
+	private CommunityService CS;
+
+	private List<Community> listado;
+	private String input;
 
 	public BeanCommunities() {
-		loginInfo = new BeanUser();
+		CS = Factories.services.createCommunityService();
+		loginInfo = new BeanInfo();
+		listAll();
 	}
 
-	public String listarComunidades() {
-		if (loginInfo.getSessionRole() == Role.USER) {
-			// TODO: mostrar s�lo las comunidades de ese usuario, sin posibilidad de borrarlas.
-		} else {
-			// TODO: mostrar TODAS las comunidades, con posibilidad de borrar.
+	public void search() {
+		if (input == null || input.trim().isEmpty()) {
+			listAll();
+			return;
 		}
 
-		return "unimplemented";
+		this.listado = this.listado.stream().filter(c -> c.getName().contains(input)).collect(Collectors.toList());
 	}
 
-	public String borrarPublicacion() {
-		return "unimplemented";
+	public String getInput() {
+		return this.input;
 	}
 
-	// Método para declarar el borrado de comunidades. Se verifica antes que el usuario sea admin
-	public String borrarComunidad() {
-		if(loginInfo.getSessionRole() == Role.ADMIN) {
-			// TODO: Borrado de la columunidad en la BBDD
-			return "success"; // El borrado ha tenido �xito
-		}
-
-		return "unauthorized"; // La comunidad no se ha podido borrar
+	public void setInput(String inputSearch) {
+		this.input = inputSearch;
 	}
 
-	public String crearComunidad() {
+	public List<Community> getListado() {
+		return listado;
+	}
+
+	public void setListado(List<Community> listado) {
+		this.listado = listado;
+	}
+
+	public List<Community> listAll() {
+		List<Community> list = CS.listAll();
+		this.listado = list;
+		return list;
+	}
+
+	public List<Community> listJoined() {
+		return CS.listJoined(loginInfo.getSessionUser());
+	}
+
+	public boolean ableToJoin(Community comunidad) {
+		return CS.ableToJoin(comunidad, loginInfo.getSessionUser());
+	}
+
+	public String delete(Community comunidad) {
+		String temp = CS.remove(comunidad);
+		listAll();
+		return temp;
+	}
+
+	public String create() {
 		FacesContext jsfCtx = FacesContext.getCurrentInstance();
 		ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
 
 		if (nombre == null || nombre.trim().isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_create_error_emptyName"), null));
-			return null; // Nombre vac�o, no contin�o
-	    }
+			return null;
+		}
 
-	    if (descripcion == null || descripcion.trim().isEmpty()) {
+		if (descripcion == null || descripcion.trim().isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_create_error_emptyDesc"), null));
-			return null; // Descripci�n vac�a, no contin�o
-	    }
+			return null;
+		}
 
-	    // TODO: Gesti�n de las comunidades en la BBDD.
-		return "success"; // Retorno un mensaje de �xito. A continuaci�n, se redirige al usuario a ver sus comunidades.
+		for(Community cm : CS.listAll()) {
+			if(cm.getName().equals(nombre)) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_create_error_existingName"), null));
+				return null;
+			}
+		}
+
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_create_ok"), null));
+		String result = CS.create(new Community(this.nombre, this.descripcion));
+		if (!result.equals("success")) return result;
+		listAll();
+		return CS.join(findByName(this.nombre), loginInfo.getSessionUser());
+	}
+
+	public String join(Community community) {
+		FacesContext jsfCtx = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
+
+		if (community == null) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_list_join_error"), null));
+			return null;
+		}
+
+		if (!ableToJoin(community)) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_list_join_error"), null));
+			return null;
+		}
+
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_list_join_ok"), null));
+		listAll();
+		return CS.join(community, loginInfo.getSessionUser());
+	}
+
+	public String leave(Community community) {
+		FacesContext jsfCtx = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
+
+		if (community == null) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_list_leave_error"), null));
+			return null;
+		}
+
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_list_leave_ok"), null));
+		listAll();
+		return CS.leave(community, loginInfo.getSessionUser());
+	}
+
+	public Community findByName(String name) {
+		Optional<Community> community = CS.findByName(name);
+		if (community.isPresent()) {
+			return community.get();
+		}
+		return null;
+	}
+
+	public BeanInfo getLoginInfo() {
+		return loginInfo;
+	}
+
+	public void setLoginInfo(BeanInfo loginInfo) {
+		this.loginInfo = loginInfo;
 	}
 
 	public String getNombre() {
@@ -76,7 +167,7 @@ public class BeanCommunities {
 		return descripcion;
 	}
 
-	public void setDescripcion(String str) {
-		this.descripcion = str;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 }

@@ -6,11 +6,11 @@ import java.util.Optional;
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.User;
 
-public interface UserDAO {
+public interface UserDAO extends DAO {
 
-	List<User> getUsers();
+	List<User> listAll();
 	Optional<User> findByEmail(String email);
-	boolean remove(String email);
+	boolean remove(User user);
 	boolean add(User user);
 	boolean update(User user);
 	List<User> getUsersInCommunity(Community community);

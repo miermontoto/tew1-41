@@ -5,7 +5,7 @@ import java.util.Optional;
 import com.tewrrss.dto.User;
 import com.tewrrss.infrastructure.Factories;
 
-public class SimpleLoginService implements com.tewrrss.business.LoginService {
+public class LoginServiceImpl implements com.tewrrss.business.LoginService {
 
 	@Override
 	public User verify(String email, String password) {
