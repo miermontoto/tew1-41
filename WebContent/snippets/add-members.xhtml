@@ -6,7 +6,7 @@
 	template="/templates/template-logged.xhtml">
 
 	<ui:define name="cuerpo">
-	
+
 		<p:panel header="#{msgs.communities_create}" update="@all">
 
 			<p:selectOneMenu id="emaillist" value="#{users.userEmail}"
@@ -18,15 +18,28 @@
 				<!-- Cambiar -->
 			</p:selectOneMenu>
 
+			<!--  
+			<h:selectOneMenu value="#{users.userEmail}">
+				<f:selectItems value="#{users.getEmails}" />
+			</h:selectOneMenu>
+			-->
+			
+			<!--  
+			<h:selectOneMenu value="#{users.communityName}">
+				<f:selectItems value="#{users.getCommunities}" />
+			</h:selectOneMenu>
+			-->
+			
 			<p:selectOneMenu id="communitylist" value="#{users.communityName}"
 				style="width:130px">
-				<f:selectItem itemLabel="Selecciona la comunidad para la que quieres unir al usuario" itemValue=""
-					noSelectionOption="true" />
+				<f:selectItem
+					itemLabel="Selecciona la comunidad para la que quieres unir al usuario"
+					itemValue="" noSelectionOption="true" />
 				<f:selectItems value="#{users.getCommunities}" />
 				<p:ajax update="" process="@form" />
-				
+
 			</p:selectOneMenu>
-			
+
 			<p:commandButton value="#{msgs.communities_create_button}"
 				action="#{users.join}" type="submit"
 				update="messages formNuevaComunidad" />
