@@ -6,27 +6,26 @@
 	template="/templates/template-logged.xhtml">
 
 	<ui:define name="cuerpo">
-		<p:panel header="#{msgs.members_add}" update="@all">
-		<h:form>
-			<p:selectOneMenu id="emailList" value="#{users.userEmail}" style="width:130px">
+		<h:form id="form">
+		<p:panel header="#{msgs.members_add}" update="@all" id="tableform">
+			<p:selectOneMenu id="emailList" value="#{users.userEmail}">
 				<f:selectItem itemLabel="#{msgs.members_add_user}" itemValue=""
 					noSelectionOption="true" />
 				<f:selectItems value="#{users.listEmails()}" />
 			</p:selectOneMenu>
 
-			<p:selectOneMenu id="communityList" value="#{users.communityName}"
-				style="width:130px">
-				<f:selectItem
-					itemLabel="#{msgs.members_add_community}"
+			<p:selectOneMenu id="communityList" value="#{users.communityName}">
+				<f:selectItem itemLabel="#{msgs.members_add_community}"
 					itemValue="" noSelectionOption="true" />
 				<f:selectItems value="#{users.listCommunities()}" />
 			</p:selectOneMenu>
-
+			<br/>
 			<p:commandButton value="#{msgs.members_add_button}" action="#{users.join}" type="submit" update="messages"/>
 			<p:messages id="messages" />
-		</h:form>
 		</p:panel>
+		</h:form>
 	</ui:define>
+	
 	<ui:define name="pie">
 		<ui:include src="/snippets/footer.xhtml" />
 	</ui:define>
