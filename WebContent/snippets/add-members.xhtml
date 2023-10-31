@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-logged.xhtml">
+
+	<ui:define name="cuerpo">
+	
+		<p:panel header="#{msgs.communities_create}" update="@all">
+
+			<p:selectOneMenu id="emaillist" value="#{users.userEmail}"
+				style="width:130px">
+				<f:selectItem itemLabel="Selecciona el email" itemValue=""
+					noSelectionOption="true" />
+				<f:selectItems value="#{users.getEmails}" />
+				<p:ajax update="" process="@form" />
+				<!-- Cambiar -->
+			</p:selectOneMenu>
+
+			<p:selectOneMenu id="communitylist" value="#{users.communityName}"
+				style="width:130px">
+				<f:selectItem itemLabel="Selecciona la comunidad para la que quieres unir al usuario" itemValue=""
+					noSelectionOption="true" />
+				<f:selectItems value="#{users.getCommunities}" />
+				<p:ajax update="" process="@form" />
+				
+			</p:selectOneMenu>
+			
+			<p:commandButton value="#{msgs.communities_create_button}"
+				action="#{users.join}" type="submit"
+				update="messages formNuevaComunidad" />
+
+		</p:panel>
+	</ui:define>
+
+	<ui:define name="pie">
+		<ui:include src="/snippets/footer.xhtml" />
+	</ui:define>
+
+</ui:composition>
