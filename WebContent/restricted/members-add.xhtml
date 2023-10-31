@@ -13,7 +13,7 @@
 				style="width:130px">
 				<f:selectItem itemLabel="#{msgs.members_add_user}" itemValue=""
 					noSelectionOption="true" />
-				<f:selectItems value="#{users.getEmails()}" />
+				<f:selectItems value="#{users.listEmails()}" />
 				<p:ajax update="" />
 				<!-- Cambiar -->
 			</p:selectOneMenu>
@@ -23,24 +23,11 @@
 				<f:selectItem
 					itemLabel="#{msgs.members_add_community}"
 					itemValue="" noSelectionOption="true" />
-				<f:selectItems value="#{users.getCommunities()}" />
+				<f:selectItems value="#{users.listCommunities()}" />
 				<p:ajax update=""/>
 
 			</p:selectOneMenu>
 
-
-			<!--
-		<h:outputLabel value="Elige un email: "/>
-		<h:selectOneMenu value="#{users.userEmail}">
-		   	<f:selectItems value="#{users.getEmails}" />
-		</h:selectOneMenu>
-
-		<h:outputLabel value="Elige una comunidad: "/>
-		<h:selectOneMenu value="#{users.communityName}">
-		   	<f:selectItems value="#{users.getCommunities}" />
-		</h:selectOneMenu>
-
-			-->
 			<p:commandButton value="#{msgs.communities_create_button}"
 				action="#{users.join}" type="submit"
 				update="messages formNuevaComunidad" />

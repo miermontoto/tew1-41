@@ -55,11 +55,11 @@ public class BeanUsers implements Serializable {
 		return communityService.join(community.get(), user.get());
 	}
 
-	public List<String> getEmails() {
+	public List<String> listEmails() {
 		return userService.listAll().stream().map(u -> u.getEmail()).collect(Collectors.toList());
 	}
 
-	public List<String> getCommunities() {
+	public List<String> listCommunities() {
 		return communityService.listAll().stream().map(c -> c.getName()).collect(Collectors.toList());
 	}
 }
