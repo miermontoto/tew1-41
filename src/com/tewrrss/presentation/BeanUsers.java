@@ -10,10 +10,8 @@ import javax.faces.bean.*;
 import com.tewrrss.business.CommunityService;
 import com.tewrrss.business.UserService;
 import com.tewrrss.dto.Community;
-import com.tewrrss.dto.Post;
 import com.tewrrss.dto.User;
 import com.tewrrss.infrastructure.Factories;
-import com.tewrrss.util.Role;
 
 @ManagedBean(name = "users")
 @SessionScoped
