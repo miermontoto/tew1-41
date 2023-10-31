@@ -3,9 +3,12 @@ package com.tewrrss.presentation;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.faces.bean.*;
 
+import com.tewrrss.business.CommunityService;
+import com.tewrrss.business.UserService;
 import com.tewrrss.dto.Community;
 import com.tewrrss.dto.Post;
 import com.tewrrss.dto.User;
@@ -14,7 +17,7 @@ import com.tewrrss.util.Role;
 
 @ManagedBean(name = "users")
 @SessionScoped
-public class BeanUser implements Serializable {
+public class BeanUsers implements Serializable {
 	private static final long serialVersionUID = 5128381238225556L;
 
 	private UserService userService;
@@ -23,29 +26,25 @@ public class BeanUser implements Serializable {
 	private String userEmail;
 	private String communityName;
 
-	public BeanUser() {
+	public BeanUsers() {
 		userService = Factories.services.createUserService();
 		communityService = Factories.services.createCommunityService();
 	}
 
-	public User getUserEmail() {
-		return this.user;
+	public String getUserEmail() {
+		return this.userEmail;
 	}
 
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
 
-	public Community getCommunityName() {
+	public String getCommunityName() {
 		return this.communityName;
 	}
 
 	public void setCommunityName(String communityName) {
 		this.communityName = communityName;
-	}
-
-	public List<User> listAll() {
-		return service.listAll();
 	}
 
 	public String join() {
@@ -55,14 +54,14 @@ public class BeanUser implements Serializable {
 			return "error";
 		}
 
-		return communtiyService.join(community.get(), user.get());
+		return communityService.join(community.get(), user.get());
 	}
 
 	public List<String> getEmails() {
-		return userService.listAll().forEach(u -> u.getEmail()).collect(Collectors.toList());
+		return userService.listAll().stream().map(u -> u.getEmail()).collect(Collectors.toList());
 	}
 
 	public List<String> getCommunities() {
-		return communityService.listAll().forEach(c -> c.getName()).collect(Collectors.toList());
+		return communityService.listAll().stream().map(c -> c.getName()).collect(Collectors.toList());
 	}
 }
