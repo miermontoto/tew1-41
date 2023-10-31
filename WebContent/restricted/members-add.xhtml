@@ -8,24 +8,25 @@
 	<ui:define name="cuerpo">
 		<h:form id="form">
 		<p:panel header="#{msgs.members_add}" update="@all" id="tableform">
-			<p:selectOneMenu id="emailList" value="#{users.userEmail}">
+			<p:selectOneMenu id="emailList" value="#{users.userEmail}" style="width: 250px;">
 				<f:selectItem itemLabel="#{msgs.members_add_user}" itemValue=""
 					noSelectionOption="true" />
 				<f:selectItems value="#{users.listEmails()}" />
 			</p:selectOneMenu>
-
-			<p:selectOneMenu id="communityList" value="#{users.communityName}">
+			<br/>
+			<p:selectOneMenu id="communityList" value="#{users.communityName}" style="width: 250px;">
 				<f:selectItem itemLabel="#{msgs.members_add_community}"
 					itemValue="" noSelectionOption="true" />
 				<f:selectItems value="#{users.listCommunities()}" />
 			</p:selectOneMenu>
+			<br/>
 			<br/>
 			<p:commandButton value="#{msgs.members_add_button}" action="#{users.join}" type="submit" update="messages"/>
 			<p:messages id="messages" />
 		</p:panel>
 		</h:form>
 	</ui:define>
-	
+
 	<ui:define name="pie">
 		<ui:include src="/snippets/footer.xhtml" />
 	</ui:define>
