@@ -59,6 +59,8 @@ public class BeanUsers implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_add_manually_member_error"), null));
 			return "error";
 		}
+		
+		//Unido correctamente
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_list_join_ok"), null));
 		return communityService.join(community.get(), user.get());
 	}
