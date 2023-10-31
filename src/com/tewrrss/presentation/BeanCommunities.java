@@ -60,7 +60,7 @@ public class BeanCommunities implements Serializable {
 
 	public List<Community> listAll() {
 		List<Community> list = CS.listAll();
-		this.listado = list;
+		this.listado = list;					// Asigno al listado la lista que he obtenido de negocio.
 		return list;
 	}
 

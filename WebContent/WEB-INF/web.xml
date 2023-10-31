@@ -5,6 +5,7 @@
 	id="WebApp_ID" version="3.1">
 	<display-name>Entrega1</display-name>
 
+	<!-- Filtros para el login, en caso de no estar logueado, redirige -->
 	<filter>
 		<filter-name>LoginFilter</filter-name>
 		<filter-class>com.tewrrss.util.LoginFilter</filter-class>
