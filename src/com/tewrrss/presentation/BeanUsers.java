@@ -3,9 +3,12 @@ package com.tewrrss.presentation;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
+import javax.faces.context.FacesContext;
 
 import com.tewrrss.business.CommunityService;
 import com.tewrrss.business.UserService;
@@ -48,10 +51,15 @@ public class BeanUsers implements Serializable {
 	public String join() {
 		Optional<User> user = userService.findByEmail(userEmail);
 		Optional<Community> community = communityService.findByName(communityName);
+		
+		FacesContext jsfCtx = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
+		
 		if (!user.isPresent() || !community.isPresent()) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_add_manually_member_error"), null));
 			return "error";
 		}
-
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_list_join_ok"), null));
 		return communityService.join(community.get(), user.get());
 	}
 
