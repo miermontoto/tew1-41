@@ -7,13 +7,11 @@
 
 	<ui:define name="cuerpo">
 		<p:panel header="#{msgs.members_add}" update="@all">
-			<p:selectOneMenu id="emailList" value="#{users.userEmail}"
-				style="width:130px">
+		<h:form>
+			<p:selectOneMenu id="emailList" value="#{users.userEmail}" style="width:130px">
 				<f:selectItem itemLabel="#{msgs.members_add_user}" itemValue=""
 					noSelectionOption="true" />
 				<f:selectItems value="#{users.listEmails()}" />
-				<p:ajax update="" />
-				<!-- Cambiar -->
 			</p:selectOneMenu>
 
 			<p:selectOneMenu id="communityList" value="#{users.communityName}"
@@ -22,13 +20,11 @@
 					itemLabel="#{msgs.members_add_community}"
 					itemValue="" noSelectionOption="true" />
 				<f:selectItems value="#{users.listCommunities()}" />
-				<p:ajax update=""/>
 			</p:selectOneMenu>
 
-			<p:commandButton value="#{msgs.communities_create_button}"
-				action="#{users.join}" type="submit"
-				update="communityList emailList" />
-
+			<p:commandButton value="#{msgs.members_add_button}" action="#{users.join}" type="submit" update="messages"/>
+			<p:messages id="messages" />
+		</h:form>
 		</p:panel>
 	</ui:define>
 	<ui:define name="pie">

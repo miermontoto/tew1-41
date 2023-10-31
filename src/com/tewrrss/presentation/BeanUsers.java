@@ -51,18 +51,22 @@ public class BeanUsers implements Serializable {
 	public String join() {
 		Optional<User> user = userService.findByEmail(userEmail);
 		Optional<Community> community = communityService.findByName(communityName);
-		
+
 		FacesContext jsfCtx = FacesContext.getCurrentInstance();
 		ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
-		
+
 		if (!user.isPresent() || !community.isPresent()) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("communities_add_manually_member_error"), null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("members_add_error_null"), null));
 			return "error";
 		}
-		
-		//Unido correctamente
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("communities_list_join_ok"), null));
-		return communityService.join(community.get(), user.get());
+
+		String result = communityService.join(community.get(), user.get());
+		if (result.equals("unable")) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("members_add_error_unable"), null));
+			return "unable";
+		}
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("members_add_ok"), null));
+		return result;
 	}
 
 	public List<String> listEmails() {
