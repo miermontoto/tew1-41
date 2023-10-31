@@ -8,24 +8,39 @@
 	<ui:define name="cuerpo">
 		<p:panel header="#{msgs.communities_create}" update="@all">
 
+
 			<p:selectOneMenu id="emaillist" value="#{users.userEmail}"
 				style="width:130px">
 				<f:selectItem itemLabel="Selecciona el email" itemValue=""
 					noSelectionOption="true" />
 				<f:selectItems value="#{users.getEmails}" />
-				<p:ajax update="" process="@form" />
+				<p:ajax update="" />
 				<!-- Cambiar -->
 			</p:selectOneMenu>
 
 			<p:selectOneMenu id="communitylist" value="#{users.communityName}"
 				style="width:130px">
-				<f:selectItem itemLabel="Selecciona la comunidad para la que quieres unir al usuario" itemValue=""
-					noSelectionOption="true" />
+				<f:selectItem
+					itemLabel="Selecciona la comunidad para la que quieres unir al usuario"
+					itemValue="" noSelectionOption="true" />
 				<f:selectItems value="#{users.getCommunities}" />
-				<p:ajax update="" process="@form" />
+				<p:ajax update=""/>
 
 			</p:selectOneMenu>
 
+
+			<!--  
+		<h:outputLabel value="Elige un email: "/>
+		<h:selectOneMenu value="#{users.userEmail}">
+		   	<f:selectItems value="#{users.getEmails}" />
+		</h:selectOneMenu>
+		
+		<h:outputLabel value="Elige una comunidad: "/>
+		<h:selectOneMenu value="#{users.communityName}">
+		   	<f:selectItems value="#{users.getCommunities}" />
+		</h:selectOneMenu>	
+		
+			-->
 			<p:commandButton value="#{msgs.communities_create_button}"
 				action="#{users.join}" type="submit"
 				update="messages formNuevaComunidad" />
