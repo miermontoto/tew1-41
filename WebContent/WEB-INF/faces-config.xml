@@ -78,6 +78,7 @@
 		<navigation-case>
 			<from-outcome>anadirMiembros</from-outcome>
 			<to-view-id>/restricted/members-add.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 
 	<navigation-rule>
