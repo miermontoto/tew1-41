@@ -74,6 +74,11 @@
 			<from-outcome>success</from-outcome>
 			<to-view-id>/restricted/index.xhtml</to-view-id>
 		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>anadirMiembros</from-outcome>
+			<to-view-id>/restricted/members-add.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 
 	<navigation-rule>

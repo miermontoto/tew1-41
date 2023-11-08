@@ -34,6 +34,7 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public String join(Community community, User user) {
+		if (!ableToJoin(community, user)) return "unable";
 		return new Join().join(community, user);
 	}
 

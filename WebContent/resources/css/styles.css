@@ -28,6 +28,7 @@ body, * {
 .ui-inputfield {
 	color: var(--white) !important;
 	font-family: monospace !important;
+	background: var(--primary) !important;
 }
 
 .ui-widget-content.ui-panel {

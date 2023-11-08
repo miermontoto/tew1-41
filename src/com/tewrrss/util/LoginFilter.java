@@ -51,13 +51,10 @@ public class LoginFilter implements Filter {
 		HttpSession session = req.getSession();
 
 		if (session.getAttribute("LOGGEDIN_USER") == null) {
-			//String loginForm = config.getInitParameter("LoginParam");
 			String loginForm = "/login.xhtml";
 			res.sendRedirect(req.getContextPath() + loginForm);
-			//res.sendRedirect("/Entrega1/login.xhtml");
 			return;
 		}
-
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
