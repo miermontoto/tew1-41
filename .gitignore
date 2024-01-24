@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 /build/
-=======
 # Compiled class file
 *.class
 
@@ -25,4 +23,5 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
->>>>>>> branch 'main' of https://github.com/TEWgijon/2324-tew1-41.git
+
+.vscode

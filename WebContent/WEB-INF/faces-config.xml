@@ -4,8 +4,6 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
 	version="2.3">
 
-	<!-- Misc -->
-
 	<validator>
 		<validator-id>emailValidator</validator-id>
 		<validator-class>com.tewrrss.util.EmailValidator</validator-class>
@@ -18,7 +16,6 @@
 		</resource-bundle>
 	</application>
 
-	<!-- Reglas de navegación -->
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 
@@ -38,13 +35,44 @@
 		</navigation-case>
 
 		<navigation-case>
-			<from-outcome>communities</from-outcome>
-			<to-view-id>/restricted/manageCommunities.xhtml</to-view-id>
+			<from-outcome>listAllCommunities</from-outcome>
+			<to-view-id>/restricted/communities-list-all.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>
-			<from-outcome>error</from-outcome>
-			<to-view-id>/error.xhtml</to-view-id>
+			<from-outcome>listJoinedCommunities</from-outcome>
+			<to-view-id>/restricted/communities-list-joined.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>createCommunity</from-outcome>
+			<to-view-id>/restricted/communities-create.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>listUserPosts</from-outcome>
+			<to-view-id>/restricted/posts-user.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>listLastPosts</from-outcome>
+			<to-view-id>/restricted/posts-new.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>viewCommunity</from-outcome>
+			<to-view-id>/restricted/communities-view.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>viewUser</from-outcome>
+			<to-view-id>/restricted/user-profile.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-action>#{info.resetDatabase}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/restricted/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -57,6 +85,60 @@
 		</navigation-case>
 	</navigation-rule>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<navigation-rule>
 		<from-view-id>/register.xhtml</from-view-id>
 
@@ -66,19 +148,12 @@
 		</navigation-case>
 	</navigation-rule>
 
-	<!--  Gestión de comunidades -->
 	<navigation-rule>
-		<from-view-id>/communities.xhtml</from-view-id>
+		<from-view-id>/restricted/communities-list-all.xhtml</from-view-id>
 
 		<navigation-case>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/restricted/communities.xhtml</to-view-id>
-		</navigation-case>
-
-		<navigation-case>
-			<from-outcome>unauthorized</from-outcome>
-			<to-view-id>/restricted/communities.xhtml</to-view-id>
+			<from-outcome>joined</from-outcome>
+			<to-view-id>/restricted/communities-list-all.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-
 </faces-config>

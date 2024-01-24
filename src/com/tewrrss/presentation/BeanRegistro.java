@@ -1,5 +1,7 @@
 package com.tewrrss.presentation;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -12,16 +14,14 @@ import com.tewrrss.util.Role;
 
 @ManagedBean(name = "registro")
 @SessionScoped
-public class BeanRegistro {
+public class BeanRegistro implements Serializable {
+	private static final long serialVersionUID = 6076632229413784370L;
 
-	// Datos del cliente.
 	private String nombre;
 	private String email;
 	private String contrasena;
 	private String confirmarContrasena;
 	private boolean rgpd;
-
-	// Getters y Setters para las propiedades
 
 	public String getNombre() {
 		return nombre;
@@ -72,19 +72,19 @@ public class BeanRegistro {
 
 		if (!rgpd) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe aceptar la política de privacidad", "Debe aceptar la política de privacidad."));
-			return ""; // Permanece en la página de registro
+			return "";
 		}
 
 		if (!contrasena.equals(confirmarContrasena)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden", "Las contraseñas no coinciden."));
-			return ""; // Permanece en la página de registro
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contrase�as no coinciden", "Las contrase�as no coinciden."));
+			return "";
 		}
-		
+
 		service = Factories.services.createLoginService();
 
 		if (service.emailExists(email)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo electrónico ya está en uso", "El correo electrónico ya está en uso."));
-			return ""; // Permanece en la página de registro
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo electr�nico ya est� en uso", "El correo electr�nico ya est� en uso."));
+			return "";
 		}
 
 		User newUser = new User(email, nombre, contrasena);

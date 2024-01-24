@@ -10,6 +10,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import java.util.regex.Pattern;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 
 @FacesValidator("emailValidator")
@@ -28,9 +29,12 @@ public class EmailValidator implements Validator {
         String email = value.toString();
         Matcher matcher = pattern.matcher(email);
 
-        // Si el email no esta bien formado, devolvemos una excepci�n de validaci�n, lo que causa un mensaje en el Front
+        // Si el email no esta bien formado, devolvemos una excepción de validación, lo que causa un mensaje en el Front
         if (!matcher.matches()) {
-            FacesMessage message = new FacesMessage("El email no es v�lido");
+            FacesContext jsfCtx = FacesContext.getCurrentInstance();
+		    ResourceBundle bundle = jsfCtx.getApplication().getResourceBundle(jsfCtx, "msgs");
+
+            FacesMessage message = new FacesMessage(bundle.getString("session_register_invalid_email"));
             throw new ValidatorException(message);
         }
     }
